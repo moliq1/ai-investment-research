@@ -1,0 +1,32 @@
+name: Refresh A/H closing prices
+on:
+  schedule:
+    - cron: '0 10 * * 1-5'  # 18:00 Asia/Shanghai
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install quote source
+        run: pip install -r requirements.txt
+      - name: Refresh valid daily price snapshots
+        run: python scripts/update_prices.py
+      - name: Validate data
+        run: python -m unittest discover -s tests -v
+      - name: Commit new snapshots when needed
+        run: |
+          if ! git diff --quiet -- data/stocks.json; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add data/stocks.json
+            git commit -m 'data: update verified date-based close snapshots'
+            git push
+          else
+            echo 'No newer valid daily close.'
+          fi
