@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#091429">
+<meta name="description" content="AI 投研估值与研报库：紫金矿业 A/H、紫金黄金国际、中国黄金国际">
+<title>Alpha Atlas | AI 投研估值与研报库</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js" defer></script>
+</head><body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-icon">A</div><div><strong>Alpha Atlas</strong><small>AI 投研 · Research Desk</small></div></div>
+  <p class="side-label">INVESTMENT WORKSPACE</p>
+  <nav aria-label="页面导航">
+   <button class="nav-link selected" data-nav="home">▦ <span>研究总览</span></button>
+   <button class="nav-link" data-nav="valuation">◇ <span>三情景估值</span></button>
+   <button class="nav-link" data-nav="brokers">▤ <span>券商目标价</span></button>
+   <button class="nav-link" data-nav="reports">▣ <span>研究报告库</span></button>
+   <button class="nav-link" data-nav="sources">◉ <span>数据与说明</span></button>
+  </nav>
+  <div class="sidebar-foot"><strong>ALPHA ATLAS / v0.1</strong><p>先区分事实与假设，再讨论合理价值与预期差。</p><a href="https://github.com/moliq1/ai-investment-research" target="_blank" rel="noopener noreferrer">GitHub 项目源代码 ↗</a></div>
+</aside>
+<div class="workspace">
+<header class="topbar"><div>WORKSPACE <span class="muted">/</span> <strong id="breadcrumb">研究总览</strong></div><div class="top-right"><span class="live-dot"></span> STATIC RESEARCH <button id="export" class="button small">导出本地调整 ↓</button></div></header>
+<main>
+  <div class="title-row"><div><div class="eyebrow">INVESTMENT RESEARCH / A & H EQUITIES</div><h1 id="pageTitle">研究总览</h1><p id="pageSubtitle">公司研究、情景估值、机构预期，集中管理。</p></div><div class="latest"><small>最近记录的收盘日期</small><strong id="latestDate">—</strong><small>以各代码自身的更新日期为准</small></div></div>
+  <div class="warning" id="notice">研究模型的目标价目前都是<strong>演示假设</strong>，不是真实测算；券商共识数据尚未从富途导入。</div>
+  <section id="view" aria-live="polite"><div class="loading">正在读取研究数据…</div></section>
+</main><footer>© 2026 Alpha Atlas · 所有估值为独立研究示范，非买卖建议 · 请核对日期、币种和原始来源</footer></div></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body></html>
