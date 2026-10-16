@@ -1,0 +1,42 @@
+[
+  {
+    "id": "zijin-mining",
+    "company": "zijin-mining",
+    "stockIds": [
+      "601899.SH",
+      "2899.HK"
+    ],
+    "title": "紫金矿业｜金铜业务成长与 A/H 估值框架",
+    "type": "独立研究提纲",
+    "date": "2026-10-16",
+    "status": "outline",
+    "summary": "未来金铜产量、价格敏感性、资本支出、自由现金流与 A/H 溢折价。",
+    "path": "reports/zijin-mining.md"
+  },
+  {
+    "id": "zijin-gold",
+    "company": "zijin-gold",
+    "stockIds": [
+      "2259.HK"
+    ],
+    "title": "紫金黄金国际｜黄金价格弹性与矿山成长",
+    "type": "独立研究提纲",
+    "date": "2026-10-16",
+    "status": "outline",
+    "summary": "逐矿跟踪产量与成本，区分集团、子公司权益和地缘风险。",
+    "path": "reports/zijin-gold.md"
+  },
+  {
+    "id": "china-gold",
+    "company": "china-gold",
+    "stockIds": [
+      "2099.HK"
+    ],
+    "title": "中国黄金国际｜矿山经营与黄金弹性",
+    "type": "独立研究提纲",
+    "date": "2026-10-16",
+    "status": "outline",
+    "summary": "甲玛和长山壕矿山运营、恢复进度、黄金与铜价格敏感性。",
+    "path": "reports/china-gold.md"
+  }
+]

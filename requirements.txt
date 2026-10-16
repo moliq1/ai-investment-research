@@ -1,0 +1,2 @@
+yfinance>=0.2.50,<1
+# pip install futu-api separately for local OpenD integration
