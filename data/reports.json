@@ -6,11 +6,11 @@
       "601899.SH",
       "2899.HK"
     ],
-    "title": "紫金矿业｜金铜业务成长与 A/H 估值框架",
-    "type": "独立研究提纲",
-    "date": "2026-10-16",
-    "status": "outline",
-    "summary": "未来金铜产量、价格敏感性、资本支出、自由现金流与 A/H 溢折价。",
+    "title": "紫金矿业｜2027 PE 基准与金价6000情景",
+    "type": "历史估值重建摘要",
+    "date": "2026-10-12",
+    "status": "reconstructed",
+    "summary": "2027理论值人民币约36元；另存金价6000美元条件下2028折现情景。",
     "path": "reports/zijin-mining.md"
   },
   {
@@ -19,11 +19,11 @@
     "stockIds": [
       "2259.HK"
     ],
-    "title": "紫金黄金国际｜黄金价格弹性与矿山成长",
-    "type": "独立研究提纲",
-    "date": "2026-10-16",
-    "status": "outline",
-    "summary": "逐矿跟踪产量与成本，区分集团、子公司权益和地缘风险。",
+    "title": "紫金黄金国际｜金价5000条件估值",
+    "type": "历史估值重建摘要",
+    "date": "2026-09-29",
+    "status": "partial",
+    "summary": "仅恢复2027金价5000美元条件下HK$129.3理论价，未找到完整三情景。",
     "path": "reports/zijin-gold.md"
   },
   {
@@ -32,11 +32,102 @@
     "stockIds": [
       "2099.HK"
     ],
-    "title": "中国黄金国际｜矿山经营与黄金弹性",
-    "type": "独立研究提纲",
-    "date": "2026-10-16",
-    "status": "outline",
-    "summary": "甲玛和长山壕矿山运营、恢复进度、黄金与铜价格敏感性。",
+    "title": "中国黄金国际｜2027 三情景估值（2026-10-20版）",
+    "type": "历史估值重建摘要",
+    "date": "2026-10-20",
+    "status": "reconstructed",
+    "summary": "三情景区间港元89–108 / 189–220 / 289–331；另保留10月19日版本。",
     "path": "reports/china-gold.md"
+  },
+  {
+    "id": "china-gold-prior",
+    "company": "china-gold",
+    "stockIds": [
+      "2099.HK"
+    ],
+    "title": "中国黄金国际｜2027 三情景估值（2026-10-19版）",
+    "type": "历史估值重建摘要",
+    "date": "2026-10-19",
+    "status": "reconstructed",
+    "summary": "上一版区间港元130–165 / 215–260 / 295–345，独立归档以便对照。",
+    "path": "reports/china-gold-prior.md"
+  },
+  {
+    "id": "china-hongqiao",
+    "company": "china-hongqiao",
+    "stockIds": [
+      "1378.HK"
+    ],
+    "title": "中国宏桥｜2029 折现估值三情景",
+    "type": "历史估值重建摘要",
+    "date": "2026-10-15",
+    "status": "reconstructed",
+    "summary": "港元8.4–12.8 / 17.9–24.1 / 25.3–32.3。",
+    "path": "reports/china-hongqiao.md"
+  },
+  {
+    "id": "yunal",
+    "company": "yunal",
+    "stockIds": [
+      "000807.SZ"
+    ],
+    "title": "云铝股份｜2027–2029 中周期利润与估值",
+    "type": "历史估值重建摘要",
+    "date": "2026-10-19",
+    "status": "reconstructed",
+    "summary": "情景中枢人民币12.3 / 24.3 / 38.5元；保留8月中报估值版本。",
+    "path": "reports/yunal.md"
+  },
+  {
+    "id": "harbin-electric",
+    "company": "harbin-electric",
+    "stockIds": [
+      "1133.HK"
+    ],
+    "title": "哈尔滨电气｜正常化FCFF模型",
+    "type": "历史估值重建摘要",
+    "date": "2026-10-13",
+    "status": "reconstructed",
+    "summary": "港元6.09–8.71 / 13.09–15.71 / 16.64–19.26。",
+    "path": "reports/harbin-electric.md"
+  },
+  {
+    "id": "sungrow",
+    "company": "sungrow",
+    "stockIds": [
+      "300274.SZ"
+    ],
+    "title": "阳光电源｜长期 FCFF/DCF 情景估值",
+    "type": "历史估值重建摘要",
+    "date": "2026-08-12",
+    "status": "reconstructed",
+    "summary": "人民币81–104 / 141–183 / 216–279元；历史假设需要更新。",
+    "path": "reports/sungrow.md"
+  },
+  {
+    "id": "amec",
+    "company": "amec",
+    "stockIds": [
+      "688012.SH"
+    ],
+    "title": "中微公司｜半导体设备成长估值",
+    "type": "历史估值重建摘要",
+    "date": "2026-09-04",
+    "status": "reconstructed",
+    "summary": "人民币46–73 / 115–209 / 197–356元；高增长预测十分敏感。",
+    "path": "reports/amec.md"
+  },
+  {
+    "id": "catl",
+    "company": "catl",
+    "stockIds": [
+      "300750.SZ"
+    ],
+    "title": "宁德时代｜长期DCF三情景（2026-08-04版）",
+    "type": "历史估值重建摘要",
+    "date": "2026-08-04",
+    "status": "reconstructed",
+    "summary": "人民币255–330 / 370–505 / 555–780元；非10月新模型。",
+    "path": "reports/catl.md"
   }
 ]

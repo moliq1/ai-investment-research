@@ -31,7 +31,7 @@ def refresh(stocks, lookup, now=None):
             if day == today and now.hour < 17:
                 print("SKIP intraday / market not closed", symbol)
                 continue
-            if day.isoformat() <= stock["closeDate"]:
+            if day.isoformat() <= (stock.get("closeDate") or ""):
                 print("UNCHANGED", symbol, day)
                 continue
             stock["close"] = round(price, 4)

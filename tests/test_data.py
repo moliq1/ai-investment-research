@@ -12,19 +12,28 @@ def get_data(name):
 class ResearchDataTests(unittest.TestCase):
     def test_stocks(self):
         stocks = get_data("stocks")
-        self.assertEqual({s["id"] for s in stocks}, {"601899.SH", "2899.HK", "2259.HK", "2099.HK"})
+        self.assertTrue({"601899.SH", "2899.HK", "2259.HK", "2099.HK"}.issubset({s["id"] for s in stocks}))
         for s in stocks:
-            self.assertGreater(s["close"], 0)
+            if s["close"] is not None:
+                self.assertGreater(s["close"], 0)
+                self.assertLessEqual(date.fromisoformat(s["closeDate"]), date.today())
+                self.assertTrue(s["closeSource"].startswith("https://"))
+            else:
+                self.assertIsNone(s["closeDate"])
             self.assertIn(s["currency"], ("CNY", "HKD"))
-            self.assertLessEqual(date.fromisoformat(s["closeDate"]), date.today())
-            self.assertTrue(s["closeSource"].startswith("https://"))
 
     def test_demo_scenarios(self):
         scenarios = get_data("scenarios")
         self.assertEqual({s["id"] for s in get_data("stocks")}, {s["stockId"] for s in scenarios})
         for m in scenarios:
-            self.assertEqual(m["status"], "demo")
-            self.assertTrue(m["bear"] < m["base"] < m["bull"])
+            self.assertIn(m["status"], ("historical", "partial", "unavailable"))
+            for kind in ("bear", "base", "bull"):
+                lo, hi = m[kind+"Low"], m[kind+"High"]
+                self.assertEqual(lo is None, hi is None)
+                if lo is not None:
+                    self.assertGreater(lo, 0)
+                    self.assertLessEqual(lo, hi)
+            self.assertEqual(m["sourceType"], "prior_chat_reconstruction")
 
     def test_brokers(self):
         for row in get_data("brokers"):

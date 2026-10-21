@@ -1,0 +1,56 @@
+[
+  {
+    "id": "china-gold-2026-10-19",
+    "stockId": "2099.HK",
+    "asOf": "2026-10-19",
+    "horizon": "2027E",
+    "kind": "historical_scenarios",
+    "title": "中国黄金国际：上一版2027三情景估值",
+    "bearLow": 130,
+    "bearHigh": 165,
+    "baseLow": 215,
+    "baseHigh": 260,
+    "bullLow": 295,
+    "bullHigh": 345,
+    "assumptions": "2027归母净利7–8/9.5–10.5/12–13.5亿美元，PE9.5–10.5/11.5–12.5/12.5–13倍。股本约3.964亿，USD/HKD=7.8；不包含未经批准的Super Pit新增收益。",
+    "sourceType": "prior_chat_reconstruction"
+  },
+  {
+    "id": "yunal-2026-08-28",
+    "stockId": "000807.SZ",
+    "asOf": "2026-08-28",
+    "horizon": "中周期",
+    "kind": "historical_scenarios",
+    "title": "云铝股份：2026中报后的历史模型区间",
+    "bearLow": 20.5,
+    "bearHigh": 23.1,
+    "baseLow": 29,
+    "baseHigh": 32.6,
+    "bullLow": 41.5,
+    "bullHigh": 45.7,
+    "assumptions": "中报后正常化利润约90–105亿元、FCF约68–78亿元，模型区间为当时分析结果，并非最新目标价。",
+    "sourceType": "prior_chat_reconstruction"
+  },
+  {
+    "id": "zijin-mining-2026-10-12",
+    "stockId": "601899.SH",
+    "asOf": "2026-10-12",
+    "horizon": "2028E折现至2026末",
+    "kind": "conditional_model",
+    "title": "紫金矿业：金价6000美元假设下的乐观情景",
+    "value": 46.9,
+    "assumptions": "金价6000美元/盎司条件，2026/27/28归母利润875.5/1022.9/1117.5亿元，14×PE理论值46.09/53.85/58.83元；2028折现至2026年末约46.90元。不同于2026-10-08的2027E PE基准模型。",
+    "sourceType": "prior_chat_reconstruction"
+  },
+  {
+    "id": "zijin-gold-2026-09-29",
+    "stockId": "2259.HK",
+    "asOf": "2026-09-29",
+    "horizon": "2027E",
+    "kind": "conditional_model",
+    "title": "紫金黄金国际：金价5000美元条件估值",
+    "value": 129.3,
+    "assumptions": "2027平均黄金价格5000美元/盎司假设，归母净利人民币246.6亿元，统一12×PE，理论价HK$129.3。并非完整公司三情景独立估值。",
+    "sourceType": "prior_chat_reconstruction"
+  }
+]
