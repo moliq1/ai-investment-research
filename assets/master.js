@@ -16,16 +16,16 @@
     const rows=[],seen=new Set();
     for(let i=header+1;i<lines.length&&lines[i].startsWith('|');i++){
       if(isDivider(lines[i]))continue;
-      const c=cells(lines[i]);if(c.length<11)continue;
+      const c=cells(lines[i]);if(c.length<12)continue;
       const code=c[1],id=normalCode(code);
       if(seen.has(id))throw Error('估值总表出现重复证券代码：'+code);
-      const bear=range(c[6]),base=range(c[7]),bull=range(c[8]);
+      const bear=range(c[7]),base=range(c[8]),bull=range(c[9]);
       if(!bear||!base||!bull)throw Error(code+' 尚无完整三情景估值，请勿添加占位记录');
-      if(!/^\d{4}-\d{2}-\d{2}$/.test(c[3])||amount(c[4])==null)throw Error(code+' 缺少有效参考价或日期');
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(c[4])||amount(c[5])==null)throw Error(code+' 缺少有效参考价或日期');
       seen.add(id);
-      rows.push({name:c[0],code,normalizedCode:id,market:c[2],closeDate:c[3],
-        close:amount(c[4]),closeText:c[4],horizon:c[5],bear,base,bull,
-        method:c[9],updated:c[10],currency:c[4].includes('HK$')?'HK$':c[4].includes('¥')?'¥':(code.toUpperCase().endsWith('.HK')?'HK$':'¥')});
+      rows.push({name:c[0],code,normalizedCode:id,sector:c[2],market:c[3],closeDate:c[4],
+        close:amount(c[5]),closeText:c[5],horizon:c[6],bear,base,bull,
+        method:c[10],updated:c[11],currency:c[5].includes('HK$')?'HK$':c[5].includes('¥')?'¥':(code.toUpperCase().endsWith('.HK')?'HK$':'¥')});
     }
     const sectionStarts=[];
     lines.forEach((line,i)=>{const m=line.match(/^###\s+\d+\.\s+(.+?)[（(]([^)）]+)[)）]\s*$/);if(m)sectionStarts.push({idx:i,code:normalCode(m[2])})});
@@ -45,6 +45,9 @@
       const tracking=textOf(/^####.*核验节点/).filter(l=>l.startsWith('|')&&!isDivider(l)&&!/\|\s*跟踪事项\s*\|/.test(l));
       item.tracking=tracking.map(cells).filter(c=>c.length>=3).map(c=>({event:c[0],effect:c[1],evidence:c[2]}));
       item.note=sub.find(l=>/^\*\*当前研究结论/.test(l))||'';
+      const src=sub.join('\n');
+      item.chatTitle=(src.match(/原研究对话：《([^》]+)》/)||[])[1]||'';
+      item.archiveLink=(src.match(/\[GitHub 历史研究摘要（不是原始 ChatGPT 聊天）\]\((https:\/\/github\.com\/[^)]+)\)/)||[])[1]||'';
       const recorded=item.assumptions.find(a=>a.label.includes('每股估值'));
       if(recorded){
         for(const scenario of ['bear','base','bull']){
@@ -56,6 +59,8 @@
     }
     if(!rows.length)throw Error('估值总表尚无公司记录');
     const version=(markdown.match(/文档版本\*\*：([^\s\n]+)/)||[])[1]||'—';
+    const sectorOrder=['有色金属与矿业','半导体与电子材料','电力装备与电源','新能源与储能'];
+    rows.sort((a,b)=>sectorOrder.indexOf(a.sector)-sectorOrder.indexOf(b.sector)||b.updated.localeCompare(a.updated));
     return {items:rows,version};
   }
   const money=(v,c)=>v==null?'—':c+v.toLocaleString('zh-CN',{minimumFractionDigits:v%1?1:0,maximumFractionDigits:2});
@@ -70,8 +75,8 @@
     let html='<div class="master-intro"><div><span class="tag green">MARKDOWN · SINGLE SOURCE OF TRUTH</span><h2>公司估值情景总表</h2><p>所有目标区间与假设均直接读取 GitHub 中的估值 Markdown；参考价是文档记录日价格，不是实时行情。</p></div><a class="button master-source" href="'+mdPath+'" target="_blank" rel="noopener noreferrer">打开原始 Markdown ↗</a></div>';
     html+='<div class="master-stats"><div><small>已登记公司</small><strong>'+items.length+'</strong><span>仅展示完整情景研究</span></div><div><small>三情景估值</small><strong>'+complete+'</strong><span>已完整建模公司/证券</span></div><div><small>文档版本</small><strong>'+esc(master.version)+'</strong><span>保留 Git 提交历史</span></div><div><small>最近记录更新</small><strong class="date">'+esc(items.map(x=>x.updated).sort().slice(-1)[0])+'</strong><span>不等于行情更新</span></div></div>';
     html+='<div class="section-head"><div><h2>全部公司 · 估值对照</h2><p>点击证券查看假设、估值范围和验证事项</p></div><input class="master-search" type="search" aria-label="筛选公司" placeholder="搜索公司或证券代码..." data-master-search></div>';
-    html+='<div class="card table-wrap master-table"><table><thead><tr><th>公司 / 代码</th><th>参考价 · 日期</th><th>悲观</th><th>基准</th><th>乐观</th><th>基准预期差*</th><th>估值年度</th></tr></thead><tbody>';
-    for(const x of items)html+='<tr data-master-row="'+esc((x.name+' '+x.code).toLowerCase())+'" class="'+(x.code===chosen.code?'master-current':'')+'"><td><button class="master-row-link" data-master-stock="'+esc(x.code)+'"><b>'+esc(x.name)+'</b><span>'+esc(x.code)+' · '+esc(x.market)+(x.bear&&x.base&&x.bull?' · 完整三情景':' · 非完整记录')+'</span></button></td><td><b>'+esc(x.closeText)+'</b><span class="cell-sub">'+esc(x.closeDate)+'</span></td><td class="m-bear">'+esc(val(x.bear,x.currency))+'</td><td class="m-base">'+esc(val(x.base,x.currency))+'</td><td class="m-bull">'+esc(val(x.bull,x.currency))+'</td><td>'+esc(diff(x.base,x.close))+'</td><td>'+esc(x.horizon)+'</td></tr>';
+    html+='<div class="card table-wrap master-table"><table><thead><tr><th>公司 / 代码</th><th>行业</th><th>参考价 · 日期</th><th>悲观</th><th>基准</th><th>乐观</th><th>基准预期差*</th><th>估值年度</th></tr></thead><tbody>';
+    let priorSector='';for(const x of items){if(priorSector!==x.sector){html+='<tr class="master-sector-row" data-master-group="'+esc(x.sector)+'"><td colspan="8"><b>'+esc(x.sector)+'</b><small>按研究日期倒序</small></td></tr>';priorSector=x.sector}html+='<tr data-master-row="'+esc((x.name+' '+x.code).toLowerCase())+'" class="'+(x.code===chosen.code?'master-current':'')+'"><td><button class="master-row-link" data-master-stock="'+esc(x.code)+'"><b>'+esc(x.name)+'</b><span>'+esc(x.code)+' · '+esc(x.market)+(x.bear&&x.base&&x.bull?' · 完整三情景':' · 非完整记录')+'</span></button></td><td class="master-sector-cell">'+esc(x.sector)+'</td><td><b>'+esc(x.closeText)+'</b><span class="cell-sub">'+esc(x.closeDate)+'</span></td><td class="m-bear">'+esc(val(x.bear,x.currency))+'</td><td class="m-base">'+esc(val(x.base,x.currency))+'</td><td class="m-bull">'+esc(val(x.bull,x.currency))+'</td><td>'+esc(diff(x.base,x.close))+'</td><td>'+esc(x.horizon)+'</td></tr>';}
     html+='</tbody></table></div><p class="master-fine">* 预期差仅按 Markdown 内参考收盘价计算，未包含股息，不代表预期收益率或交易建议。</p>';
     html+='<section class="master-detail" id="masterDetail"><div class="master-company"><div><div class="eyebrow">VALUATION CASE STUDY / '+esc(chosen.horizon)+'</div><h2>'+esc(chosen.name)+' <span>'+esc(chosen.code)+'</span></h2><p>'+esc(chosen.method)+'</p></div><div class="master-spot"><small>文档参考价 · '+esc(chosen.closeDate)+'</small><strong>'+esc(chosen.closeText)+'</strong><span>'+(snap&&snap.close!=null?'行情快照：'+esc(snap.currencySymbol)+esc(Number(snap.close).toFixed(2))+' ('+esc(snap.closeDate||'')+')':'行情快照未取得')+'</span></div></div>';
     html+='<div class="master-scenarios">';
@@ -86,9 +91,9 @@
     if(chosen.logic.length)html+='<ol class="master-logic">'+chosen.logic.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>';
     if(chosen.tracking.length)html+='<h4>关键核验节点</h4><div class="master-track">'+chosen.tracking.map(x=>'<div><b>'+esc(x.event)+'</b><p>'+esc(x.effect)+'</p><small>需核验：'+esc(x.evidence)+'</small></div>').join('')+'</div>';
     if(!chosen.logic.length&&!chosen.tracking.length)html+='<p>该公司已登记估值，后续可在 Markdown 中补充投资逻辑及验证节点。</p>';
-    html+='</div></div><div class="master-foot"><span>最近更新 '+esc(chosen.updated)+' · '+esc(chosen.horizon)+' · 独立研究情景，不是券商目标价</span><a target="_blank" rel="noopener noreferrer" href="https://github.com/moliq1/ai-investment-research/blob/main/sources/AI%E6%8A%95%E7%A0%94_%E5%85%AC%E5%8F%B8%E4%BC%B0%E5%80%BC%E6%83%85%E6%99%AF%E6%B1%87%E6%80%BB.md">GitHub 查看 / 编辑 ↗</a></div></section>';
+    html+='</div></div><div class="master-chat-source"><strong>原始聊天与研究来源</strong><p>《'+esc(chosen.chatTitle||chosen.name+'估值分析')+'》 · '+esc(chosen.updated)+'。原始 ChatGPT 会话链接尚未取得；请勿将研究摘要视为原始聊天。</p>'+(chosen.archiveLink?'<a href="'+esc(chosen.archiveLink)+'" target="_blank" rel="noopener noreferrer">查看 GitHub 历史研究摘要 ↗</a>':'')+'</div><div class="master-foot"><span>最近更新 '+esc(chosen.updated)+' · '+esc(chosen.horizon)+' · 独立研究情景，不是券商目标价</span><a target="_blank" rel="noopener noreferrer" href="https://github.com/moliq1/ai-investment-research/blob/main/sources/AI%E6%8A%95%E7%A0%94_%E5%85%AC%E5%8F%B8%E4%BC%B0%E5%80%BC%E6%83%85%E6%99%AF%E6%B1%87%E6%80%BB.md">GitHub 查看 / 编辑 ↗</a></div></section>';
     return html;
   }
-  document.addEventListener('input',function(e){if(!e.target.matches('[data-master-search]'))return;const q=e.target.value.trim().toLowerCase();document.querySelectorAll('[data-master-row]').forEach(row=>row.hidden=!row.dataset.masterRow.includes(q));});
+  document.addEventListener('input',function(e){if(!e.target.matches('[data-master-search]'))return;const q=e.target.value.trim().toLowerCase();document.querySelectorAll('[data-master-row]').forEach(row=>row.hidden=!row.dataset.masterRow.includes(q));document.querySelectorAll('[data-master-group]').forEach(row=>{let next=row.nextElementSibling,visible=false;while(next&&!next.hasAttribute('data-master-group')){if(next.hasAttribute('data-master-row')&&!next.hidden)visible=true;next=next.nextElementSibling}row.hidden=!visible});});
   window.MasterValuation={parse,render};
 })();

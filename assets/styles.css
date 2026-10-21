@@ -34,3 +34,5 @@ footer{font-size:11px;color:#617694;text-align:center;padding:22px}
 @media(max-width:780px){.master-intro,.master-company{align-items:flex-start;flex-direction:column}.master-spot{text-align:left}.master-scenarios{grid-template-columns:1fr}.master-search{width:100%}.master-stats>div{padding:15px}.master-detail{margin-top:23px}.master-scenario strong{font-size:25px}}
 
 .master-missing{font-size:12px;color:#dcb783;margin:23px 0 2px}.master-assumptions td{overflow-wrap:anywhere}.master-scenario:has(.master-missing){opacity:.78}.master-row-link span{line-height:1.5}
+
+.master-sector-row td{background:#1b2e4a;border-bottom:1px solid #3b5177!important;padding:12px 17px!important}.master-sector-row b{color:#e1ebff;letter-spacing:.5px}.master-sector-row small{color:#8ba5c9;margin-left:16px;font-size:11px}.master-sector-cell{color:#9ab6da;font-size:12px}.master-chat-source{margin-top:18px;border:1px solid #344963;border-radius:12px;background:#12243d;padding:17px 20px}.master-chat-source strong{color:#e1ecff;font-size:13px}.master-chat-source p{color:#91a8ca;font-size:12px;line-height:1.8;margin:8px 0}.master-chat-source a{font-size:12px}
