@@ -20,7 +20,8 @@
       const code=c[1],id=normalCode(code);
       if(seen.has(id))throw Error('估值总表出现重复证券代码：'+code);
       const bear=range(c[6]),base=range(c[7]),bull=range(c[8]);
-      /* No guesswork: companies with incomplete valuation remain visible as pending. */
+      if(!bear||!base||!bull)throw Error(code+' 尚无完整三情景估值，请勿添加占位记录');
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(c[3])||amount(c[4])==null)throw Error(code+' 缺少有效参考价或日期');
       seen.add(id);
       rows.push({name:c[0],code,normalizedCode:id,market:c[2],closeDate:c[3],
         close:amount(c[4]),closeText:c[4],horizon:c[5],bear,base,bull,
@@ -67,10 +68,10 @@
     const complete=items.filter(x=>x.bear&&x.base&&x.bull).length;
     const snap=(stocks||[]).find(x=>normalCode(x.id)===chosen.normalizedCode);
     let html='<div class="master-intro"><div><span class="tag green">MARKDOWN · SINGLE SOURCE OF TRUTH</span><h2>公司估值情景总表</h2><p>所有目标区间与假设均直接读取 GitHub 中的估值 Markdown；参考价是文档记录日价格，不是实时行情。</p></div><a class="button master-source" href="'+mdPath+'" target="_blank" rel="noopener noreferrer">打开原始 Markdown ↗</a></div>';
-    html+='<div class="master-stats"><div><small>已登记公司</small><strong>'+items.length+'</strong><span>历史研究与待补公司</span></div><div><small>三情景估值</small><strong>'+complete+'</strong><span>已完整建模公司/证券</span></div><div><small>文档版本</small><strong>'+esc(master.version)+'</strong><span>保留 Git 提交历史</span></div><div><small>最近记录更新</small><strong class="date">'+esc(items.map(x=>x.updated).sort().slice(-1)[0])+'</strong><span>不等于行情更新</span></div></div>';
+    html+='<div class="master-stats"><div><small>已登记公司</small><strong>'+items.length+'</strong><span>仅展示完整情景研究</span></div><div><small>三情景估值</small><strong>'+complete+'</strong><span>已完整建模公司/证券</span></div><div><small>文档版本</small><strong>'+esc(master.version)+'</strong><span>保留 Git 提交历史</span></div><div><small>最近记录更新</small><strong class="date">'+esc(items.map(x=>x.updated).sort().slice(-1)[0])+'</strong><span>不等于行情更新</span></div></div>';
     html+='<div class="section-head"><div><h2>全部公司 · 估值对照</h2><p>点击证券查看假设、估值范围和验证事项</p></div><input class="master-search" type="search" aria-label="筛选公司" placeholder="搜索公司或证券代码..." data-master-search></div>';
     html+='<div class="card table-wrap master-table"><table><thead><tr><th>公司 / 代码</th><th>参考价 · 日期</th><th>悲观</th><th>基准</th><th>乐观</th><th>基准预期差*</th><th>估值年度</th></tr></thead><tbody>';
-    for(const x of items)html+='<tr data-master-row="'+esc((x.name+' '+x.code).toLowerCase())+'" class="'+(x.code===chosen.code?'master-current':'')+'"><td><button class="master-row-link" data-master-stock="'+esc(x.code)+'"><b>'+esc(x.name)+'</b><span>'+esc(x.code)+' · '+esc(x.market)+(x.bear&&x.base&&x.bull?' · 完整三情景':' · 待补模型')+'</span></button></td><td><b>'+esc(x.closeText)+'</b><span class="cell-sub">'+esc(x.closeDate)+'</span></td><td class="m-bear">'+esc(val(x.bear,x.currency))+'</td><td class="m-base">'+esc(val(x.base,x.currency))+'</td><td class="m-bull">'+esc(val(x.bull,x.currency))+'</td><td>'+esc(diff(x.base,x.close))+'</td><td>'+esc(x.horizon)+'</td></tr>';
+    for(const x of items)html+='<tr data-master-row="'+esc((x.name+' '+x.code).toLowerCase())+'" class="'+(x.code===chosen.code?'master-current':'')+'"><td><button class="master-row-link" data-master-stock="'+esc(x.code)+'"><b>'+esc(x.name)+'</b><span>'+esc(x.code)+' · '+esc(x.market)+(x.bear&&x.base&&x.bull?' · 完整三情景':' · 非完整记录')+'</span></button></td><td><b>'+esc(x.closeText)+'</b><span class="cell-sub">'+esc(x.closeDate)+'</span></td><td class="m-bear">'+esc(val(x.bear,x.currency))+'</td><td class="m-base">'+esc(val(x.base,x.currency))+'</td><td class="m-bull">'+esc(val(x.bull,x.currency))+'</td><td>'+esc(diff(x.base,x.close))+'</td><td>'+esc(x.horizon)+'</td></tr>';
     html+='</tbody></table></div><p class="master-fine">* 预期差仅按 Markdown 内参考收盘价计算，未包含股息，不代表预期收益率或交易建议。</p>';
     html+='<section class="master-detail" id="masterDetail"><div class="master-company"><div><div class="eyebrow">VALUATION CASE STUDY / '+esc(chosen.horizon)+'</div><h2>'+esc(chosen.name)+' <span>'+esc(chosen.code)+'</span></h2><p>'+esc(chosen.method)+'</p></div><div class="master-spot"><small>文档参考价 · '+esc(chosen.closeDate)+'</small><strong>'+esc(chosen.closeText)+'</strong><span>'+(snap&&snap.close!=null?'行情快照：'+esc(snap.currencySymbol)+esc(Number(snap.close).toFixed(2))+' ('+esc(snap.closeDate||'')+')':'行情快照未取得')+'</span></div></div>';
     html+='<div class="master-scenarios">';
