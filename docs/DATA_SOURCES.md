@@ -16,7 +16,7 @@
 2099.HK | 214.00 | HKD | https://ca.investing.com/equities/china-gold-international-res.-corp-historical-data?cid=990854
 
 ## 更新逻辑
-GitHub Actions 尝试于北京时间每个工作日 18:00 执行一次更新，依赖非官方 yfinance 日 K。服务失败、没有有效新日期或出现异常值时跳过更新并保留原价和日期。并不保证每个交易日均成功或一定与官方交易所收盘价一致；正式交易用途应额外核实。
+GitHub Actions 尝试于北京时间每个工作日 18:30 与 21:30 各执行一次更新，依赖非官方 yfinance 日 K。每次执行完成后，**在同一个工作流中部署 GitHub Pages**，避免 GITHUB_TOKEN 自动提交不能触发其他 push 工作流的问题。GitHub 定时执行可能延迟或被跳过；服务失败、没有有效新日期或出现异常值时跳过更新并保留原价和日期。并不保证每个交易日都成功或与交易所官方收盘价完全一致，正式交易用途应额外核实。
 
 ## 券商信息获取
 - 富途官方 API: https://openapi.futunn.com/futu-api-doc/en/quote/get-research-analyst-consensus.html

@@ -2,7 +2,7 @@
 
 GitHub Pages 静态研究站点，先覆盖紫金矿业 A/H（601899.SH / 02899.HK）、紫金黄金国际（02259.HK）、中国黄金国际（02099.HK）。
 
-在线地址（需要在仓库 Settings → Pages 中启用 GitHub Actions）：https://moliq1.github.io/ai-investment-research/
+在线地址（已启用 GitHub Pages）：https://moliq1.github.io/ai-investment-research/
 
 ## 功能
 - 研究总览：逐证券展示日期、货币及收盘价来源。
@@ -21,7 +21,7 @@ python3 -m http.server 8000
 不要直接双击 index.html；浏览器会阻止 file:// 读取 JSON。
 
 ## 发布
-仓库 Settings → Pages → Build and deployment → Source 选择 **GitHub Actions**。工作流位于 .github/workflows/pages.yml。如自动更新行情失败，页面继续展示之前的收盘价及日期，不会伪装为最新实时值。
+仓库 Settings → Pages → Build and deployment → Source 已选择 **GitHub Actions**。代码变更由 .github/workflows/pages.yml 发布；收盘价则由 .github/workflows/quotes.yml 于北京时间工作日 18:30 和 21:30 尝试更新，并在同一个工作流中重新部署网站（GitHub Actions 定时可能延迟或跳过）。如行情更新失败，页面保留以前的收盘价及日期，不会伪装为最新实时值。
 
 ## 数据同步
 浏览器里修改的模型和机构数据仅保存在 localStorage，右上角可以导出 JSON；它不会自动写入 GitHub。若要更新共享数据，需要提交 data/*.json 到仓库。
