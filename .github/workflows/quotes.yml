@@ -1,13 +1,28 @@
-name: Refresh A/H closing prices
+name: Refresh A/H closing prices and publish site
+
 on:
   schedule:
-    - cron: '0 10 * * 1-5'  # 18:00 Asia/Shanghai
+    # GitHub's schedule uses UTC. China Standard Time = UTC+8.
+    # Run after both A-share and Hong Kong closing sessions.
+    - cron: '30 10 * * 1-5' # Beijing 18:30 (primary)
+    - cron: '30 13 * * 1-5' # Beijing 21:30 (retry in case quotes lag)
   workflow_dispatch:
+
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: close-prices-and-pages
+  cancel-in-progress: false
+
 jobs:
-  refresh:
+  refresh-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -15,18 +30,30 @@ jobs:
           python-version: '3.12'
       - name: Install quote source
         run: pip install -r requirements.txt
-      - name: Refresh valid daily price snapshots
+      - name: Refresh valid daily closing prices
         run: python scripts/update_prices.py
-      - name: Validate data
+      - name: Validate research data
         run: python -m unittest discover -s tests -v
-      - name: Commit new snapshots when needed
+      - name: Commit fresh quote snapshots
         run: |
           if ! git diff --quiet -- data/stocks.json; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
             git add data/stocks.json
-            git commit -m 'data: update verified date-based close snapshots'
+            git commit -m 'data: refresh latest A/H closing prices'
             git push
           else
             echo 'No newer valid daily close.'
           fi
+      # IMPORTANT: commits pushed by GITHUB_TOKEN do NOT trigger a second
+      # push-based workflow. Deploy in this same workflow so the website
+      # actually shows the new data/stocks.json after every refresh.
+      - name: Build public dashboard with current local prices
+        run: python scripts/build_site.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .site
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
