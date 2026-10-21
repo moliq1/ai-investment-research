@@ -13,7 +13,7 @@ class MasterValuationArchiveTests(unittest.TestCase):
         rows=[]
         for row in lines[start+1:]:
             if not row.startswith("|"): break
-            if re.fullmatch(r"[| \-:]+", row): continue
+            if all(c in '| -:' for c in row): continue
             cells=[x.strip().replace("**","") for x in row.strip().strip("|").split("|")]
             self.assertGreaterEqual(len(cells), 12)
             rows.append(cells)
