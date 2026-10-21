@@ -5,6 +5,7 @@
 <meta name="description" content="AI 投研估值与研报库：紫金矿业 A/H、紫金黄金国际、中国黄金国际">
 <title>Alpha Atlas | AI 投研估值与研报库</title>
 <link rel="stylesheet" href="assets/styles.css">
+<script src="assets/master.js" defer></script>
 <script src="assets/app.js" defer></script>
 </head><body>
 <div class="app">
@@ -12,7 +13,8 @@
   <div class="brand"><div class="brand-icon">A</div><div><strong>Alpha Atlas</strong><small>AI 投研 · Research Desk</small></div></div>
   <p class="side-label">INVESTMENT WORKSPACE</p>
   <nav aria-label="页面导航">
-   <button class="nav-link selected" data-nav="home">▦ <span>研究总览</span></button>
+   <button class="nav-link selected" data-nav="master">◈ <span>估值情景档案</span></button>
+   <button class="nav-link" data-nav="home">▦ <span>研究总览</span></button>
    <button class="nav-link" data-nav="valuation">◇ <span>三情景估值</span></button>
    <button class="nav-link" data-nav="brokers">▤ <span>券商目标价</span></button>
    <button class="nav-link" data-nav="reports">▣ <span>研究报告库</span></button>
@@ -21,10 +23,10 @@
   <div class="sidebar-foot"><strong>ALPHA ATLAS / v0.1</strong><p>先区分事实与假设，再讨论合理价值与预期差。</p><a href="https://github.com/moliq1/ai-investment-research" target="_blank" rel="noopener noreferrer">GitHub 项目源代码 ↗</a></div>
 </aside>
 <div class="workspace">
-<header class="topbar"><div>WORKSPACE <span class="muted">/</span> <strong id="breadcrumb">研究总览</strong></div><div class="top-right"><span class="live-dot"></span> STATIC RESEARCH <button id="export" class="button small">导出本地调整 ↓</button></div></header>
+<header class="topbar"><div>WORKSPACE <span class="muted">/</span> <strong id="breadcrumb">估值情景档案</strong></div><div class="top-right"><span class="live-dot"></span> STATIC RESEARCH <button id="export" class="button small">导出本地调整 ↓</button></div></header>
 <main>
-  <div class="title-row"><div><div class="eyebrow">INVESTMENT RESEARCH / A & H EQUITIES</div><h1 id="pageTitle">研究总览</h1><p id="pageSubtitle">公司研究、情景估值、机构预期，集中管理。</p></div><div class="latest"><small>最近记录的收盘日期</small><strong id="latestDate">—</strong><small>以各代码自身的更新日期为准</small></div></div>
-  <div class="warning" id="notice">已归档部分<strong>历史聊天估值区间</strong>（摘要重建，并非报告逐字原文或今日新估值）；未找回的情景显示“待补充”，不使用任何样例目标价。券商共识尚未导入。</div>
+  <div class="title-row"><div><div class="eyebrow">INVESTMENT RESEARCH / A & H EQUITIES</div><h1 id="pageTitle">估值情景档案</h1><p id="pageSubtitle">Markdown 驱动的公司估值总表、三种情景与关键经营假设。</p></div><div class="latest"><small>最近记录的收盘日期</small><strong id="latestDate">—</strong><small>以各代码自身的更新日期为准</small></div></div>
+  <div class="warning" id="notice">估值档案来自 <strong>GitHub Markdown 原始研究记录</strong>，其股价为带日期的历史参考价，不代表实时行情；其他页面继续保留历史模型、报告与券商数据，不能混为一谈。</div>
   <section id="view" aria-live="polite"><div class="loading">正在读取研究数据…</div></section>
 </main><footer>© 2026 Alpha Atlas · 所有估值为独立研究示范，非买卖建议 · 请核对日期、币种和原始来源</footer></div></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>

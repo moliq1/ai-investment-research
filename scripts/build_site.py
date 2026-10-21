@@ -10,6 +10,6 @@ if OUTPUT.exists():
 OUTPUT.mkdir()
 for name in ("index.html", ".nojekyll"):
     shutil.copy2(ROOT / name, OUTPUT / name)
-for folder in ("assets", "data", "reports", "docs"):
+for folder in ("assets", "data", "reports", "docs", "sources"):
     shutil.copytree(ROOT / folder, OUTPUT / folder)
 print("GitHub Pages output:", OUTPUT)
