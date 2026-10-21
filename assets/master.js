@@ -20,7 +20,7 @@
       const code=c[1],id=normalCode(code);
       if(seen.has(id))throw Error('估值总表出现重复证券代码：'+code);
       const bear=range(c[6]),base=range(c[7]),bull=range(c[8]);
-      if(!bear||!base||!bull)throw Error(code+' 缺少三情景估值区间');
+      /* No guesswork: companies with incomplete valuation remain visible as pending. */
       seen.add(id);
       rows.push({name:c[0],code,normalizedCode:id,market:c[2],closeDate:c[3],
         close:amount(c[4]),closeText:c[4],horizon:c[5],bear,base,bull,
@@ -48,7 +48,7 @@
       if(recorded){
         for(const scenario of ['bear','base','bull']){
           const r=range(recorded[scenario]);
-          if(r&&(Math.abs(r.low-item[scenario].low)>0.1||Math.abs(r.high-item[scenario].high)>0.1))
+          if(r&&item[scenario]&&(Math.abs(r.low-item[scenario].low)>0.1||Math.abs(r.high-item[scenario].high)>0.1))
             throw Error(item.code+' 估值总表与详细假设中的'+scenario+'估值不一致');
         }
       }
@@ -64,18 +64,19 @@
   function render(master,stocks,selected){
     if(!master||!master.items||!master.items.length)return '<div class="card pad"><h3>估值档案尚未加载</h3><p>请检查仓库 sources 下的 Markdown 文件。</p></div>';
     const items=master.items,chosen=items.find(x=>x.normalizedCode===normalCode(selected))||items[0];
+    const complete=items.filter(x=>x.bear&&x.base&&x.bull).length;
     const snap=(stocks||[]).find(x=>normalCode(x.id)===chosen.normalizedCode);
     let html='<div class="master-intro"><div><span class="tag green">MARKDOWN · SINGLE SOURCE OF TRUTH</span><h2>公司估值情景总表</h2><p>所有目标区间与假设均直接读取 GitHub 中的估值 Markdown；参考价是文档记录日价格，不是实时行情。</p></div><a class="button master-source" href="'+mdPath+'" target="_blank" rel="noopener noreferrer">打开原始 Markdown ↗</a></div>';
-    html+='<div class="master-stats"><div><small>已登记公司</small><strong>'+items.length+'</strong><span>持续追加</span></div><div><small>三情景估值</small><strong>'+items.length*3+'</strong><span>悲观 / 基准 / 乐观</span></div><div><small>文档版本</small><strong>'+esc(master.version)+'</strong><span>保留 Git 提交历史</span></div><div><small>最近模型更新</small><strong class="date">'+esc(items.map(x=>x.updated).sort().slice(-1)[0])+'</strong><span>不等于行情更新</span></div></div>';
+    html+='<div class="master-stats"><div><small>已登记公司</small><strong>'+items.length+'</strong><span>历史研究与待补公司</span></div><div><small>三情景估值</small><strong>'+complete+'</strong><span>已完整建模公司/证券</span></div><div><small>文档版本</small><strong>'+esc(master.version)+'</strong><span>保留 Git 提交历史</span></div><div><small>最近记录更新</small><strong class="date">'+esc(items.map(x=>x.updated).sort().slice(-1)[0])+'</strong><span>不等于行情更新</span></div></div>';
     html+='<div class="section-head"><div><h2>全部公司 · 估值对照</h2><p>点击证券查看假设、估值范围和验证事项</p></div><input class="master-search" type="search" aria-label="筛选公司" placeholder="搜索公司或证券代码..." data-master-search></div>';
     html+='<div class="card table-wrap master-table"><table><thead><tr><th>公司 / 代码</th><th>参考价 · 日期</th><th>悲观</th><th>基准</th><th>乐观</th><th>基准预期差*</th><th>估值年度</th></tr></thead><tbody>';
-    for(const x of items)html+='<tr data-master-row="'+esc((x.name+' '+x.code).toLowerCase())+'" class="'+(x.code===chosen.code?'master-current':'')+'"><td><button class="master-row-link" data-master-stock="'+esc(x.code)+'"><b>'+esc(x.name)+'</b><span>'+esc(x.code)+' · '+esc(x.market)+'</span></button></td><td><b>'+esc(x.closeText)+'</b><span class="cell-sub">'+esc(x.closeDate)+'</span></td><td class="m-bear">'+esc(val(x.bear,x.currency))+'</td><td class="m-base">'+esc(val(x.base,x.currency))+'</td><td class="m-bull">'+esc(val(x.bull,x.currency))+'</td><td>'+esc(diff(x.base,x.close))+'</td><td>'+esc(x.horizon)+'</td></tr>';
+    for(const x of items)html+='<tr data-master-row="'+esc((x.name+' '+x.code).toLowerCase())+'" class="'+(x.code===chosen.code?'master-current':'')+'"><td><button class="master-row-link" data-master-stock="'+esc(x.code)+'"><b>'+esc(x.name)+'</b><span>'+esc(x.code)+' · '+esc(x.market)+(x.bear&&x.base&&x.bull?' · 完整三情景':' · 待补模型')+'</span></button></td><td><b>'+esc(x.closeText)+'</b><span class="cell-sub">'+esc(x.closeDate)+'</span></td><td class="m-bear">'+esc(val(x.bear,x.currency))+'</td><td class="m-base">'+esc(val(x.base,x.currency))+'</td><td class="m-bull">'+esc(val(x.bull,x.currency))+'</td><td>'+esc(diff(x.base,x.close))+'</td><td>'+esc(x.horizon)+'</td></tr>';
     html+='</tbody></table></div><p class="master-fine">* 预期差仅按 Markdown 内参考收盘价计算，未包含股息，不代表预期收益率或交易建议。</p>';
     html+='<section class="master-detail" id="masterDetail"><div class="master-company"><div><div class="eyebrow">VALUATION CASE STUDY / '+esc(chosen.horizon)+'</div><h2>'+esc(chosen.name)+' <span>'+esc(chosen.code)+'</span></h2><p>'+esc(chosen.method)+'</p></div><div class="master-spot"><small>文档参考价 · '+esc(chosen.closeDate)+'</small><strong>'+esc(chosen.closeText)+'</strong><span>'+(snap&&snap.close!=null?'行情快照：'+esc(snap.currencySymbol)+esc(Number(snap.close).toFixed(2))+' ('+esc(snap.closeDate||'')+')':'行情快照未取得')+'</span></div></div>';
     html+='<div class="master-scenarios">';
     for(const [id,title,sub] of [['bear','悲观情景','压力测试'],['base','基准情景','主要判断'],['bull','乐观情景','有利条件']]){
       const r=chosen[id];
-      html+='<article class="card master-scenario '+id+'"><div class="m-scenario-top"><span>'+title+'</span><small>'+sub+'</small></div><strong>'+esc(val(r,chosen.currency))+'</strong><div class="m-return">'+esc(diff(r,chosen.close))+' <small>相对文档参考价</small></div><div class="m-rail"><span style="left:'+(Math.min(100,100*chosen.close/Math.max(1,chosen.bull.high*1.15,chosen.close*1.2)))+'%" class="m-marker"></span><i style="left:'+(100*r.low/Math.max(1,chosen.bull.high*1.15,chosen.close*1.2))+'%;width:'+Math.max(1,100*(r.high-r.low)/Math.max(1,chosen.bull.high*1.15,chosen.close*1.2))+'%"></i></div></article>';
+      html+='<article class="card master-scenario '+id+'"><div class="m-scenario-top"><span>'+title+'</span><small>'+sub+'</small></div><strong>'+esc(val(r,chosen.currency))+'</strong><div class="m-return">'+esc(diff(r,chosen.close))+' <small>相对文档参考价</small></div>' + (r ? '<div class="m-rail">' + (chosen.close ? '<span style="left:'+(Math.min(100,100*chosen.close/Math.max(1,...['bear','base','bull'].map(k=>chosen[k]?.high||0).concat([chosen.close*1.2]))))+'%" class="m-marker"></span>':'') + '<i style="left:'+(100*r.low/Math.max(1,...['bear','base','bull'].map(k=>chosen[k]?.high||0).concat([chosen.close||1])))+'%;width:'+Math.max(1,100*(r.high-r.low)/Math.max(1,...['bear','base','bull'].map(k=>chosen[k]?.high||0).concat([chosen.close||1])))+'%"></i></div>':'<p class="master-missing">尚未形成可追溯的该档估值</p>')+'</article>';
     }
     html+='</div><div class="master-two"><div class="card pad"><h3>三种情景 · 核心假设</h3><div class="table-wrap"><table class="master-assumptions"><thead><tr><th>模型参数</th><th>悲观</th><th>基准</th><th>乐观</th></tr></thead><tbody>';
     for(const a of chosen.assumptions)html+='<tr><td>'+esc(a.label)+'</td><td>'+esc(a.bear)+'</td><td>'+esc(a.base)+'</td><td>'+esc(a.bull)+'</td></tr>';

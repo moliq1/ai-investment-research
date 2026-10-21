@@ -32,3 +32,5 @@ footer{font-size:11px;color:#617694;text-align:center;padding:22px}
 .master-foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin:16px 0 0;font-size:11px;color:#879cb9}
 @media(max-width:1100px){.master-stats{grid-template-columns:repeat(2,1fr)}.master-two{grid-template-columns:1fr}}
 @media(max-width:780px){.master-intro,.master-company{align-items:flex-start;flex-direction:column}.master-spot{text-align:left}.master-scenarios{grid-template-columns:1fr}.master-search{width:100%}.master-stats>div{padding:15px}.master-detail{margin-top:23px}.master-scenario strong{font-size:25px}}
+
+.master-missing{font-size:12px;color:#dcb783;margin:23px 0 2px}.master-assumptions td{overflow-wrap:anywhere}.master-scenario:has(.master-missing){opacity:.78}.master-row-link span{line-height:1.5}
