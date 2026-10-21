@@ -2,12 +2,12 @@
 
 ## 研究与估值数据
 - stocks.json 按证券代码区分 A / H，包含收盘价、closeDate、币种及 closeSource，不把交易日收盘价写成盘中实时价。
-- scenarios.json 记录悲观、基准、乐观假设，status=demo 一律解释为**演示数据而非合理价值**。
+- scenarios.json 记录此前聊天可恢复的历史估值区间：bearLow/bearHigh、baseLow/baseHigh、bullLow/bullHigh。字段可为空表示未找回；status=historical 为历史模型，status=partial 表示仅找到部分历史结果。sourceType=prior_chat_reconstruction 表示对话检索摘要重建，**不等于原文的完整再现**。
 - brokers.json 保存机构、证券代码、目标价、评级、日期、来源 URL、origin。只有原文 URL 不代表已经实质核验。
 - consensus.json 为富途接口返回的一致预期，不能与自己的三情景估值混同。
-- reports.json 是研究档案索引，reports/*.md 是原创研究提纲，尚未迁移历史 ChatGPT 完整文章。
+- valuation_history.json 存放其他时间/条件的独立模型。reports.json 是研究索引，reports/*.md 是从历史对话的可恢复摘要编写的研究笔记，并非完整历史 ChatGPT 原文。
 
-## 2026-10-16 收盘快照
+## 初始收盘快照（历史基线，最新看 data/stocks.json）
 证券 | 价格 | 原币 | 来源
 ---|---:|---|---
 601899.SH | 29.92 | CNY | https://cn.investing.com/equities/zijin-mining-historical-data
@@ -26,5 +26,12 @@ GitHub Actions 尝试于北京时间每个工作日 18:30 与 21:30 各执行一
 
 富途 OpenD 需要用户自行在本地授权，脚本不向 GitHub 保存账号凭据。SDK 返回格式可能随版本变化，接入时须实际调试。
 
-## 从演示到正式估值
+## 历史独立模型与新研究
 在发布正式估值之前，需补齐金铜价格、权益产量、AISC/成本、资本支出、少数股东权益、债务、股本、汇率与适用 PE/NAV 估值框架，同时记录模型时间、失效条件与原始证据。
+
+## 2026-10-21 清理与迁移记录
+- 原始虚构三情景样例已删除，所有已恢复数值均注明对应的旧研究日期。未确认完整模型的留空，不用虚构“基准价”填补。
+- 旧浏览器中的 alpha-atlas-edits-v1 不再被载入，改用 alpha-atlas-edits-v2。新的用户个人试算不会修改研究历史档案。
+- 新加入六只证券的 close、closeDate、closeSource 初始为 null，行情脚本下次成功查询后写回。页面明确显示“待抓取”。
+- 对于历史旧文中混用的股价与目标价，重新分类为参考收盘、历史独立模型、条件模型或券商目标价；不确定的部分不展示在正式三情景。
+- 历史聊天的完整原文与附件未批量获得，因此文档统一标明“检索摘要重建”，细节仍待核查。
