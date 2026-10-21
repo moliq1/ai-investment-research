@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a static GitHub Pages site from the public research files."""
+"""Publish only the Markdown-driven research UI and its canonical source."""
 from pathlib import Path
 import shutil
 
@@ -7,9 +7,18 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / ".site"
 if OUTPUT.exists():
     shutil.rmtree(OUTPUT)
-OUTPUT.mkdir()
+OUTPUT.mkdir(parents=True)
+
 for name in ("index.html", ".nojekyll"):
     shutil.copy2(ROOT / name, OUTPUT / name)
-for folder in ("assets", "data", "reports", "docs", "sources"):
-    shutil.copytree(ROOT / folder, OUTPUT / folder)
-print("GitHub Pages output:", OUTPUT)
+
+(OUTPUT / "assets").mkdir()
+for name in ("research.js", "research.css"):
+    shutil.copy2(ROOT / "assets" / name, OUTPUT / "assets" / name)
+
+(OUTPUT / "sources").mkdir()
+shutil.copy2(
+    ROOT / "sources" / "AI投研_公司估值情景汇总.md",
+    OUTPUT / "sources" / "AI投研_公司估值情景汇总.md",
+)
+print("Markdown-only website output:", OUTPUT)

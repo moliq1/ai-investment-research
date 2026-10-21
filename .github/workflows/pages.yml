@@ -23,6 +23,10 @@ jobs:
           python-version: '3.12'
       - name: Validate research data
         run: python -m unittest discover -s tests -v
+      - name: Validate Markdown website
+        run: |
+          node --check assets/research.js
+          node tests/smoke_research.js
       - name: Build public site
         run: python scripts/build_site.py
       - uses: actions/configure-pages@v5

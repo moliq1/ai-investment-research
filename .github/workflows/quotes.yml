@@ -45,6 +45,11 @@ jobs:
           else
             echo 'No newer valid daily close.'
           fi
+      # The quote snapshots are legacy data, not used by the Markdown-only UI.
+      - name: Validate Markdown website
+        run: |
+          node --check assets/research.js
+          node tests/smoke_research.js
       # IMPORTANT: commits pushed by GITHUB_TOKEN do NOT trigger a second
       # push-based workflow. Deploy in this same workflow so the website
       # actually shows the new data/stocks.json after every refresh.

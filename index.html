@@ -1,33 +1,24 @@
 <!doctype html>
-<html lang="zh-CN"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#091429">
-<meta name="description" content="AI 投研估值与研报库：紫金矿业 A/H、紫金黄金国际、中国黄金国际">
-<title>Alpha Atlas | AI 投研估值与研报库</title>
-<link rel="stylesheet" href="assets/styles.css">
-<script src="assets/master.js" defer></script>
-<script src="assets/app.js" defer></script>
-</head><body>
-<div class="app">
-<aside class="sidebar">
-  <div class="brand"><div class="brand-icon">A</div><div><strong>Alpha Atlas</strong><small>AI 投研 · Research Desk</small></div></div>
-  <p class="side-label">INVESTMENT WORKSPACE</p>
-  <nav aria-label="页面导航">
-   <button class="nav-link selected" data-nav="master">◈ <span>估值情景档案</span></button>
-   <button class="nav-link" data-nav="home">▦ <span>研究总览</span></button>
-   <button class="nav-link" data-nav="valuation">◇ <span>三情景估值</span></button>
-   <button class="nav-link" data-nav="brokers">▤ <span>券商目标价</span></button>
-   <button class="nav-link" data-nav="reports">▣ <span>研究报告库</span></button>
-   <button class="nav-link" data-nav="sources">◉ <span>数据与说明</span></button>
-  </nav>
-  <div class="sidebar-foot"><strong>ALPHA ATLAS / v0.1</strong><p>先区分事实与假设，再讨论合理价值与预期差。</p><a href="https://github.com/moliq1/ai-investment-research" target="_blank" rel="noopener noreferrer">GitHub 项目源代码 ↗</a></div>
-</aside>
-<div class="workspace">
-<header class="topbar"><div>WORKSPACE <span class="muted">/</span> <strong id="breadcrumb">估值情景档案</strong></div><div class="top-right"><span class="live-dot"></span> STATIC RESEARCH <button id="export" class="button small">导出本地调整 ↓</button></div></header>
-<main>
-  <div class="title-row"><div><div class="eyebrow">INVESTMENT RESEARCH / A & H EQUITIES</div><h1 id="pageTitle">估值情景档案</h1><p id="pageSubtitle">Markdown 驱动的公司估值总表、三种情景与关键经营假设。</p></div><div class="latest"><small>最近记录的收盘日期</small><strong id="latestDate">—</strong><small>以各代码自身的更新日期为准</small></div></div>
-  <div class="warning" id="notice">估值档案来自 <strong>GitHub Markdown 原始研究记录</strong>，其股价为带日期的历史参考价，不代表实时行情；其他页面继续保留历史模型、报告与券商数据，不能混为一谈。</div>
-  <section id="view" aria-live="polite"><div class="loading">正在读取研究数据…</div></section>
-</main><footer>© 2026 Alpha Atlas · 所有估值为独立研究示范，非买卖建议 · 请核对日期、币种和原始来源</footer></div></div>
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
-</body></html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101f35">
+<meta name="description" content="Alpha Atlas AI 投研工作台：从同一份 Markdown 展示公司三情景估值、现金流假设、投资逻辑、反向估值与核验节点。">
+<title>Alpha Atlas · AI 投研工作台</title>
+<link rel="stylesheet" href="assets/research.css">
+<script src="assets/research.js" defer></script>
+</head>
+<body>
+<div id="shade" aria-hidden="true"></div>
+<aside id="sidebar" aria-label="研究导航"><div class="loading">正在读取研究档案…</div></aside>
+<div id="workspace">
+  <header id="topbar">
+    <div class="top-path"><button id="mobile-menu" type="button" aria-label="打开导航菜单"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><span>WORKSPACE</span><span class="top-sep">/</span><b id="crumb">研究总览</b></div>
+    <div class="top-utilities"><span class="top-label">MARKDOWN RESEARCH</span><span class="top-version" id="version">DOC —</span><a class="top-link" href="https://github.com/moliq1/ai-investment-research" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 查看仓库">GITHUB ↗</a></div>
+  </header>
+  <main id="content" aria-live="polite"><div class="loading" style="padding:80px 20px;text-align:center;color:#8797ad">正在读取 Markdown 研究报告…</div></main>
+  <footer id="footer">© 2026 Alpha Atlas · 基于 GitHub Markdown 的独立投研档案 · 历史情景估值并非实时行情或买卖建议</footer>
+</div>
+</body>
+</html>
