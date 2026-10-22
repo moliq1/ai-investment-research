@@ -45,6 +45,11 @@ class MarketQuoteTests(unittest.TestCase):
         fixed = datetime(2026, 10, 22, 20, 0, tzinfo=TZ)
         def lookup(symbol):
             return ("2026-10-22", 195.1) if symbol == "2099.HK" else None
+        for entry in earlier["quotes"]:
+            if entry["code"] == "02099.HK":
+                # The live archive may already have updated to Oct 22; test a past snapshot.
+                entry["closeDate"] = "2026-10-21"
+                entry["close"] = 194.9
         newer, updated = mod.refresh(self.universe, earlier, lookup, fixed)
         self.assertEqual(updated, ["02099.HK"])
         first = next(x for x in newer["quotes"] if x["code"] == "02099.HK")

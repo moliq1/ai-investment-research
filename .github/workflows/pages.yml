@@ -4,12 +4,12 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: valuation-pages
+  cancel-in-progress: false
 jobs:
   deploy:
     environment:
@@ -21,6 +21,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install quote source
+        run: pip install -r requirements.txt
+      - name: Refresh latest closed A/H prices from Markdown universe
+        run: python scripts/update_market_quotes.py
+      - name: Persist valid market quote changes
+        run: |
+          if ! git diff --quiet -- data/market_quotes.json; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add data/market_quotes.json
+            git commit -m 'data: update latest verified A/H closing prices'
+            git push
+          else
+            echo 'No newer validated market close available.'
+          fi
       - name: Validate research data
         run: python -m unittest discover -s tests -v
       - name: Validate Markdown website

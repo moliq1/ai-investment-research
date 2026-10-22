@@ -60,3 +60,18 @@ assert.equal(quotes.get('02099.HK').valid,true);
 assert.equal(quotes.get('300274.SZ').valid,false);
 assert.equal(app.dayAge('2030-01-01',date)<0,true);
 assert.ok(app.opportunities(data).includes('低估发现'));
+
+// Signed comparison uses the MIDPOINT of the base valuation, not its lower bound.
+const centered={base:{low:100,high:200}};
+assert.equal(app.benchmarkInfo(centered,120).baseline,150);
+assert.equal(app.benchmarkInfo(centered,120).relative,-20);
+assert.equal(app.benchmarkInfo(centered,180).relative,20);
+assert.equal(app.benchmarkInfo(centered,150).relative,0);
+const radarHtml=app.opportunities(data);
+assert.ok(radarHtml.includes('基准价（区间中点）'));
+assert.ok(radarHtml.includes('相对基准价'));
+assert.equal(app.ratioClass(-20),'ratio-negative');
+assert.equal(app.ratioClass(20),'ratio-positive');
+assert.equal(app.ratioClass(0),'ratio-zero');
+assert.equal(app.ratioClass(null),'ratio-unknown');
+assert.ok(radarHtml.includes('绿色')&&radarHtml.includes('红色'));

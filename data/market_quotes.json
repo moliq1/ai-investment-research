@@ -37,9 +37,9 @@
       "market": "A股",
       "symbol": "603799.SS",
       "currency": "¥",
-      "close": null,
-      "closeDate": null,
-      "sourceUrl": null
+      "close": 31.74,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://cn.investing.com/equities/zhejiang-huayou-cobalt-co-ltd-historical-data"
     },
     {
       "code": "688012.SH",
@@ -57,9 +57,9 @@
       "market": "A股",
       "symbol": "688498.SS",
       "currency": "¥",
-      "close": null,
-      "closeDate": null,
-      "sourceUrl": null
+      "close": 1021.1,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://cn.investing.com/equities/yuanjie-semiconductor-tech-historical-data"
     },
     {
       "code": "600183.SH",
@@ -67,9 +67,9 @@
       "market": "A股",
       "symbol": "600183.SS",
       "currency": "¥",
-      "close": null,
-      "closeDate": null,
-      "sourceUrl": null
+      "close": 118.99,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://cn.investing.com/equities/shengyi-tech-historical-data"
     },
     {
       "code": "300408.SZ",
@@ -77,9 +77,9 @@
       "market": "A股",
       "symbol": "300408.SZ",
       "currency": "¥",
-      "close": null,
-      "closeDate": null,
-      "sourceUrl": null
+      "close": 95.97,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://cn.investing.com/equities/chaozhou-three-circle-historical-data"
     },
     {
       "code": "01133.HK",
@@ -97,9 +97,9 @@
       "market": "A股",
       "symbol": "002851.SZ",
       "currency": "¥",
-      "close": null,
-      "closeDate": null,
-      "sourceUrl": null
+      "close": 97.98,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://cn.investing.com/equities/shenzhen-megmeet-electrical-historical-data"
     },
     {
       "code": "300274.SZ",

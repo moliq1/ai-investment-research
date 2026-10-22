@@ -316,3 +316,12 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 .scan-rules p{margin:9px 0 0;font-size:11px;line-height:1.85;color:#8b9caf}
 @media(max-width:1080px){.scan-hero{grid-template-columns:1fr}.scan-visual{display:none}.scan-stats{grid-template-columns:repeat(2,1fr)}.scan-table{overflow-x:auto}.scan-rules{grid-template-columns:1fr}}
 @media(max-width:650px){.scan-hero{padding:30px 22px}.scan-hero h1{font-size:27px}.scan-stats{gap:8px}.scan-stats>div{padding:16px}.scan-stats strong{font-size:24px}.scan-section-heading{display:block}.scan-selector{margin-top:13px}.scan-selector select{margin-left:0;margin-top:5px}.scan-formula{padding:15px}.scan-formula-icon{display:none}}
+
+/* Signed price deviation versus the midpoint of the Markdown base case. */
+.scan-discount.ratio-negative{color:#178669}
+.scan-discount.ratio-positive{color:#cc4e57}
+.scan-discount.ratio-zero{color:#71829b}
+.scan-discount.ratio-unknown{color:#a2aebe}
+.scan-legend-negative{color:#168268;font-weight:800}
+.scan-legend-positive{color:#c24e59;font-weight:800}
+.scan-formula strong{font-weight:800}

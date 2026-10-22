@@ -14,7 +14,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: close-prices-and-pages
+  group: valuation-pages
   cancel-in-progress: false
 
 jobs:

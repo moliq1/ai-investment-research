@@ -42,15 +42,28 @@ function quote(item){return state.quotes.get(item.code)||null}
 function quoteFresh(item){const q=quote(item);return q&&q.valid?q:null}
 function labelQuote(item){const q=quote(item);return {price:q&&q.valid?item.currency+format(q.close):'—',date:q&&q.closeDate?q.closeDate+(q.valid?'':' · 过期'):'行情未覆盖'} }
 function modelOld(item,now=Date.now()){const age=dayAge(item.updated,now);return age<0||age>MODEL_REVIEW_AGE}
+function ratioClass(value){return value==null?'ratio-unknown':value<0?'ratio-negative':value>0?'ratio-positive':'ratio-zero'}
+function benchmarkInfo(item,price){
+ const baseline=(item.base.low+item.base.high)/2;
+ if(!Number.isFinite(baseline)||baseline<=0||!Number.isFinite(price)||price<=0)return null;
+ return {
+   baseline,
+   relative:(price/baseline-1)*100,
+   // Low-end breach remains a separate, more conservative research signal.
+   belowLower:(item.base.low-price)/item.base.low*100
+ };
+}
 function discountInfo(item){
  const q=quoteFresh(item);
- if(!q)return {kind:'missing',discount:null,reason:'暂无有效收盘价'};
- const discount=(item.base.low-q.close)/item.base.low*100;
- if(discount>0&&modelOld(item))return {kind:'archive',discount,reason:'历史模型折价，需先复核模型'};
- if(discount>=10)return {kind:'watch',discount,reason:'基准下沿折价10%以上，重点核验'};
- if(discount>0)return {kind:'observe',discount,reason:'低于基准估值下沿，需核验'};
- if(q.close<=item.base.high)return {kind:'inrange',discount,reason:'处于基准估值区间'};
- return {kind:'above',discount,reason:'高于基准估值上沿'};
+ if(!q)return {kind:'missing',relative:null,belowLower:null,reason:'暂无有效收盘价'};
+ const benchmark=benchmarkInfo(item,q.close);
+ if(!benchmark)return {kind:'missing',relative:null,belowLower:null,reason:'基准价或行情无效'};
+ const {relative,belowLower}=benchmark;
+ if(belowLower>0&&modelOld(item))return {kind:'archive',relative,belowLower,reason:'低于基准下沿，但历史模型需先复核'};
+ if(belowLower>=10)return {kind:'watch',relative,belowLower,reason:'跌破基准下沿10%以上，重点核验'};
+ if(belowLower>0)return {kind:'observe',relative,belowLower,reason:'跌破基准下沿，需核验'};
+ if(q.close<=item.base.high)return {kind:'inrange',relative,belowLower,reason:'收盘价处于基准估值区间'};
+ return {kind:'above',relative,belowLower,reason:'收盘价高于基准估值区间'};
 }
 const delta=(s,key)=>{const q=quoteFresh(s);if(!q)return '行情缺失或过期';return percent(pct(s[key].low,q.close))+(s[key].low===s[key].high?'':' 至 '+percent(pct(s[key].high,q.close)));};
 const encode=s=>encodeURIComponent(s);
@@ -235,28 +248,30 @@ function opportunities(db){
  const filtered=rows.filter(x=>(state.opSector==='全部'||x.item.sector===state.opSector)&&
    (state.opFilter==='all'||state.opFilter==='below'&&['watch','observe','archive'].includes(x.result.kind)||
     state.opFilter==='review'&&x.result.kind==='archive'||state.opFilter==='missing'&&x.result.kind==='missing'));
- filtered.sort((a,b)=>(b.result.discount??-1e8)-(a.result.discount??-1e8)||b.item.updated.localeCompare(a.item.updated));
+ // Most negative price deviation first. Missing prices appear at the bottom.
+ filtered.sort((a,b)=>(a.result.relative??Infinity)-(b.result.relative??Infinity)||b.item.updated.localeCompare(a.item.updated));
  const valid=rows.filter(x=>x.quote).length;
  const below=rows.filter(x=>['watch','observe'].includes(x.result.kind)).length;
  const archive=rows.filter(x=>x.result.kind==='archive').length;
  const missing=rows.filter(x=>x.result.kind==='missing').length;
  const snapshot=rows.map(x=>x.quote?.closeDate).filter(Boolean).sort().at(-1)||'暂无有效行情';
- let h='<div class="scan-hero"><div><span class="eyebrow">VALUATION OPPORTUNITY SCANNER</span><h1>低估发现<span> / Value Radar</span></h1><p>每天以最新有效收盘价对比 Markdown 的三情景价值区间。识别的只是<strong>价格与旧估值假设之间的折价</strong>，最终仍需要财报、利润和现金流验证。</p><a href="#/companies">浏览全部公司 '+icon('arrow')+'</a></div><div class="scan-visual"><span>LAST VALID MARKET SESSION</span><strong>'+safe(snapshot)+'</strong><small>行情每日定时尝试刷新 · 非实时成交</small><div class="scan-visual-bars"><i></i><i></i><i></i><i></i><i></i></div></div></div>';
- h+='<div class="scan-stats"><div><span>有效收盘价</span><strong>'+valid+'<small> / '+db.items.length+'</small></strong><p>仅有效行情参与筛选</p></div><div><span>折价观察</span><strong>'+below+'</strong><p>模型更新日距今 ≤ 60 天</p></div><div><span>历史模型折价</span><strong>'+archive+'</strong><p>模型超过 60 天，需重估</p></div><div><span>无有效行情</span><strong>'+missing+'</strong><p>不生成估值信号</p></div></div>';
- h+='<div class="scan-formula"><div class="scan-formula-icon">%</div><div><strong>折价计算口径</strong><p>基准下沿折价率 =（Markdown 基准估值下沿 − 最新有效收盘价）÷ Markdown 基准估值下沿 × 100%。正数代表股价低于基准下沿；<strong>折价不等于安全边际，也不等于预期收益率</strong>。跨不同估值期限、币种和模型日期仅比较各自百分比。</p></div></div>';
- h+='<div class="scan-section-heading"><div><span class="eyebrow">SCREENED UNIVERSE</span><h2>估值折价与观察清单</h2><p>折价由大到小排序 · 保留失效模型和缺行情记录，便于发现资料缺口</p></div><div class="scan-selector"><label>行业筛选 <select id="scan-sector"><option value="全部">全部行业</option>'+db.sectors.map(x=>'<option value="'+safe(x)+'" '+(x===state.opSector?'selected':'')+'>'+safe(x)+'</option>').join('')+'</select></label></div></div>';
- h+='<div class="scan-filters">'+[['all','全部公司'],['below','基准下沿折价'],['review','旧模型待复核'],['missing','缺少行情']].map(([key,label])=>'<button data-op-filter="'+key+'" class="'+(state.opFilter===key?'active':'')+'">'+label+'</button>').join('')+'</div>';
- h+='<div class="scan-table"><div class="scan-table-header"><span>研究对象</span><span>有效收盘价</span><span>基准估值下沿</span><span>基准折价率</span><span>研究状态</span></div>';
+ let h='<div class="scan-hero"><div><span class="eyebrow">VALUATION OPPORTUNITY SCANNER</span><h1>低估发现<span> / Value Radar</span></h1><p>最新有效收盘价对比 Markdown 的基准估值区间中点。<strong>绿色负值表示当前价低于基准价，红色正值表示高于基准价</strong>。是否真正低估，仍需结合财报、利润和现金流判断。</p><a href="#/companies">浏览全部公司 '+icon('arrow')+'</a></div><div class="scan-visual"><span>LAST VERIFIED CLOSE DATE</span><strong>'+safe(snapshot)+'</strong><small>每只股票另列自己的交易日 · 非实时成交</small><div class="scan-visual-bars"><i></i><i></i><i></i><i></i><i></i></div></div></div>';
+ h+='<div class="scan-stats"><div><span>有效收盘价</span><strong>'+valid+'<small> / '+db.items.length+'</small></strong><p>仅有效行情参与筛选</p></div><div><span>跌破基准下沿</span><strong>'+below+'</strong><p>有效行情且模型更新 ≤ 60 天</p></div><div><span>历史模型需复核</span><strong>'+archive+'</strong><p>跌破下沿但研究超过60天</p></div><div><span>无有效行情</span><strong>'+missing+'</strong><p>不生成估值比例</p></div></div>';
+ h+='<div class="scan-formula"><div class="scan-formula-icon">%</div><div><strong>当前价相对基准价涨跌幅</strong><p><strong>基准价 =（Markdown 基准估值下沿 + 上沿）÷ 2</strong>；比例 =（最新有效收盘价 ÷ 基准价 − 1）× 100%。<span class="scan-legend-negative">负数（绿色）为低于基准价</span>，<span class="scan-legend-positive">正数（红色）为高于基准价</span>。另以“跌破基准下沿”判断重点核验信号；区间与利润假设仍是历史模型，不构成交易建议。</p></div></div>';
+ h+='<div class="scan-section-heading"><div><span class="eyebrow">PRICE VS BASE VALUE</span><h2>当前价格 / 基准估值对比</h2><p>按相对基准价涨跌幅从低到高排列 · 未取得有效收盘价的公司列在最后</p></div><div class="scan-selector"><label>行业筛选 <select id="scan-sector"><option value="全部">全部行业</option>'+db.sectors.map(x=>'<option value="'+safe(x)+'" '+(x===state.opSector?'selected':'')+'>'+safe(x)+'</option>').join('')+'</select></label></div></div>';
+ h+='<div class="scan-filters">'+[['all','全部公司'],['below','跌破基准下沿'],['review','旧模型待复核'],['missing','缺少行情']].map(([key,label])=>'<button data-op-filter="'+key+'" class="'+(state.opFilter===key?'active':'')+'">'+label+'</button>').join('')+'</div>';
+ h+='<div class="scan-table"><div class="scan-table-header"><span>研究对象</span><span>最新有效收盘价</span><span>基准价（区间中点）</span><span>相对基准价</span><span>估值核验状态</span></div>';
  if(!filtered.length)h+='<div class="scan-empty">当前筛选条件下没有记录。可切换其他行业或信号分类。</div>';
  for(const {item,result,quote:q} of filtered){
-   const positive=result.discount!=null&&result.discount>0;
    const color=result.kind==='watch'?'watch':result.kind==='observe'?'observe':result.kind==='archive'?'archive':result.kind==='missing'?'missing':'neutral';
-   const badge={watch:'重点观察',observe:'折价待核验',archive:'历史模型待复核',missing:'行情不可用',inrange:'位于基准区间',above:'高于基准区间'}[result.kind];
-   const discount=result.discount==null?'—':(result.discount>0?'+':'')+result.discount.toFixed(1)+'%';
-   h+='<a href="'+routeCompany(item)+'" class="scan-row"><span class="scan-company"><b>'+safe(item.name)+'</b><small>'+safe(item.code)+' · '+safe(item.sector)+'</small></span><span class="scan-price"><b>'+safe(q?item.currency+format(q.close):'—')+'</b><small>'+safe(q?q.closeDate:quote(item)?.closeDate||'日期未知')+'</small></span><span class="scan-low"><b>'+safe(item.currency+format(item.base.low))+'</b><small>基准上沿 '+safe(item.currency+format(item.base.high))+'</small></span><span class="scan-discount '+(positive?'discount-positive':'discount-other')+'">'+discount+'</span><span class="scan-signal"><span class="scan-badge '+color+'">'+badge+'</span><small>'+safe(result.reason)+'</small><small>模型更新 '+safe(item.updated)+'</small></span></a>';
+   const badge={watch:'重点观察',observe:'跌破下沿待核验',archive:'历史模型待复核',missing:'行情不可用',inrange:'基准区间内',above:'高于基准区间'}[result.kind];
+   const relative=result.relative==null?'—':(result.relative>0?'+':'')+result.relative.toFixed(1)+'%';
+   const deviationClass=ratioClass(result.relative);
+   const baseline=(item.base.low+item.base.high)/2;
+   h+='<a href="'+routeCompany(item)+'" class="scan-row"><span class="scan-company"><b>'+safe(item.name)+'</b><small>'+safe(item.code)+' · '+safe(item.sector)+'</small></span><span class="scan-price"><b>'+safe(q?item.currency+format(q.close):'—')+'</b><small>'+safe(q?q.closeDate:quote(item)?.closeDate||'日期未知')+'</small></span><span class="scan-low"><b>'+safe(item.currency+format(baseline))+'</b><small>区间 '+safe(item.currency+format(item.base.low))+'–'+safe(format(item.base.high))+'</small></span><span class="scan-discount '+deviationClass+'">'+relative+'</span><span class="scan-signal"><span class="scan-badge '+color+'">'+badge+'</span><small>'+safe(result.reason)+'</small><small>模型更新 '+safe(item.updated)+'</small></span></a>';
  }
  h+='</div>';
- h+='<div class="scan-rules"><div><strong>有效行情</strong><p>收盘日期距离查看时不超过 5 个日历日，超过则标注过期，不用于折价筛选。长假后如未更新，也会暂时失效。</p></div><div><strong>模型时效</strong><p>研究版本超过 60 个日历日仅能提示“历史模型折价”；必须先根据最新财报和经营情况重估。</p></div><div><strong>缺少数据</strong><p>Yahoo Finance 非官方行情源可能失败、延迟或无覆盖。无有效行情时不猜测现价，也不判断低估。</p></div></div>';
+ h+='<div class="scan-rules"><div><strong>收盘日期</strong><p>有效收盘日期超过5个日历日即暂时停止比较。网站展示的是最近有效收盘价，不是实时盘中价格。</p></div><div><strong>基准价与预期差</strong><p>基准价定义为原 Markdown 估值区间中点，正负比率反映当前价的位置；并不代表实际可兑现的上涨或下跌空间。</p></div><div><strong>历史模型需更新</strong><p>研究超过60个日历日，或经营与盈利假设失效时，应先重新估值；跌破下沿本身不构成买入信号。</p></div></div>';
  return h;
 }
 
@@ -323,6 +338,6 @@ async function start(){
   render();
  }catch(err){$('content').innerHTML='<div class="load-fail"><h1>研究数据加载失败</h1><p>'+safe(err.message)+'</p><p>请通过 GitHub Pages 或本地 HTTP 服务打开，并检查 Markdown 文档格式。</p><a href="'+ORIGINAL+'" target="_blank" rel="noopener noreferrer">打开原始文件 ↗</a></div>'}
 }
-window.AtlasResearch={parseMarkdown,parseQuotes,dayAge,renderMarkdown,graph,detail,catalog,overview,opportunities,discountInfo,modelOld};
+window.AtlasResearch={parseMarkdown,parseQuotes,dayAge,benchmarkInfo,ratioClass,renderMarkdown,graph,detail,catalog,overview,opportunities,discountInfo,modelOld};
 start();
 })();
