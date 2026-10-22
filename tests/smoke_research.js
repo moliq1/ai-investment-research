@@ -64,8 +64,8 @@ assert.ok(app.opportunities(data).includes('低估发现'));
 // Signed comparison uses the MIDPOINT of the base valuation, not its lower bound.
 const centered={base:{low:100,high:200}};
 assert.equal(app.benchmarkInfo(centered,120).baseline,150);
-assert.equal(app.benchmarkInfo(centered,120).relative,-20);
-assert.equal(app.benchmarkInfo(centered,180).relative,20);
+assert.ok(Math.abs(app.benchmarkInfo(centered,120).relative-(-20))<1e-9);
+assert.ok(Math.abs(app.benchmarkInfo(centered,180).relative-20)<1e-9);
 assert.equal(app.benchmarkInfo(centered,150).relative,0);
 const radarHtml=app.opportunities(data);
 assert.ok(radarHtml.includes('基准价（区间中点）'));
