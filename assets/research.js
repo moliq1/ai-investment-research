@@ -188,9 +188,14 @@ function graph(item,mini=false){
 function triple(item){
  return '<div class="triple">'+[['bear','悲观情景','BEAR CASE'],['base','基准情景','BASE CASE'],['bull','乐观情景','BULL CASE']].map(([key,label,sub])=>'<div class="case-card '+key+'"><div class="case-label"><b>'+label+'</b><small>'+sub+'</small></div><strong class="case-price">'+safe(rangeText(item,key))+'</strong><div class="case-delta"><span>相对历史参考价</span><b>'+safe(delta(item,key))+'</b></div></div>').join('')+'</div>';
 }
-function companyTile(item){
- const q=quoteFresh(item),t=labelQuote(item);
- return '<a class="company-tile" href="'+routeCompany(item)+'" data-company data-match="'+safe((item.name+' '+item.code+' '+item.sector).toLowerCase())+'" data-market="'+safe(item.market)+'"><div class="tile-head"><span>'+safe(item.sector)+'</span><i>'+icon('arrow')+'</i></div><h3>'+safe(item.name)+'</h3><p>'+safe(item.code)+' <span>·</span> '+safe(item.horizon)+'</p><div class="tile-ref"><span>最新有效收盘价 <small>'+safe(t.date)+'</small></span><strong>'+safe(t.price)+'</strong><small class="historical-line">历史参考价 '+safe(item.referenceText)+'（'+safe(item.closeDate)+'）</small></div><div class="tile-base"><small>BASE / 基准估值</small><strong>'+safe(rangeText(item,'base'))+'</strong><span>'+safe(delta(item,'base'))+' · 对最新有效收盘价</span></div><div class="tile-foot"><span>'+safe(item.updated)+' 研究</span><span>研究详情 ↗</span></div></a>';
+function companyTile(item,currentQuote=quoteFresh(item)){
+ const q=currentQuote&&currentQuote.valid?currentQuote:null;
+ const t=q?{price:item.currency+format(q.close),date:q.closeDate}:labelQuote(item);
+ const info=q?benchmarkInfo(item,q.close):null;
+ const relative=info?info.relative:null;
+ const change=relative==null?'—':percent(relative);
+ const benchmark=item.currency+format((item.base.low+item.base.high)/2);
+ return '<a class="company-tile" href="'+routeCompany(item)+'" data-company data-match="'+safe((item.name+' '+item.code+' '+item.sector).toLowerCase())+'" data-market="'+safe(item.market)+'"><div class="tile-head"><span>'+safe(item.sector)+'</span><i>'+icon('arrow')+'</i></div><h3>'+safe(item.name)+'</h3><p>'+safe(item.code)+' <span>·</span> '+safe(item.horizon)+'</p><div class="tile-ref"><span>最新有效收盘价 <small>'+safe(t.date)+'</small></span><strong>'+safe(t.price)+'</strong><small class="historical-line">历史参考价 '+safe(item.referenceText)+'（'+safe(item.closeDate)+'）</small></div><div class="tile-base"><small>BASE / 基准估值区间</small><strong>'+safe(rangeText(item,'base'))+'</strong><span class="tile-base-midpoint">基准价（区间中点） '+safe(benchmark)+'</span><div class="tile-benchmark"><span>相对基准价</span><strong class="tile-benchmark-value '+ratioClass(relative)+'">'+safe(change)+'</strong></div></div><div class="tile-foot"><span>'+safe(item.updated)+' 研究</span><span>研究详情 ↗</span></div></a>';
 }
 function sectionTitle(label,desc=''){return '<div class="section-title"><div><span class="eyebrow">ALPHA ATLAS / RESEARCH</span><h2>'+safe(label)+'</h2></div>'+(desc?'<p>'+safe(desc)+'</p>':'')+'</div>'}
 function overview(db){
@@ -341,6 +346,6 @@ async function start(){
   render();
  }catch(err){$('content').innerHTML='<div class="load-fail"><h1>研究数据加载失败</h1><p>'+safe(err.message)+'</p><p>请通过 GitHub Pages 或本地 HTTP 服务打开，并检查 Markdown 文档格式。</p><a href="'+ORIGINAL+'" target="_blank" rel="noopener noreferrer">打开原始文件 ↗</a></div>'}
 }
-window.AtlasResearch={parseMarkdown,parseQuotes,dayAge,benchmarkInfo,ratioClass,renderMarkdown,graph,detail,catalog,overview,opportunities,discountInfo,modelOld};
+window.AtlasResearch={parseMarkdown,parseQuotes,dayAge,benchmarkInfo,ratioClass,companyTile,renderMarkdown,graph,detail,catalog,overview,opportunities,discountInfo,modelOld};
 start();
 })();

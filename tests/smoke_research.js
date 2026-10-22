@@ -79,3 +79,18 @@ assert.equal(app.ratioClass(20),'ratio-positive');
 assert.equal(app.ratioClass(0),'ratio-zero');
 assert.equal(app.ratioClass(null),'ratio-unknown');
 assert.ok(radarHtml.includes('绿色')&&radarHtml.includes('红色'));
+
+// Sector catalogue cards use the EXACT same signed midpoint ratio as Value Radar.
+const sectorPage=app.catalog(data,data.sectors[0]);
+assert.ok(sectorPage.includes('相对基准价'),'Sector cards must show signed benchmark ratio');
+const modelCompany=data.items.find(x=>x.code==='02099.HK');
+const negativeCard=app.companyTile(modelCompany,{close:180,closeDate:'2026-10-22',valid:true});
+const positiveCard=app.companyTile(modelCompany,{close:250,closeDate:'2026-10-22',valid:true});
+const missingCard=app.companyTile(modelCompany,null);
+assert.ok(negativeCard.includes('class="tile-benchmark-value ratio-negative"'));
+assert.ok(negativeCard.includes('-12.0%'));
+assert.ok(positiveCard.includes('class="tile-benchmark-value ratio-positive"'));
+assert.ok(positiveCard.includes('+22.2%'));
+assert.ok(missingCard.includes('class="tile-benchmark-value ratio-unknown"'));
+assert.ok(missingCard.includes('>—</strong>'));
+assert.ok(negativeCard.includes('基准价（区间中点）'));

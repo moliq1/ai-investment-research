@@ -325,3 +325,15 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 .scan-legend-negative{color:#168268;font-weight:800}
 .scan-legend-positive{color:#c24e59;font-weight:800}
 .scan-formula strong{font-weight:800}
+
+
+/* Sector and company catalogue cards: signed price deviation vs base-case midpoint. */
+.tile-base .tile-base-midpoint{display:block;font-size:11px;color:#8b9ab0;letter-spacing:0;margin-top:0}
+.tile-base .tile-benchmark{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding:13px 14px;border:1px solid #e7edf5;border-radius:9px;background:#f7f9fc}
+.tile-base .tile-benchmark>span{font-size:12px;color:#657791;font-weight:700}
+.tile-base .tile-benchmark-value{display:block;margin:0;font-size:21px;line-height:1.2;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:-.3px}
+.tile-base .tile-benchmark-value.ratio-negative{color:#178669}
+.tile-base .tile-benchmark-value.ratio-positive{color:#cc4e57}
+.tile-base .tile-benchmark-value.ratio-zero{color:#71829b}
+.tile-base .tile-benchmark-value.ratio-unknown{color:#a2aebe}
+@media(max-width:650px){.tile-base .tile-benchmark-value{font-size:23px}}
