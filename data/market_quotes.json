@@ -7,8 +7,8 @@
       "market": "港股",
       "symbol": "2099.HK",
       "currency": "HK$",
-      "close": 194.9,
-      "closeDate": "2026-10-21",
+      "close": 185.7,
+      "closeDate": "2026-10-22",
       "sourceUrl": "https://finance.yahoo.com/quote/2099.HK/history/"
     },
     {
@@ -17,8 +17,8 @@
       "market": "A股",
       "symbol": "000807.SZ",
       "currency": "¥",
-      "close": 24.93,
-      "closeDate": "2026-10-21",
+      "close": 24.65,
+      "closeDate": "2026-10-22",
       "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/"
     },
     {
@@ -27,8 +27,8 @@
       "market": "港股",
       "symbol": "1378.HK",
       "currency": "HK$",
-      "close": 18.92,
-      "closeDate": "2026-10-21",
+      "close": 18.02,
+      "closeDate": "2026-10-22",
       "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/"
     },
     {
@@ -37,9 +37,9 @@
       "market": "A股",
       "symbol": "603799.SS",
       "currency": "¥",
-      "close": 31.74,
-      "closeDate": "2026-10-21",
-      "sourceUrl": "https://cn.investing.com/equities/zhejiang-huayou-cobalt-co-ltd-historical-data"
+      "close": 31.01,
+      "closeDate": "2026-10-22",
+      "sourceUrl": "https://finance.yahoo.com/quote/603799.SS/history/"
     },
     {
       "code": "688012.SH",
@@ -47,8 +47,8 @@
       "market": "A股",
       "symbol": "688012.SS",
       "currency": "¥",
-      "close": 274,
-      "closeDate": "2026-10-21",
+      "close": 264.18,
+      "closeDate": "2026-10-22",
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/"
     },
     {
@@ -57,9 +57,9 @@
       "market": "A股",
       "symbol": "688498.SS",
       "currency": "¥",
-      "close": 1021.1,
-      "closeDate": "2026-10-21",
-      "sourceUrl": "https://cn.investing.com/equities/yuanjie-semiconductor-tech-historical-data"
+      "close": 920.0,
+      "closeDate": "2026-10-22",
+      "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/"
     },
     {
       "code": "600183.SH",
@@ -67,9 +67,9 @@
       "market": "A股",
       "symbol": "600183.SS",
       "currency": "¥",
-      "close": 118.99,
-      "closeDate": "2026-10-21",
-      "sourceUrl": "https://cn.investing.com/equities/shengyi-tech-historical-data"
+      "close": 110.26,
+      "closeDate": "2026-10-22",
+      "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/"
     },
     {
       "code": "300408.SZ",
@@ -77,9 +77,9 @@
       "market": "A股",
       "symbol": "300408.SZ",
       "currency": "¥",
-      "close": 95.97,
-      "closeDate": "2026-10-21",
-      "sourceUrl": "https://cn.investing.com/equities/chaozhou-three-circle-historical-data"
+      "close": 91.97,
+      "closeDate": "2026-10-22",
+      "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/"
     },
     {
       "code": "01133.HK",
@@ -87,8 +87,8 @@
       "market": "港股",
       "symbol": "1133.HK",
       "currency": "HK$",
-      "close": 11.63,
-      "closeDate": "2026-10-21",
+      "close": 11.25,
+      "closeDate": "2026-10-22",
       "sourceUrl": "https://finance.yahoo.com/quote/1133.HK/history/"
     },
     {
@@ -97,9 +97,9 @@
       "market": "A股",
       "symbol": "002851.SZ",
       "currency": "¥",
-      "close": 97.98,
-      "closeDate": "2026-10-21",
-      "sourceUrl": "https://cn.investing.com/equities/shenzhen-megmeet-electrical-historical-data"
+      "close": 92.06,
+      "closeDate": "2026-10-22",
+      "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/"
     },
     {
       "code": "300274.SZ",
@@ -107,8 +107,8 @@
       "market": "A股",
       "symbol": "300274.SZ",
       "currency": "¥",
-      "close": 72.3,
-      "closeDate": "2026-10-21",
+      "close": 70.51,
+      "closeDate": "2026-10-22",
       "sourceUrl": "https://finance.yahoo.com/quote/300274.SZ/history/"
     },
     {
@@ -117,8 +117,8 @@
       "market": "A股",
       "symbol": "300750.SZ",
       "currency": "¥",
-      "close": 227.9,
-      "closeDate": "2026-10-21",
+      "close": 220.41,
+      "closeDate": "2026-10-22",
       "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/"
     }
   ]
