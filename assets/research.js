@@ -118,10 +118,12 @@ function parseMarkdown(text){
    items.push({name:c[0],code:c[1],key,sector:c[2],market:c[3],closeDate:c[4],reference,referenceText:c[5],currency:moneySymbol(c[5]),horizon:c[6],bear,base,bull,method:c[10],updated:c[11]});
  }
  if(!items.length)throw Error('估值总表没有研究记录');
- const starts=[...text.matchAll(/^###\s+\d+\.\s+(.+?)（([0-9]{5,6}\.(?:HK|SH|SZ))）\s*$/gm)];
+ // A single company section may serve A/H securities sharing the same underlying business.
+ const starts=[...text.matchAll(/^###\s+\d+\.\s+(.+?)（([^）]+)）\s*$/gm)]
+   .filter(m=>m[2].split(/\s*\/\s*/).every(code=>/^\d{5,6}\.(?:HK|SH|SZ)$/.test(code.trim())));
  const stop=text.indexOf('\n## 三、');
  for(const item of items){
-   const i=starts.findIndex(m=>m[2].replace(/^0+(?=\d)/,'').toUpperCase()===item.key);
+   const i=starts.findIndex(m=>m[2].split(/\s*\/\s*/).some(code=>code.trim().replace(/^0+(?=\d)/,'').toUpperCase()===item.key));
    if(i<0)throw Error('缺失公司研究正文：'+item.code);
    const start=starts[i].index+starts[i][0].length;
    const until=starts[i+1]?.index??(stop<0?text.length:stop);
@@ -140,7 +142,8 @@ function parseMarkdown(text){
    while(after<al.length&&al[after].trim().startsWith('|')){if(!isDivider(al[after])){const c=cells(al[after]);if(c.length===4)vals.push({name:c[0],bear:c[1],base:c[2],bull:c[3]})}after++}
    item.params=vals;
    item.assumptionNotes=al.slice(0,at).concat(al.slice(after)).join('\n').trim();
-   const row=vals.find(v=>/每股估值/.test(v.name));
+   const row=vals.find(v=>/每股估值/.test(v.name) &&
+      (!/^[AH] 股/.test(v.name) || v.name.startsWith(item.market==='A股'?'A 股':'H 股')));
    if(row)for(const mode of ['bear','base','bull']){const test=interval(row[mode]);if(test&&(Math.abs(test.low-item[mode].low)>.15||Math.abs(test.high-item[mode].high)>.15))throw Error(item.code+' 详细估值与总表不一致')}
    item.logic=item.blocks.find(b=>/核心估值逻辑/.test(b.title))?.raw||'';
    item.validation=item.blocks.find(b=>/核验节点/.test(b.title))?.raw||'';

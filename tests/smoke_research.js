@@ -21,15 +21,19 @@ vm.runInNewContext(script,{window,document,fetch:()=>new Promise(()=>{}),console
 const app=window.AtlasResearch;
 assert.ok(app,'The UI parser must be exposed for validation');
 const data=app.parseMarkdown(markdown);
-assert.equal(data.items.length,12);
+const tableRows=markdown.split(/\r?\n/).filter(line=>/^\|\s*[^|]+\s*\|\s*\d{5,6}\.(?:HK|SH|SZ)\s*\|/.test(line));
+assert.equal(data.items.length,tableRows.length);
+assert.ok(data.items.length>=12);
+assert.ok(data.items.some(x=>x.code==='601899.SH'),'Zijin A stock missing');
+assert.ok(data.items.some(x=>x.code==='02899.HK'),'Zijin H stock missing');
 assert.equal(data.sectors.length,4);
-assert.equal(data.version,'v2.2');
+assert.equal(data.version,(markdown.match(/文档版本\*\*：(v\d+\.\d+)/)||[])[1]);
 assert.equal(new Set(data.items.map(x=>x.code)).size,data.items.length);
-const first=data.items[0];
-assert.equal(first.code,'02099.HK');
-assert.equal(first.reference,201.60);
-assert.equal(first.base.low,189);
-assert.equal(first.base.high,220);
+const cgi=data.items.find(x=>x.code==='02099.HK');
+assert.ok(cgi,'China Gold International record must remain intact');
+assert.equal(cgi.reference,201.60);
+assert.equal(cgi.base.low,189);
+assert.equal(cgi.base.high,220);
 for(const entry of data.items){
   assert.ok(entry.assumptionNotes!=null);
   assert.ok(entry.params.length>=6,entry.code+' lost model parameters');

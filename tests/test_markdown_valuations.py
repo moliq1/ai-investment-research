@@ -7,7 +7,7 @@ DOC = Path(__file__).resolve().parents[1] / "sources" / "AI投研_公司估值�
 class MasterValuationArchiveTests(unittest.TestCase):
     def test_canonical_markdown_scenarios(self):
         text = DOC.read_text(encoding="utf-8")
-        self.assertIn("文档版本**：v2.2", text)
+        self.assertRegex(text, r"文档版本\*\*：v\d+\.\d+")
         lines = text.splitlines()
         start = next(i for i,l in enumerate(lines) if l.startswith("| 公司 | 代码 |"))
         rows=[]
@@ -17,13 +17,16 @@ class MasterValuationArchiveTests(unittest.TestCase):
             cells=[x.strip().replace("**","") for x in row.strip().strip("|").split("|")]
             self.assertGreaterEqual(len(cells), 12)
             rows.append(cells)
-        self.assertEqual(len(rows), 12)
+        self.assertGreaterEqual(len(rows), 12)
         self.assertEqual(len({r[1] for r in rows}), len(rows))
+        # A company can have a combined A/H section, but each security needs an entry.
+        sections = re.findall(r"^###\s+\d+\.\s+.+?（([^）]+)）\s*$", text, flags=re.M)
+        heading_codes = {c.strip() for group in sections for c in re.split(r"\s*/\s*", group)}
         complete=0
         for r in rows:
             code=r[1]
             self.assertRegex(code, r"^\d{5,6}\.(?:HK|SH|SZ)$")
-            self.assertRegex(text, re.escape("（"+code+"）"))
+            self.assertIn(code, heading_codes)
             vals=r[7:10]
             if all(v!="待补充" for v in vals):
                 complete+=1
@@ -56,7 +59,7 @@ class MasterValuationArchiveTests(unittest.TestCase):
         for sector in industries:
             dates = [r[11] for r in rows if r[2] == sector]
             self.assertEqual(dates, sorted(dates, reverse=True))
-        self.assertEqual(content.count("#### 原始聊天与研究来源"), 12)
+        self.assertEqual(content.count("#### 原始聊天与研究来源"), len(set(re.findall(r"^###\s+\d+\.", content, flags=re.M))))
         self.assertGreaterEqual(content.count("#### 2.3 核心估值逻辑"), 11)
         self.assertGreaterEqual(content.count("#### 2.4 估值与市场预期差的核验节点"), 11)
         self.assertIn("原始 ChatGPT 对话链接：未取得可核实的分享 URL", content)

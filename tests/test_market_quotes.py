@@ -21,7 +21,7 @@ class MarketQuoteTests(unittest.TestCase):
         cls.current = json.loads(MARKET.read_text("utf-8"))
 
     def test_markdown_controls_coverage(self):
-        self.assertEqual(len(self.universe), 12)
+        self.assertGreaterEqual(len(self.universe), 12)
         self.assertEqual(len(self.current["quotes"]), len(self.universe))
         self.assertEqual(
             {x["code"] for x in self.universe},
