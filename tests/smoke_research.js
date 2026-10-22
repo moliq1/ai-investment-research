@@ -12,7 +12,8 @@ assert.match(html,/assets\/research\.js/);
 assert.match(html,/assets\/research\.css/);
 assert.doesNotMatch(html,/assets\/app\.js|assets\/master\.js/);
 assert.match(script,/const MD='sources\/AI投研_公司估值情景汇总\.md'/);
-assert.doesNotMatch(script,/fetch\(['"]data\//);
+assert.match(script,/data\/market_quotes\.json/);
+assert.doesNotMatch(script,/fetch\(['"]data\/stocks/);
 const fake={innerHTML:'',textContent:''};
 const document={getElementById:()=>fake,addEventListener:()=>{},querySelectorAll:()=>[]};
 const window={addEventListener:()=>{},location:{hash:'#/overview'}};
@@ -50,3 +51,12 @@ assert.ok(app.overview(data).includes(data.items[0].name));
 assert.ok(app.renderMarkdown('**加粗** [参考](https://example.com/)').includes('href="https://example.com/"'));
 assert.ok(!app.renderMarkdown('<script>alert(1)</script>').includes('<script>'));
 console.log('Research website smoke PASS: '+data.items.length+' companies, '+data.sectors.length+' sectors, '+data.version);
+
+// Quote fixtures: fresh, stale, missing, and future candles must remain distinct.
+const fixture={schemaVersion:1,quotes:[{code:'02099.HK',currency:'HK$',close:180,closeDate:'2026-10-21',sourceUrl:'https://finance.yahoo.com/quote/2099.HK/history/'},{code:'300274.SZ',currency:'¥',close:90,closeDate:'2026-08-01'}]};
+const date=Date.parse('2026-10-22T14:00:00Z');
+const quotes=app.parseQuotes(fixture,data,date);
+assert.equal(quotes.get('02099.HK').valid,true);
+assert.equal(quotes.get('300274.SZ').valid,false);
+assert.equal(app.dayAge('2030-01-01',date)<0,true);
+assert.ok(app.opportunities(data).includes('低估发现'));

@@ -2,6 +2,9 @@
 (() => {
 'use strict';
 const MD='sources/AI投研_公司估值情景汇总.md';
+const MARKET='data/market_quotes.json';
+const QUOTE_MAX_AGE=5;
+const MODEL_REVIEW_AGE=60;
 const REPO='https://github.com/moliq1/ai-investment-research';
 const ORIGINAL=REPO+'/blob/main/sources/AI%E6%8A%95%E7%A0%94_%E5%85%AC%E5%8F%B8%E4%BC%B0%E5%80%BC%E6%83%85%E6%99%AF%E6%B1%87%E6%80%BB.md';
 const $=id=>document.getElementById(id);
@@ -15,7 +18,41 @@ const format=n=>Number(n).toLocaleString('zh-CN',{maximumFractionDigits:2});
 const pct=(a,b)=>(a/b-1)*100;
 const percent=p=>(p>0?'+':'')+p.toFixed(1)+'%';
 const rangeText=(s,key)=>s.currency+format(s[key].low)+(s[key].low===s[key].high?'':' – '+format(s[key].high));
-const delta=(s,key)=>percent(pct(s[key].low,s.reference))+(s[key].low===s[key].high?'':' 至 '+percent(pct(s[key].high,s.reference)));
+const dayAge=(day,now=Date.now())=>{
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(day||''))return Infinity;
+ const dt=Date.parse(day+'T00:00:00Z');return Number.isFinite(dt)?Math.floor((now-dt)/86400000):Infinity;
+};
+function parseQuotes(json,master,now=Date.now()){
+ if(!json||json.schemaVersion!==1||!Array.isArray(json.quotes))throw Error('行情文件格式错误');
+ const quotes=new Map(),known=new Map(master.items.map(x=>[x.code,x]));
+ for(const q of json.quotes){
+   const stock=known.get(q.code);if(!stock)continue;
+   if(quotes.has(q.code))throw Error('重复行情：'+q.code);
+   if(q.currency!==stock.currency)continue;
+   const age=dayAge(q.closeDate,now);
+   if(q.close==null||!Number.isFinite(Number(q.close))||Number(q.close)<=0||!Number.isFinite(age)){
+     quotes.set(q.code,{...q,valid:false,close:null,reason:'尚未取得有效收盘价'});continue;
+   }
+   const valid=age>=0&&age<=QUOTE_MAX_AGE;
+   quotes.set(q.code,{...q,valid,age,close:Number(q.close),reason:valid?'有效收盘价':'行情过期'});
+ }
+ return quotes;
+}
+function quote(item){return state.quotes.get(item.code)||null}
+function quoteFresh(item){const q=quote(item);return q&&q.valid?q:null}
+function labelQuote(item){const q=quote(item);return {price:q&&q.valid?item.currency+format(q.close):'—',date:q&&q.closeDate?q.closeDate+(q.valid?'':' · 过期'):'行情未覆盖'} }
+function modelOld(item,now=Date.now()){const age=dayAge(item.updated,now);return age<0||age>MODEL_REVIEW_AGE}
+function discountInfo(item){
+ const q=quoteFresh(item);
+ if(!q)return {kind:'missing',discount:null,reason:'暂无有效收盘价'};
+ const discount=(item.base.low-q.close)/item.base.low*100;
+ if(discount>0&&modelOld(item))return {kind:'archive',discount,reason:'历史模型折价，需先复核模型'};
+ if(discount>=10)return {kind:'watch',discount,reason:'基准下沿折价10%以上，重点核验'};
+ if(discount>0)return {kind:'observe',discount,reason:'低于基准估值下沿，需核验'};
+ if(q.close<=item.base.high)return {kind:'inrange',discount,reason:'处于基准估值区间'};
+ return {kind:'above',discount,reason:'高于基准估值上沿'};
+}
+const delta=(s,key)=>{const q=quoteFresh(s);if(!q)return '行情缺失或过期';return percent(pct(s[key].low,q.close))+(s[key].low===s[key].high?'':' 至 '+percent(pct(s[key].high,q.close)));};
 const encode=s=>encodeURIComponent(s);
 const moneySymbol=s=>s.includes('HK$')?'HK$':s.includes('¥')?'¥':'';
 const icon=(name)=>{
@@ -104,36 +141,40 @@ function parseMarkdown(text){
  const intro=text.slice(0,text.indexOf('## 一、')).replace(/^# .*\n/,'').replace(/^>\s*/gm,'').trim();
  return {items,sectors,version,changes,intro};
 }
-const state={db:null,term:'',market:'全部',layout:'cards'};
+const state={db:null,quotes:new Map(),term:'',market:'全部',layout:'cards',opFilter:'all',opSector:'全部'};
 const routeCompany=item=>'#/company/'+encode(item.code);
 function side(route){
  const d=state.db;
  const sectorLinks=d.sectors.map((s,i)=>'<a href="#/sector/'+encode(s)+'" class="side-item '+(route.type==='sector'&&route.sector===s?'selected':'')+'"><span class="sector-mark">'+['◇','◈','✧','⬡'][i%4]+'</span><span>'+safe(s)+'</span><em>'+d.items.filter(x=>x.sector===s).length+'</em></a>').join('');
  return '<a href="#/overview" class="logo"><span class="logo-box">A<i></i></span><span><b>ALPHA ATLAS</b><small>INVESTMENT RESEARCH</small></span></a><div class="side-overline">INVESTMENT WORKSPACE</div><nav aria-label="网站导航"><span class="nav-caption">研究空间</span>'+
  '<a href="#/overview" class="side-item '+(route.type==='overview'?'selected':'')+'">'+icon('grid')+'<span>研究总览</span></a>'+
+ '<a href="#/opportunities" class="side-item '+(route.type==='opportunities'?'selected':'')+'">'+icon('search')+'<span>低估发现</span></a>'+ 
  '<a href="#/companies" class="side-item '+(route.type==='companies'?'selected':'')+'">'+icon('list')+'<span>估值公司库</span><em>'+d.items.length+'</em></a>'+
  '<span class="nav-caption nav-spacer">行业聚合</span>'+sectorLinks+
  '<span class="nav-caption nav-spacer">研究档案</span><a href="#/about" class="side-item '+(route.type==='about'?'selected':'')+'">'+icon('book')+'<span>方法与变更记录</span></a></nav>'+
  '<div class="side-bottom"><div class="status-line"><i></i><div><strong>Markdown · Single Source</strong><small>研究版本 '+safe(d.version)+'</small></div></div><a href="'+ORIGINAL+'" target="_blank" rel="noopener noreferrer">GitHub 估值原文 ↗</a></div>';
 }
 function info(item){
- if(item.reference<item.base.low)return '历史参考价低于基准情景下沿';
- if(item.reference>item.base.high)return '历史参考价高于基准情景上沿';
- return '历史参考价位于基准情景区间';
+ const q=quoteFresh(item);if(!q)return '缺少有效最新收盘价 · 不产生信号';
+ if(q.close<item.base.low)return modelOld(item)?'历史基准区间折价 · 模型需重估':'低于基准估值下沿 · 待核验';
+ if(q.close>item.base.high)return '最新收盘价高于模型基准上沿';
+ return '最新收盘价处于基准估值区间';
 }
 function graph(item,mini=false){
- const max=Math.max(item.reference,item.bear.high,item.base.high,item.bull.high)*1.13;
- const mark=Math.min(99,item.reference/max*100);
+ const live=quoteFresh(item),ref=live?live.close:item.reference;
+ const max=Math.max(ref,item.bear.high,item.base.high,item.bull.high)*1.13;
+ const mark=Math.min(99,ref/max*100);
  return '<div class="range-chart '+(mini?'mini':'')+'"><div class="chart-title"><div><span class="eyebrow">SCENARIO MAP</span><h3>价值区间分布</h3></div><span>'+safe(item.currency)+' / 股</span></div>'+
  ['bear','base','bull'].map((k,i)=>{const r=item[k],left=r.low/max*100,width=Math.max(.9,(r.high-r.low)/max*100);
  return '<div class="chart-line"><span class="chart-name"><i class="tiny-dot '+k+'"></i>'+['悲观','基准','乐观'][i]+'</span><div class="bar-track"><i class="ref-rule" style="left:'+mark+'%"></i><i class="value-band '+k+'" style="left:'+left.toFixed(3)+'%;width:'+width.toFixed(3)+'%"></i></div><strong>'+safe(rangeText(item,k))+'</strong></div>'}).join('')+
- '<p class="graph-caption">竖线为 '+safe(item.closeDate)+' 文档参考价 '+safe(item.referenceText)+'；仅在该公司内部按同一价格轴比较。</p></div>';
+ '<p class="graph-caption">竖线为 '+(live?'最新有效收盘 '+safe(item.currency+format(live.close))+'（'+safe(live.closeDate)+'）':'Markdown 历史参考价 '+safe(item.referenceText)+'（'+safe(item.closeDate)+'，行情不可用）')+'；仅在同一公司内部按同一价格轴比较。</p></div>';
 }
 function triple(item){
  return '<div class="triple">'+[['bear','悲观情景','BEAR CASE'],['base','基准情景','BASE CASE'],['bull','乐观情景','BULL CASE']].map(([key,label,sub])=>'<div class="case-card '+key+'"><div class="case-label"><b>'+label+'</b><small>'+sub+'</small></div><strong class="case-price">'+safe(rangeText(item,key))+'</strong><div class="case-delta"><span>相对历史参考价</span><b>'+safe(delta(item,key))+'</b></div></div>').join('')+'</div>';
 }
 function companyTile(item){
- return '<a class="company-tile" href="'+routeCompany(item)+'" data-company data-match="'+safe((item.name+' '+item.code+' '+item.sector).toLowerCase())+'" data-market="'+safe(item.market)+'"><div class="tile-head"><span>'+safe(item.sector)+'</span><i>'+icon('arrow')+'</i></div><h3>'+safe(item.name)+'</h3><p>'+safe(item.code)+' <span>·</span> '+safe(item.horizon)+'</p><div class="tile-ref"><span>历史参考价 <small>'+safe(item.closeDate)+'</small></span><strong>'+safe(item.referenceText)+'</strong></div><div class="tile-base"><small>BASE / 基准估值</small><strong>'+safe(rangeText(item,'base'))+'</strong><span>'+safe(delta(item,'base'))+' · 文档基准</span></div><div class="tile-foot"><span>'+safe(item.updated)+' 研究</span><span>研究详情 ↗</span></div></a>';
+ const q=quoteFresh(item),t=labelQuote(item);
+ return '<a class="company-tile" href="'+routeCompany(item)+'" data-company data-match="'+safe((item.name+' '+item.code+' '+item.sector).toLowerCase())+'" data-market="'+safe(item.market)+'"><div class="tile-head"><span>'+safe(item.sector)+'</span><i>'+icon('arrow')+'</i></div><h3>'+safe(item.name)+'</h3><p>'+safe(item.code)+' <span>·</span> '+safe(item.horizon)+'</p><div class="tile-ref"><span>最新有效收盘价 <small>'+safe(t.date)+'</small></span><strong>'+safe(t.price)+'</strong><small class="historical-line">历史参考价 '+safe(item.referenceText)+'（'+safe(item.closeDate)+'）</small></div><div class="tile-base"><small>BASE / 基准估值</small><strong>'+safe(rangeText(item,'base'))+'</strong><span>'+safe(delta(item,'base'))+' · 对最新有效收盘价</span></div><div class="tile-foot"><span>'+safe(item.updated)+' 研究</span><span>研究详情 ↗</span></div></a>';
 }
 function sectionTitle(label,desc=''){return '<div class="section-title"><div><span class="eyebrow">ALPHA ATLAS / RESEARCH</span><h2>'+safe(label)+'</h2></div>'+(desc?'<p>'+safe(desc)+'</p>':'')+'</div>'}
 function overview(db){
@@ -142,7 +183,7 @@ function overview(db){
  h+='<div class="hero"><div class="hero-copy"><span class="hero-tag"><i></i> Markdown 驱动的投研工作台</span><h1>让复杂的估值研究<br><em>一目了然。</em></h1><p>从完整的悲观、基准、乐观情景，到增长假设、现金流、预期差与验证节点。统一阅读，统一比较，统一追溯。</p><div class="hero-actions"><a href="#/companies" class="button-primary">探索公司估值 '+icon('arrow')+'</a><a href="'+ORIGINAL+'" target="_blank" rel="noopener noreferrer" class="button-ghost">阅读 Markdown 原文 ↗</a></div></div><div class="hero-art" aria-hidden="true"><div class="hero-art-top">ALPHA / RESEARCH <span>'+safe(db.version)+'</span></div><div class="art-rings"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><span>A</span></div><div class="hero-art-bottom"><span>THREE SCENARIOS</span><span>ONE SOURCE OF TRUTH</span></div></div></div>';
  h+='<div class="stat-row"><div><small>完整公司研究</small><strong>'+db.items.length.toString().padStart(2,'0')+'</strong><span>源于估值总表</span></div><div><small>覆盖行业</small><strong>'+db.sectors.length.toString().padStart(2,'0')+'</strong><span>按行业分组</span></div><div><small>估值情景</small><strong>'+(db.items.length*3).toString().padStart(2,'0')+'</strong><span>悲观 / 基准 / 乐观</span></div><div><small>最近研究日期</small><strong class="stat-date">'+safe(focus.updated)+'</strong><span>非行情刷新时间</span></div></div>';
  h+=sectionTitle('最新研究','以 Markdown 中的最近更新日期排序');
- h+='<div class="feature-layout"><div class="feature-card"><div class="feature-header"><span class="pill-dark">最近更新</span><span>'+safe(focus.updated)+'</span></div><div class="feature-company"><div><span class="eyebrow">'+safe(focus.sector)+' / '+safe(focus.market)+'</span><h3>'+safe(focus.name)+'</h3><p>'+safe(focus.code)+' · '+safe(focus.horizon)+'</p></div><div class="feature-icon">↗</div></div><div class="focus-reference"><span>历史参考股价 · '+safe(focus.closeDate)+'</span><strong>'+safe(focus.referenceText)+'</strong><small>'+safe(info(focus))+'</small></div>'+graph(focus,true)+'<a class="feature-open" href="'+routeCompany(focus)+'">查看完整研究 '+icon('arrow')+'</a></div>';
+ h+='<div class="feature-layout"><div class="feature-card"><div class="feature-header"><span class="pill-dark">最近更新</span><span>'+safe(focus.updated)+'</span></div><div class="feature-company"><div><span class="eyebrow">'+safe(focus.sector)+' / '+safe(focus.market)+'</span><h3>'+safe(focus.name)+'</h3><p>'+safe(focus.code)+' · '+safe(focus.horizon)+'</p></div><div class="feature-icon">↗</div></div><div class="focus-reference"><span>最新有效收盘价 · '+safe(labelQuote(focus).date)+'</span><strong>'+safe(labelQuote(focus).price)+'</strong><small>'+safe(info(focus))+' · 历史参考 '+safe(focus.referenceText)+'</small></div>'+graph(focus,true)+'<a class="feature-open" href="'+routeCompany(focus)+'">查看完整研究 '+icon('arrow')+'</a></div>';
  h+='<div class="recent-card"><div class="recent-head"><h3>研究时间线</h3><span>RECENT RESEARCH</span></div>'+latest.slice(0,5).map((s,i)=>'<a href="'+routeCompany(s)+'" class="recent-row"><span class="recent-index">0'+(i+1)+'</span><div><strong>'+safe(s.name)+'</strong><small>'+safe(s.sector)+' · '+safe(s.updated)+'</small></div>'+icon('arrow')+'</a>').join('')+'<div class="recent-warning">研究日期并不等于已按最新财报重新估值。</div></div></div>';
  h+=sectionTitle('行业研究地图','分组与排序直接采用 Markdown 估值总表');
  h+='<div class="sector-grid">'+db.sectors.map((s,i)=>'<a class="sector-tile sector-'+i+'" href="#/sector/'+encode(s)+'"><div class="sector-tile-head"><span>'+['◇','◈','✧','⬡'][i%4]+'</span>'+icon('arrow')+'</div><h3>'+safe(s)+'</h3><p><b>'+db.items.filter(x=>x.sector===s).length+' 家公司</b><span>'+safe(db.items.filter(x=>x.sector===s).slice(0,2).map(x=>x.name).join(' / '))+'</span></p></a>').join('')+'</div>';
@@ -152,12 +193,12 @@ function overview(db){
 function catalog(db,sector=null){
  const items=sector?db.items.filter(s=>s.sector===sector):db.items;
  let h='<div class="catalog-heading"><div><span class="eyebrow">THE RESEARCH UNIVERSE</span><h1>'+safe(sector||'公司估值库')+'</h1><p>完整研究 '+items.length+' 家 · 原研究日期排序 · 所有内容以 Markdown 为准</p></div><a href="'+ORIGINAL+'" class="original-link" target="_blank" rel="noopener noreferrer">查看原始文档 ↗</a></div>';
- h+='<div class="filter-tools"><label class="searchbox">'+icon('search')+'<input id="search" type="search" placeholder="搜索公司名称、股票代码或行业..." aria-label="搜索公司" value="'+safe(state.term)+'"></label><div class="market-tabs">'+['全部','A股','港股'].map(x=>'<button data-market-filter="'+x+'" class="'+(state.market===x?'active':'')+'">'+x+'</button>').join('')+'</div><div class="layout-switch"><button data-layout="cards" class="'+(state.layout==='cards'?'active':'')+'" aria-label="卡片布局">'+icon('grid')+'</button><button data-layout="table" class="'+(state.layout==='table'?'active':'')+'" aria-label="表格布局">'+icon('list')+'</button></div></div><div class="result-summary"><strong id="visible-count">共 '+items.length+' 条研究</strong><span>百分比是模型估值与历史参考价之差，非未来收益</span></div>';
+ h+='<div class="filter-tools"><label class="searchbox">'+icon('search')+'<input id="search" type="search" placeholder="搜索公司名称、股票代码或行业..." aria-label="搜索公司" value="'+safe(state.term)+'"></label><div class="market-tabs">'+['全部','A股','港股'].map(x=>'<button data-market-filter="'+x+'" class="'+(state.market===x?'active':'')+'">'+x+'</button>').join('')+'</div><div class="layout-switch"><button data-layout="cards" class="'+(state.layout==='cards'?'active':'')+'" aria-label="卡片布局">'+icon('grid')+'</button><button data-layout="table" class="'+(state.layout==='table'?'active':'')+'" aria-label="表格布局">'+icon('list')+'</button></div></div><div class="result-summary"><strong id="visible-count">共 '+items.length+' 条研究</strong><span>百分比是模型估值与最新有效收盘价的差幅，并非预计收益</span></div>';
  for(let i=0;i<db.sectors.length;i++){
   const sec=db.sectors[i],group=items.filter(x=>x.sector===sec);if(!group.length)continue;
   h+='<section class="catalog-group" data-catalog-group><div class="group-head"><div class="group-symbol">'+['◇','◈','✧','⬡'][i%4]+'</div><div><h2>'+safe(sec)+'</h2><p>'+group.length+' 家公司 · 最近研究在前</p></div></div>';
   if(state.layout==='cards')h+='<div class="tile-grid">'+group.map(companyTile).join('')+'</div>';
-  else h+='<div class="table-list"><div class="table-list-head"><span>公司</span><span>参考价</span><span>基准区间</span><span>相对差幅</span><span>研究日期</span></div>'+group.map(s=>'<a href="'+routeCompany(s)+'" class="table-list-row" data-company data-match="'+safe((s.name+' '+s.code+' '+s.sector).toLowerCase())+'" data-market="'+safe(s.market)+'"><span><b>'+safe(s.name)+'</b><small>'+safe(s.code)+'</small></span><span>'+safe(s.referenceText)+'<small>'+safe(s.closeDate)+'</small></span><span>'+safe(rangeText(s,'base'))+'</span><span>'+safe(delta(s,'base'))+'</span><span>'+safe(s.updated)+' →</span></a>').join('')+'</div>';
+  else h+='<div class="table-list"><div class="table-list-head"><span>公司</span><span>参考价</span><span>基准区间</span><span>相对差幅</span><span>研究日期</span></div>'+group.map(s=>'<a href="'+routeCompany(s)+'" class="table-list-row" data-company data-match="'+safe((s.name+' '+s.code+' '+s.sector).toLowerCase())+'" data-market="'+safe(s.market)+'"><span><b>'+safe(s.name)+'</b><small>'+safe(s.code)+'</small></span><span>'+safe(labelQuote(s).price)+'<small>'+safe(labelQuote(s).date)+'</small></span><span>'+safe(rangeText(s,'base'))+'</span><span>'+safe(delta(s,'base'))+'</span><span>'+safe(s.updated)+' →</span></a>').join('')+'</div>';
   h+='</section>';
  }
  h+='<div class="no-results" id="no-results" hidden><h3>没有找到匹配的研究</h3><p>尝试其他关键词，或清除市场筛选。</p><button data-reset>清除筛选</button></div>';
@@ -172,9 +213,9 @@ function articleSection(id,no,tag,title,body){
 }
 function detail(db,s){
  let h='<div class="breadcrumbs"><a href="#/companies">'+icon('back')+' 返回公司库</a><span>/</span><span>'+safe(s.sector)+'</span><span>/</span><b>'+safe(s.name)+'</b></div>';
- h+='<div class="company-banner"><div><span class="company-industry">'+safe(s.sector)+'</span><span class="ticker">'+safe(s.market)+' · '+safe(s.code)+'</span><h1>'+safe(s.name)+'</h1><p>'+safe(s.method)+'</p><div class="company-tags"><span>'+icon('clock')+' '+safe(s.updated)+' 更新</span><span>'+safe(s.horizon)+'</span></div></div><div class="banner-reference"><span>历史参考价 · '+safe(s.closeDate)+'</span><strong>'+safe(s.referenceText)+'</strong><small>文档基准价，不是实时行情</small></div></div>';
- h+='<div class="position-summary"><span class="position-icon">↗</span><div><strong>'+safe(info(s))+'</strong><p>这只是三情景模型与文档历史价格的相对位置，不自动构成低估或高估结论。</p></div><small>MODEL POSITION</small></div>';
- h+='<div class="cases">'+[['bear','悲观情景','BEAR CASE'],['base','基准情景','BASE CASE'],['bull','乐观情景','BULL CASE']].map(([k,name,tag])=>'<div class="case-card '+k+'"><div class="case-heading"><span>'+name+'</span><small>'+tag+'</small></div><strong>'+safe(rangeText(s,k))+'</strong><div><span>相对历史参考价</span><b>'+safe(delta(s,k))+'</b></div></div>').join('')+'</div>';
+ h+='<div class="company-banner"><div><span class="company-industry">'+safe(s.sector)+'</span><span class="ticker">'+safe(s.market)+' · '+safe(s.code)+'</span><h1>'+safe(s.name)+'</h1><p>'+safe(s.method)+'</p><div class="company-tags"><span>'+icon('clock')+' '+safe(s.updated)+' 更新</span><span>'+safe(s.horizon)+'</span></div></div><div class="banner-reference"><span>最新有效收盘价 · '+safe(labelQuote(s).date)+'</span><strong>'+safe(labelQuote(s).price)+'</strong><small>历史参考价 '+safe(s.referenceText)+'（'+safe(s.closeDate)+'）</small></div></div>';
+ h+='<div class="position-summary"><span class="position-icon">↗</span><div><strong>'+safe(info(s))+'</strong><p>以最新有效收盘价对比历史 Markdown 模型；模型陈旧或行情过期时不生成低估信号。</p></div><small>MODEL POSITION</small></div>';
+ h+='<div class="cases">'+[['bear','悲观情景','BEAR CASE'],['base','基准情景','BASE CASE'],['bull','乐观情景','BULL CASE']].map(([k,name,tag])=>'<div class="case-card '+k+'"><div class="case-heading"><span>'+name+'</span><small>'+tag+'</small></div><strong>'+safe(rangeText(s,k))+'</strong><div><span>相对最新有效收盘价</span><b>'+safe(delta(s,k))+'</b></div></div>').join('')+'</div>';
  h+='<div class="reading-layout"><div class="reading-main">';
  h+=articleSection('distribution','01','VISUAL COMPARISON','三情景价值区间','<div class="chart-panel">'+graph(s)+'</div>');
  h+=articleSection('assumptions','02','MODEL PARAMETERS','三情景参数与估值结果',paramsTable(s)+(s.assumptionNotes?'<div class="prose section-extra">'+renderMarkdown(s.assumptionNotes)+'</div>':''));
@@ -188,6 +229,37 @@ function detail(db,s){
  h+='<div class="bottom-nav"><div><span class="eyebrow">CONTINUE EXPLORING</span><h3>继续阅读研究档案</h3></div><div>'+db.items.filter(x=>x.code!==s.code).slice(0,2).map(x=>'<a href="'+routeCompany(x)+'">'+safe(x.name)+' ↗</a>').join('')+'</div></div>';
  return h;
 }
+
+function opportunities(db){
+ const rows=db.items.map(item=>({item,result:discountInfo(item),quote:quoteFresh(item)}));
+ const filtered=rows.filter(x=>(state.opSector==='全部'||x.item.sector===state.opSector)&&
+   (state.opFilter==='all'||state.opFilter==='below'&&['watch','observe','archive'].includes(x.result.kind)||
+    state.opFilter==='review'&&x.result.kind==='archive'||state.opFilter==='missing'&&x.result.kind==='missing'));
+ filtered.sort((a,b)=>(b.result.discount??-1e8)-(a.result.discount??-1e8)||b.item.updated.localeCompare(a.item.updated));
+ const valid=rows.filter(x=>x.quote).length;
+ const below=rows.filter(x=>['watch','observe'].includes(x.result.kind)).length;
+ const archive=rows.filter(x=>x.result.kind==='archive').length;
+ const missing=rows.filter(x=>x.result.kind==='missing').length;
+ const snapshot=rows.map(x=>x.quote?.closeDate).filter(Boolean).sort().at(-1)||'暂无有效行情';
+ let h='<div class="scan-hero"><div><span class="eyebrow">VALUATION OPPORTUNITY SCANNER</span><h1>低估发现<span> / Value Radar</span></h1><p>每天以最新有效收盘价对比 Markdown 的三情景价值区间。识别的只是<strong>价格与旧估值假设之间的折价</strong>，最终仍需要财报、利润和现金流验证。</p><a href="#/companies">浏览全部公司 '+icon('arrow')+'</a></div><div class="scan-visual"><span>LAST VALID MARKET SESSION</span><strong>'+safe(snapshot)+'</strong><small>行情每日定时尝试刷新 · 非实时成交</small><div class="scan-visual-bars"><i></i><i></i><i></i><i></i><i></i></div></div></div>';
+ h+='<div class="scan-stats"><div><span>有效收盘价</span><strong>'+valid+'<small> / '+db.items.length+'</small></strong><p>仅有效行情参与筛选</p></div><div><span>折价观察</span><strong>'+below+'</strong><p>模型更新日距今 ≤ 60 天</p></div><div><span>历史模型折价</span><strong>'+archive+'</strong><p>模型超过 60 天，需重估</p></div><div><span>无有效行情</span><strong>'+missing+'</strong><p>不生成估值信号</p></div></div>';
+ h+='<div class="scan-formula"><div class="scan-formula-icon">%</div><div><strong>折价计算口径</strong><p>基准下沿折价率 =（Markdown 基准估值下沿 − 最新有效收盘价）÷ Markdown 基准估值下沿 × 100%。正数代表股价低于基准下沿；<strong>折价不等于安全边际，也不等于预期收益率</strong>。跨不同估值期限、币种和模型日期仅比较各自百分比。</p></div></div>';
+ h+='<div class="scan-section-heading"><div><span class="eyebrow">SCREENED UNIVERSE</span><h2>估值折价与观察清单</h2><p>折价由大到小排序 · 保留失效模型和缺行情记录，便于发现资料缺口</p></div><div class="scan-selector"><label>行业筛选 <select id="scan-sector"><option value="全部">全部行业</option>'+db.sectors.map(x=>'<option value="'+safe(x)+'" '+(x===state.opSector?'selected':'')+'>'+safe(x)+'</option>').join('')+'</select></label></div></div>';
+ h+='<div class="scan-filters">'+[['all','全部公司'],['below','基准下沿折价'],['review','旧模型待复核'],['missing','缺少行情']].map(([key,label])=>'<button data-op-filter="'+key+'" class="'+(state.opFilter===key?'active':'')+'">'+label+'</button>').join('')+'</div>';
+ h+='<div class="scan-table"><div class="scan-table-header"><span>研究对象</span><span>有效收盘价</span><span>基准估值下沿</span><span>基准折价率</span><span>研究状态</span></div>';
+ if(!filtered.length)h+='<div class="scan-empty">当前筛选条件下没有记录。可切换其他行业或信号分类。</div>';
+ for(const {item,result,quote:q} of filtered){
+   const positive=result.discount!=null&&result.discount>0;
+   const color=result.kind==='watch'?'watch':result.kind==='observe'?'observe':result.kind==='archive'?'archive':result.kind==='missing'?'missing':'neutral';
+   const badge={watch:'重点观察',observe:'折价待核验',archive:'历史模型待复核',missing:'行情不可用',inrange:'位于基准区间',above:'高于基准区间'}[result.kind];
+   const discount=result.discount==null?'—':(result.discount>0?'+':'')+result.discount.toFixed(1)+'%';
+   h+='<a href="'+routeCompany(item)+'" class="scan-row"><span class="scan-company"><b>'+safe(item.name)+'</b><small>'+safe(item.code)+' · '+safe(item.sector)+'</small></span><span class="scan-price"><b>'+safe(q?item.currency+format(q.close):'—')+'</b><small>'+safe(q?q.closeDate:quote(item)?.closeDate||'日期未知')+'</small></span><span class="scan-low"><b>'+safe(item.currency+format(item.base.low))+'</b><small>基准上沿 '+safe(item.currency+format(item.base.high))+'</small></span><span class="scan-discount '+(positive?'discount-positive':'discount-other')+'">'+discount+'</span><span class="scan-signal"><span class="scan-badge '+color+'">'+badge+'</span><small>'+safe(result.reason)+'</small><small>模型更新 '+safe(item.updated)+'</small></span></a>';
+ }
+ h+='</div>';
+ h+='<div class="scan-rules"><div><strong>有效行情</strong><p>收盘日期距离查看时不超过 5 个日历日，超过则标注过期，不用于折价筛选。长假后如未更新，也会暂时失效。</p></div><div><strong>模型时效</strong><p>研究版本超过 60 个日历日仅能提示“历史模型折价”；必须先根据最新财报和经营情况重估。</p></div><div><strong>缺少数据</strong><p>Yahoo Finance 非官方行情源可能失败、延迟或无覆盖。无有效行情时不猜测现价，也不判断低估。</p></div></div>';
+ return h;
+}
+
 function about(db){
  return '<div class="about-banner"><span class="eyebrow">RESEARCH METHODOLOGY</span><h1>所有研究内容，<br><em>来自同一份文档。</em></h1><p>网页只负责读取、整理和展示 Markdown 中的内容，不生成额外公司数据，也不把历史股价包装成实时行情。</p><a class="button-primary" href="'+ORIGINAL+'" target="_blank" rel="noopener noreferrer">打开 Markdown 原文 ↗</a></div><div class="method-grid">'+[['01','唯一事实来源','只读取 sources 下的估值 Markdown。历史 JSON 和旧研报不再参与网页计算。'],['02','严格历史口径','三档估值、股价、财务假设和研究日期全部沿用原文，差幅仅作数学对照。'],['03','原文可追溯','研究来源和旧对话标题取自 Markdown；没有真实聊天 URL 时不编造。']].map(x=>'<div><span>'+x[0]+'</span><h3>'+x[1]+'</h3><p>'+x[2]+'</p></div>').join('')+'</div>'+sectionTitle('文档声明与变更记录','以下条目为 Markdown 文档本身的内容')+'<div class="method-reading"><div class="prose"><h3>文档说明</h3>'+renderMarkdown(db.intro)+'</div><div class="prose"><h3>历史版本</h3>'+renderMarkdown(db.changes)+'</div></div>';
 }
@@ -195,6 +267,7 @@ function route(db){
  const hash=decodeURIComponent((window.location.hash||'#/overview').slice(1));
  if(hash.startsWith('/company/')){const key=hash.slice(9).replace(/^0+(?=\d)/,'').toUpperCase(),item=db.items.find(x=>x.key===key);return item?{type:'company',item}:{type:'notfound'}}
  if(hash.startsWith('/sector/')){const sector=hash.slice(8);return db.sectors.includes(sector)?{type:'sector',sector}:{type:'notfound'}}
+ if(hash==='/opportunities')return {type:'opportunities'};
  if(hash==='/companies')return {type:'companies'};
  if(hash==='/about')return {type:'about'};
  return {type:'overview'};
@@ -213,13 +286,14 @@ function render(){
  $('sidebar').innerHTML=side(r);
  let html='';
  if(r.type==='overview')html=overview(d);
+ else if(r.type==='opportunities')html=opportunities(d);
  else if(r.type==='companies')html=catalog(d);
  else if(r.type==='sector')html=catalog(d,r.sector);
  else if(r.type==='company')html=detail(d,r.item);
  else if(r.type==='about')html=about(d);
  else html='<div class="no-results"><h2>研究不存在</h2><a href="#/companies">返回公司库</a></div>';
  $('content').innerHTML=html;
- $('crumb').textContent=r.type==='company'?'公司研究 / '+r.item.name:r.type==='sector'?r.sector:r.type==='about'?'方法与记录':r.type==='companies'?'公司估值库':'研究总览';
+ $('crumb').textContent=r.type==='company'?'公司研究 / '+r.item.name:r.type==='sector'?r.sector:r.type==='about'?'方法与记录':r.type==='opportunities'?'低估发现':r.type==='companies'?'公司估值库':'研究总览';
  $('version').textContent='DOC '+d.version;
  document.title=(r.type==='company'?r.item.name+' | ':'')+'Alpha Atlas · AI 投研工作台';
  document.body.classList.remove('mobile-open');
@@ -230,6 +304,7 @@ function navigate(){
 }
 document.addEventListener('click',event=>{
  const scroll=event.target.closest('[data-scroll]');if(scroll){const item=$(scroll.dataset.scroll);if(item)item.scrollIntoView({behavior:'smooth',block:'start'});return}
+ const scan=event.target.closest('[data-op-filter]');if(scan){state.opFilter=scan.dataset.opFilter;render();return}
  const market=event.target.closest('[data-market-filter]');if(market){state.market=market.dataset.marketFilter;filter();return}
  const layout=event.target.closest('[data-layout]');if(layout){state.layout=layout.dataset.layout;render();return}
  if(event.target.closest('[data-reset]')){state.term='';state.market='全部';const input=$('search');if(input)input.value='';filter();return}
@@ -237,14 +312,17 @@ document.addEventListener('click',event=>{
  if(event.target.closest('#shade')){document.body.classList.remove('mobile-open');return}
  const link=event.target.closest('a[href^="#/"]');if(link){if(link.hash===location.hash)navigate();else{state.term='';state.market='全部'}}
 });
+document.addEventListener('change',event=>{if(event.target.id==='scan-sector'){state.opSector=event.target.value;render()}});
 document.addEventListener('input',event=>{if(event.target.id==='search'){state.term=event.target.value.trim();filter()}});
 window.addEventListener('hashchange',navigate);
 async function start(){
  try{
   const response=await fetch(MD,{cache:'no-store'});if(!response.ok)throw Error('读取 Markdown 失败：HTTP '+response.status);
-  state.db=parseMarkdown(await response.text());render();
+  state.db=parseMarkdown(await response.text());
+  try{const q=await fetch(MARKET,{cache:'no-store'});if(q.ok)state.quotes=parseQuotes(await q.json(),state.db);else console.warn('行情暂不可用：HTTP '+q.status)}catch(quoteError){console.warn('行情读取失败，不影响研究内容',quoteError.message)}
+  render();
  }catch(err){$('content').innerHTML='<div class="load-fail"><h1>研究数据加载失败</h1><p>'+safe(err.message)+'</p><p>请通过 GitHub Pages 或本地 HTTP 服务打开，并检查 Markdown 文档格式。</p><a href="'+ORIGINAL+'" target="_blank" rel="noopener noreferrer">打开原始文件 ↗</a></div>'}
 }
-window.AtlasResearch={parseMarkdown,renderMarkdown,graph,detail,catalog,overview};
+window.AtlasResearch={parseMarkdown,parseQuotes,dayAge,renderMarkdown,graph,detail,catalog,overview,opportunities,discountInfo,modelOld};
 start();
 })();

@@ -1,4 +1,4 @@
-name: Refresh A/H closing prices and publish site
+name: Refresh Markdown valuation-universe quotes and publish site
 
 on:
   schedule:
@@ -31,29 +31,29 @@ jobs:
       - name: Install quote source
         run: pip install -r requirements.txt
       - name: Refresh valid daily closing prices
-        run: python scripts/update_prices.py
+        run: python scripts/update_market_quotes.py
       - name: Validate research data
         run: python -m unittest discover -s tests -v
       - name: Commit fresh quote snapshots
         run: |
-          if ! git diff --quiet -- data/stocks.json; then
+          if ! git diff --quiet -- data/market_quotes.json; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add data/stocks.json
+            git add data/market_quotes.json
             git commit -m 'data: refresh latest A/H closing prices'
             git push
           else
             echo 'No newer valid daily close.'
           fi
-      # The quote snapshots are legacy data, not used by the Markdown-only UI.
+      # Quote snapshots are the only external market input; research models remain in Markdown.
       - name: Validate Markdown website
         run: |
           node --check assets/research.js
           node tests/smoke_research.js
       # IMPORTANT: commits pushed by GITHUB_TOKEN do NOT trigger a second
       # push-based workflow. Deploy in this same workflow so the website
-      # actually shows the new data/stocks.json after every refresh.
-      - name: Build public dashboard with current local prices
+      # actually shows the updated market_quotes.json after every refresh.
+      - name: Build Markdown website with the updated dated close snapshots
         run: python scripts/build_site.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

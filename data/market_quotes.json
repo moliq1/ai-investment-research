@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "quotes": [
+    {
+      "code": "02099.HK",
+      "name": "中国黄金国际",
+      "market": "港股",
+      "symbol": "2099.HK",
+      "currency": "HK$",
+      "close": 194.9,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://finance.yahoo.com/quote/2099.HK/history/"
+    },
+    {
+      "code": "000807.SZ",
+      "name": "云铝股份",
+      "market": "A股",
+      "symbol": "000807.SZ",
+      "currency": "¥",
+      "close": 24.93,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/"
+    },
+    {
+      "code": "01378.HK",
+      "name": "中国宏桥",
+      "market": "港股",
+      "symbol": "1378.HK",
+      "currency": "HK$",
+      "close": 18.92,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/"
+    },
+    {
+      "code": "603799.SH",
+      "name": "华友钴业",
+      "market": "A股",
+      "symbol": "603799.SS",
+      "currency": "¥",
+      "close": null,
+      "closeDate": null,
+      "sourceUrl": null
+    },
+    {
+      "code": "688012.SH",
+      "name": "中微公司",
+      "market": "A股",
+      "symbol": "688012.SS",
+      "currency": "¥",
+      "close": 274,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/"
+    },
+    {
+      "code": "688498.SH",
+      "name": "源杰科技",
+      "market": "A股",
+      "symbol": "688498.SS",
+      "currency": "¥",
+      "close": null,
+      "closeDate": null,
+      "sourceUrl": null
+    },
+    {
+      "code": "600183.SH",
+      "name": "生益科技",
+      "market": "A股",
+      "symbol": "600183.SS",
+      "currency": "¥",
+      "close": null,
+      "closeDate": null,
+      "sourceUrl": null
+    },
+    {
+      "code": "300408.SZ",
+      "name": "三环集团",
+      "market": "A股",
+      "symbol": "300408.SZ",
+      "currency": "¥",
+      "close": null,
+      "closeDate": null,
+      "sourceUrl": null
+    },
+    {
+      "code": "01133.HK",
+      "name": "哈尔滨电气",
+      "market": "港股",
+      "symbol": "1133.HK",
+      "currency": "HK$",
+      "close": 11.63,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://finance.yahoo.com/quote/1133.HK/history/"
+    },
+    {
+      "code": "002851.SZ",
+      "name": "麦格米特",
+      "market": "A股",
+      "symbol": "002851.SZ",
+      "currency": "¥",
+      "close": null,
+      "closeDate": null,
+      "sourceUrl": null
+    },
+    {
+      "code": "300274.SZ",
+      "name": "阳光电源",
+      "market": "A股",
+      "symbol": "300274.SZ",
+      "currency": "¥",
+      "close": 72.3,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://finance.yahoo.com/quote/300274.SZ/history/"
+    },
+    {
+      "code": "300750.SZ",
+      "name": "宁德时代",
+      "market": "A股",
+      "symbol": "300750.SZ",
+      "currency": "¥",
+      "close": 227.9,
+      "closeDate": "2026-10-21",
+      "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/"
+    }
+  ]
+}

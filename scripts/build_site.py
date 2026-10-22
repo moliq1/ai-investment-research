@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Publish only the Markdown-driven research UI and its canonical source."""
+"""Publish Markdown research plus independent dated daily market snapshots."""
 from pathlib import Path
 import shutil
 
@@ -16,9 +16,11 @@ for name in ("index.html", ".nojekyll"):
 for name in ("research.js", "research.css"):
     shutil.copy2(ROOT / "assets" / name, OUTPUT / "assets" / name)
 
+(OUTPUT / "data").mkdir()
+shutil.copy2(ROOT / "data" / "market_quotes.json", OUTPUT / "data" / "market_quotes.json")
 (OUTPUT / "sources").mkdir()
 shutil.copy2(
     ROOT / "sources" / "AI投研_公司估值情景汇总.md",
     OUTPUT / "sources" / "AI投研_公司估值情景汇总.md",
 )
-print("Markdown-only website output:", OUTPUT)
+print("Markdown research + market snapshots:", OUTPUT)
