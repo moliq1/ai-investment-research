@@ -2,6 +2,26 @@
   "schemaVersion": 1,
   "quotes": [
     {
+      "code": "601899.SH",
+      "name": "紫金矿业",
+      "market": "A股",
+      "symbol": "601899.SS",
+      "currency": "¥",
+      "close": 27.84,
+      "closeDate": "2026-10-22",
+      "sourceUrl": "https://finance.yahoo.com/quote/601899.SS/history/"
+    },
+    {
+      "code": "02899.HK",
+      "name": "紫金矿业",
+      "market": "港股",
+      "symbol": "2899.HK",
+      "currency": "HK$",
+      "close": 29.1,
+      "closeDate": "2026-10-22",
+      "sourceUrl": "https://finance.yahoo.com/quote/2899.HK/history/"
+    },
+    {
       "code": "02099.HK",
       "name": "中国黄金国际",
       "market": "港股",
