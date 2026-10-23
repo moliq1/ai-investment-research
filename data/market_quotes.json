@@ -7,8 +7,8 @@
       "market": "A股",
       "symbol": "601899.SS",
       "currency": "¥",
-      "close": 27.84,
-      "closeDate": "2026-10-22",
+      "close": 28.79,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/601899.SS/history/"
     },
     {
@@ -17,8 +17,8 @@
       "market": "港股",
       "symbol": "2899.HK",
       "currency": "HK$",
-      "close": 29.1,
-      "closeDate": "2026-10-22",
+      "close": 29.46,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/2899.HK/history/"
     },
     {
@@ -27,8 +27,8 @@
       "market": "港股",
       "symbol": "2099.HK",
       "currency": "HK$",
-      "close": 185.7,
-      "closeDate": "2026-10-22",
+      "close": 183.2,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/2099.HK/history/"
     },
     {
@@ -37,8 +37,8 @@
       "market": "A股",
       "symbol": "000807.SZ",
       "currency": "¥",
-      "close": 24.65,
-      "closeDate": "2026-10-22",
+      "close": 25.16,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/"
     },
     {
@@ -47,8 +47,8 @@
       "market": "港股",
       "symbol": "1378.HK",
       "currency": "HK$",
-      "close": 18.02,
-      "closeDate": "2026-10-22",
+      "close": 19.02,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/"
     },
     {
@@ -57,8 +57,8 @@
       "market": "A股",
       "symbol": "603799.SS",
       "currency": "¥",
-      "close": 31.01,
-      "closeDate": "2026-10-22",
+      "close": 32.14,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/603799.SS/history/"
     },
     {
@@ -67,8 +67,8 @@
       "market": "A股",
       "symbol": "688012.SS",
       "currency": "¥",
-      "close": 264.18,
-      "closeDate": "2026-10-22",
+      "close": 266.7,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/"
     },
     {
@@ -77,8 +77,8 @@
       "market": "A股",
       "symbol": "688498.SS",
       "currency": "¥",
-      "close": 920.0,
-      "closeDate": "2026-10-22",
+      "close": 925.15,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/"
     },
     {
@@ -87,8 +87,8 @@
       "market": "A股",
       "symbol": "600183.SS",
       "currency": "¥",
-      "close": 110.26,
-      "closeDate": "2026-10-22",
+      "close": 110.81,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/"
     },
     {
@@ -97,8 +97,8 @@
       "market": "A股",
       "symbol": "300408.SZ",
       "currency": "¥",
-      "close": 91.97,
-      "closeDate": "2026-10-22",
+      "close": 93.99,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/"
     },
     {
@@ -107,8 +107,8 @@
       "market": "港股",
       "symbol": "1133.HK",
       "currency": "HK$",
-      "close": 11.25,
-      "closeDate": "2026-10-22",
+      "close": 11.45,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/1133.HK/history/"
     },
     {
@@ -117,8 +117,8 @@
       "market": "A股",
       "symbol": "002851.SZ",
       "currency": "¥",
-      "close": 92.06,
-      "closeDate": "2026-10-22",
+      "close": 93.28,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/"
     },
     {
@@ -127,8 +127,8 @@
       "market": "A股",
       "symbol": "300274.SZ",
       "currency": "¥",
-      "close": 70.51,
-      "closeDate": "2026-10-22",
+      "close": 72.2,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/300274.SZ/history/"
     },
     {
@@ -137,8 +137,8 @@
       "market": "A股",
       "symbol": "300750.SZ",
       "currency": "¥",
-      "close": 220.41,
-      "closeDate": "2026-10-22",
+      "close": 237.6,
+      "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/"
     }
   ]
