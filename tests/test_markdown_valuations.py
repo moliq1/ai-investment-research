@@ -61,5 +61,5 @@ class MasterValuationArchiveTests(unittest.TestCase):
             self.assertEqual(dates, sorted(dates, reverse=True))
         self.assertEqual(content.count("#### 原始聊天与研究来源"), len(set(re.findall(r"^###\s+\d+\.", content, flags=re.M))))
         self.assertGreaterEqual(content.count("#### 2.3 核心估值逻辑"), 11)
-        self.assertGreaterEqual(content.count("#### 2.4 估值与市场预期差的核验节点"), 11)
+        self.assertGreaterEqual(len(re.findall(r"^####\s+\d+\.\d+\s+估值与市场预期差的核验节点", content, flags=re.M)), 11)
         self.assertIn("原始 ChatGPT 对话链接：未取得可核实的分享 URL", content)
