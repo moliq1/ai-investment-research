@@ -4,6 +4,8 @@
 
 **在线访问：** https://moliq1.github.io/ai-investment-research/
 
+**投研更新操作规范：** [公司估值、季报复查与 GitHub 发布 SOP](docs/RESEARCH_UPDATE_SOP.md)（新增公司估值、业绩复查、A/H 换算、季度归档、发布验收）；使用 AI/Codex 开发时也可参考根目录 [AGENTS.md](AGENTS.md)。
+
 ## v3 页面设计
 
 - **研究总览**：文档中的研究公司数量、行业、三档情景数量、最近研究日期，以及最近研究与行业浏览。
