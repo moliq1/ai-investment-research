@@ -258,7 +258,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 1. [华友钴业2026年半年度报告（巨潮资讯原始PDF）](https://static.cninfo.com.cn/finalpage/2026-08-19/1225480594.PDF)，2026-08-19，2026H1；[三季报（公司出具PDF镜像）](https://file.finance.sina.com.cn/211.154.219.97%3A9494/MRGG/CNSESH_STOCK/2026/2026-10/2026-10-24/12656751.PDF)，2026-10-23董事会、10-24平台索引，2026Q3/9M。
 2. [2025年年报](https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12066687&stockid=603799)：TTM前期利润；[10月23日收盘行情](https://www.futunn.com/stock/603799-SH/announcement)：¥32.14，三季报公告前。
 3. [2026Q2季报档案](https://github.com/moliq1/ai-investment-research/blob/main/reports/huayou-cobalt/2026Q2.md) / [2026Q3重估档案](https://github.com/moliq1/ai-investment-research/blob/main/reports/huayou-cobalt/2026Q3.md)；季度档案存GitHub，当前静态网页**不会直接展开reports文件夹**。
-4. 原对话：《华友钴业成长估值分析》（2026-08-11）、《半年报和三季报更新华友钴业估值》（2026-10-23）。**原始ChatGPT对话分享链接尚未取得，不能伪造**。
+4. 原研究对话：《华友钴业成长估值分析》（2026-08-11）、《半年报和三季报更新华友钴业估值》（2026-10-23）。**原始ChatGPT对话分享链接尚未取得，不能伪造**。
 
 
 ### 3. 中国黄金国际（02099.HK）
