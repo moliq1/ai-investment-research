@@ -72,6 +72,16 @@
       "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/"
     },
     {
+      "code": "00522.HK",
+      "name": "ASMPT",
+      "market": "港股",
+      "symbol": "522.HK",
+      "currency": "HK$",
+      "close": null,
+      "closeDate": null,
+      "sourceUrl": null
+    },
+    {
       "code": "688012.SH",
       "name": "中微公司",
       "market": "A股",
