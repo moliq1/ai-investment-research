@@ -77,9 +77,9 @@
       "market": "港股",
       "symbol": "522.HK",
       "currency": "HK$",
-      "close": null,
-      "closeDate": null,
-      "sourceUrl": null
+      "close": 121.7,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://www.investing.com/equities/asm-pacific-historical-data"
     },
     {
       "code": "688012.SH",
