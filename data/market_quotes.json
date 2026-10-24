@@ -102,6 +102,16 @@
       "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/"
     },
     {
+      "code": "00992.HK",
+      "name": "联想集团",
+      "market": "港股",
+      "symbol": "992.HK",
+      "currency": "HK$",
+      "close": 22.64,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://www.irasia.com/stocks/0992/historicalquote_english.php"
+    },
+    {
       "code": "01133.HK",
       "name": "哈尔滨电气",
       "market": "港股",
