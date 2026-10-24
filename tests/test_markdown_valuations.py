@@ -37,7 +37,7 @@ class MasterValuationArchiveTests(unittest.TestCase):
         self.assertEqual(complete, len(rows))
         self.assertIn("| 中国黄金国际 | 02099.HK", text)
         self.assertNotIn("| 洛阳钼业 A |", text)
-        self.assertNotIn("| 兴业银锡 |", text)
+        self.assertIn("| 兴业银锡 | 000426.SZ", text)
         for row in rows:
             self.assertRegex(row[4], r"^\d{4}-\d{2}-\d{2}$")
             self.assertRegex(row[5], r"^(?:HK\$|¥)[\d,]+(?:\.\d+)?$")

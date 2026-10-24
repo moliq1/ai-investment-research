@@ -32,6 +32,7 @@ class MarketQuoteTests(unittest.TestCase):
         self.assertEqual(mapping["01378.HK"], "1378.HK")
         self.assertEqual(mapping["688012.SH"], "688012.SS")
         self.assertEqual(mapping["000807.SZ"], "000807.SZ")
+        self.assertEqual(mapping["000426.SZ"], "000426.SZ")
 
     def test_invalid_future_quotes_cannot_overwrite(self):
         earlier = json.loads(json.dumps(self.current))

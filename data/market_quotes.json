@@ -2,6 +2,16 @@
   "schemaVersion": 1,
   "quotes": [
     {
+      "code": "000426.SZ",
+      "name": "兴业银锡",
+      "market": "A股",
+      "symbol": "000426.SZ",
+      "currency": "¥",
+      "close": 27.89,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://cn.investing.com/equities/inner-mongolia-xingye-mining-co-ltd-historical-data"
+    },
+    {
       "code": "601899.SH",
       "name": "紫金矿业",
       "market": "A股",
