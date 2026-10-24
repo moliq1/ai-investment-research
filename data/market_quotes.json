@@ -182,6 +182,16 @@
       "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/"
     },
     {
+      "code": "03750.HK",
+      "name": "宁德时代",
+      "market": "港股",
+      "symbol": "3750.HK",
+      "currency": "HK$",
+      "close": 356.8,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://cn.investing.com/equities/contemporary-amperex-tech-historical-data"
+    },
+    {
       "code": "300274.SZ",
       "name": "阳光电源",
       "market": "A股",
