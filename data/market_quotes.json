@@ -112,6 +112,26 @@
       "sourceUrl": "https://www.irasia.com/stocks/0992/historicalquote_english.php"
     },
     {
+      "code": "600875.SH",
+      "name": "东方电气",
+      "market": "A股",
+      "symbol": "600875.SS",
+      "currency": "¥",
+      "close": 22.39,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://cn.investing.com/equities/dongfang-elec-ss-historical-data"
+    },
+    {
+      "code": "01072.HK",
+      "name": "东方电气",
+      "market": "港股",
+      "symbol": "1072.HK",
+      "currency": "HK$",
+      "close": 15.96,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://etnet.com.hk/www/sc/stocks/realtime/quote_shortsell.php?chart=stock&code=1072&page=1"
+    },
+    {
       "code": "01133.HK",
       "name": "哈尔滨电气",
       "market": "港股",
