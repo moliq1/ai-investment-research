@@ -1379,7 +1379,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 
 #### 原始聊天与研究来源
 
-- 历史研究对话《阳光电源成长估值分析》（2026-08-12），[恢复摘要](../reports/sungrow.md)；真实聊天分享URL未取得，不能伪造。
+- 原研究对话：《阳光电源成长估值分析》（2026-08-12），[恢复摘要](../reports/sungrow.md)；真实聊天分享URL未取得，不能伪造。
 - [2026H1正式报告全文公告](https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12570250&stockid=300274)、[监管H1摘要PDF](https://static.cninfo.com.cn/finalpage/2026-08-29/1225526947.PDF)、[2026Q1监管报告](https://static.cninfo.com.cn/finalpage/2026-04-28/1225208062.PDF)、[2025审计年报](https://static.cninfo.com.cn/finalpage/2026-04-01/1225066678.PDF)、[2026-10-23历史收盘¥72.20](https://cn.investing.com/equities/sungrow-power-supply-historical-data)、[Q3预约披露2026-10-31](https://basic.10jqka.com.cn/300274/event.html)。
 
 ## 三、新增公司模板（复制使用）
