@@ -114,18 +114,23 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 .group-head{display:flex;align-items:center;gap:14px;margin-bottom:15px}.group-symbol{width:42px;height:42px;display:grid;place-items:center;background:#e8edf7;border:1px solid #dbe4f2;color:#5874a9;border-radius:11px;font-size:23px}
 .group-head h2{font-size:18px;margin:0 0 5px}.group-head p{margin:0;color:#99a5b6;font-size:11px}
 .tile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.company-tile{display:block;border:1px solid var(--line);background:#fff;border-radius:12px;padding:22px 23px 0;overflow:hidden;box-shadow:var(--shadow)}
-.tile-head{display:flex;justify-content:space-between;align-items:center}.tile-head>span{background:#f0f3f9;border-radius:4px;padding:6px 9px;color:#7789a5;font-size:10px}
-.tile-head i{color:#8b9ab4;font-style:normal}.tile-head svg{width:17px;height:17px}
-.company-tile h3{font-size:21px;margin:21px 0 6px;letter-spacing:-.5px}.company-tile>p{font-size:11px;color:#95a3b6;margin:0}.company-tile>p span{margin:0 3px;color:#cbd3de}
-.tile-ref{padding:22px 0 18px;border-bottom:1px solid var(--line-2)}
-.tile-ref>span{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#92a0b4}.tile-ref small{font-size:10px;color:#a7b3c2}
-.tile-ref strong{display:block;font-size:22px;margin-top:9px;font-variant-numeric:tabular-nums}
-.tile-base{padding:17px 0 22px}.tile-base small{font-size:10px;color:#6f89b3;letter-spacing:.5px}
-.tile-base strong{font-size:19px;display:block;color:#4260af;margin:8px 0;white-space:nowrap;font-variant-numeric:tabular-nums}
-.tile-base span{font-size:10px;color:#8c9bb1}
-.tile-foot{border-top:1px solid var(--line-2);margin:0 -23px;padding:15px 23px;display:flex;justify-content:space-between;font-size:10px;color:#93a2b6;background:#fbfcff}
-.tile-foot span:last-child{font-weight:750;color:#667fb0}
+.company-tile{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);background:#fff;border-radius:15px;padding:22px 22px 0;overflow:hidden;box-shadow:var(--shadow);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.company-tile:hover{border-color:#cbd9ed}
+.tile-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}
+.tile-identity{flex:1;min-width:0}
+.tile-sector{display:inline-flex;align-items:center;max-width:100%;padding:6px 9px;border-radius:6px;background:#eef3fa;color:#6980a2;font-size:10px;font-weight:650;line-height:1.35}
+.tile-identity h3{font-size:21px;line-height:1.3;letter-spacing:-.45px;margin:18px 0 7px;color:#192840;overflow-wrap:anywhere}
+.tile-identity p{margin:0;font-size:11px;line-height:1.5;color:#96a5bc}
+.tile-identity p span{margin:0 4px;color:#bdc7d6}
+.tile-quote{display:flex;flex-direction:column;align-items:flex-end;text-align:right;flex-shrink:0;max-width:48%;min-width:0}
+.tile-quote>span{color:#8495b0;font-size:10px;line-height:1.5}
+.tile-quote-price{display:block;color:#192943;font-size:23px;line-height:1.2;font-weight:800;letter-spacing:-.55px;margin-top:11px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tile-quote-price.is-missing{color:#a6b2c1}
+.tile-quote small{display:block;color:#a0acc0;font-size:10px;line-height:1.45;margin-top:5px;white-space:nowrap}
+.tile-visual{flex:1;display:flex;margin:24px 0 21px;min-width:0}
+.tile-foot{border-top:1px solid var(--line-2);margin:0 -22px;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:10px;color:#96a4b8;background:#fbfcff}
+.tile-foot span:last-child{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-weight:750;color:#637ead}
+.tile-foot svg{width:14px;height:14px}
 .table-list{border:1px solid var(--line);border-radius:12px;background:white;overflow-x:auto;box-shadow:var(--shadow)}
 .table-list-head,.table-list-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr .85fr;gap:13px;align-items:center;min-width:830px;padding:15px 22px}
 .table-list-head{background:#f8faff;color:#8c9bb0;font-size:10px;font-weight:750;letter-spacing:.5px}
@@ -327,24 +332,25 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 .scan-formula strong{font-weight:800}
 
 
-/* Company catalogue cards — condensed version of the detail-page scenario map. */
-.company-tile{display:flex;flex-direction:column}
-.company-tile .tile-base{flex:1}
-.company-tile .tile-foot{margin-top:auto}
-.tile-base .tile-base-midpoint{display:block;font-size:11px;color:#8b9ab0;letter-spacing:0;margin-top:0}
-.company-tile .range-chart.mini{margin:17px 0 0;padding:13px 13px 11px;border:1px solid #e7edf5;border-radius:9px;background:#f7f9fc}
-.company-tile .range-chart.mini .chart-title{margin-bottom:11px}
-.company-tile .range-chart.mini .chart-title h3{font-size:12px;letter-spacing:0;margin:3px 0 0;color:#263957}
-.company-tile .range-chart.mini .chart-title .eyebrow{font-size:8px;letter-spacing:1.1px}
-.company-tile .range-chart.mini .chart-title>span{font-size:9px}
-.company-tile .range-chart.mini .chart-line{grid-template-columns:38px minmax(0,1fr) max-content;gap:7px;margin:12px 0}
-.company-tile .range-chart.mini .chart-name{font-size:10px}
+/* Compact catalogue valuation charts with a clearly separated closing-price header. */
+.company-tile .range-chart.mini{width:100%;margin:0;padding:16px 14px 12px;border:1px solid #e5ecf5;border-radius:10px;background:#f7f9fd}
+.company-tile .range-chart.mini .chart-title{gap:10px;margin-bottom:15px;align-items:baseline}
+.company-tile .range-chart.mini .chart-title h3{font-size:12px;letter-spacing:0;margin:0;color:#344a6b;font-weight:750}
+.company-tile .range-chart.mini .chart-title>span{font-size:10px;white-space:nowrap}
+.company-tile .range-chart.mini .chart-line{grid-template-columns:38px minmax(0,1fr) max-content;gap:8px;margin:13px 0}
+.company-tile .range-chart.mini .chart-name{font-size:10px;line-height:1.35}
 .company-tile .range-chart.mini .chart-name .tiny-dot{margin-right:4px;width:6px;height:6px}
 .company-tile .range-chart.mini .bar-track,.company-tile .range-chart.mini .value-band{height:9px}
 .company-tile .range-chart.mini .ref-rule{height:21px;top:-6px}
-.company-tile .range-chart.mini .chart-line>strong{grid-column:auto;text-align:right;margin:0;font-size:10px;line-height:1.3;color:#202e49;font-weight:750}
-.company-tile .range-chart.mini .graph-caption{margin:9px 0 0;font-size:9px;line-height:1.55}
+.company-tile .range-chart.mini .chart-line>strong{grid-column:auto;text-align:right;margin:0;color:#253650;font-size:10px;font-weight:750;line-height:1.35;white-space:nowrap;font-variant-numeric:tabular-nums}
+.company-tile .range-chart.mini .graph-caption{font-size:9px;line-height:1.55;margin:15px 0 0;padding-top:10px;border-top:1px solid #e7ecf5;color:#8a9ab1}
 @media(max-width:420px){
+ .company-tile{padding:20px 18px 0}
+ .company-tile .tile-quote-price{font-size:20px}
+ .company-tile .tile-card-head{gap:8px}
+ .company-tile .tile-identity h3{font-size:19px}
+ .company-tile .tile-visual{margin-top:18px}
+ .company-tile .tile-foot{margin:0 -18px;padding:13px 18px}
  .company-tile .range-chart.mini .chart-line{grid-template-columns:38px minmax(0,1fr);row-gap:5px}
  .company-tile .range-chart.mini .chart-line>strong{grid-column:2;text-align:left;margin-top:-3px}
 }

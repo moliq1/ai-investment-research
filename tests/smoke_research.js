@@ -83,23 +83,27 @@ assert.equal(app.ratioClass(0),'ratio-zero');
 assert.equal(app.ratioClass(null),'ratio-unknown');
 assert.ok(radarHtml.includes('绿色')&&radarHtml.includes('红色'));
 
-// Catalogue cards reuse the detail chart's three scenarios and a quote-specific reference line.
+// Company cards: right-aligned closing price and a compact three-scenario chart.
 const sectorPage=app.catalog(data,data.sectors[0]);
-assert.ok(sectorPage.includes('SCENARIO MAP'),'Sector cards must show compact valuation charts');
-assert.ok(sectorPage.includes('价值区间分布'));
+assert.ok(sectorPage.includes('三情景估值区间'),'Sector cards must show compact valuation charts');
 const modelCompany=data.items.find(x=>x.code==='02099.HK');
 const negativeCard=app.companyTile(modelCompany,{close:180,closeDate:'2026-10-22',valid:true});
 const positiveCard=app.companyTile(modelCompany,{close:250,closeDate:'2026-10-22',valid:true});
 const missingCard=app.companyTile(modelCompany,null);
+assert.ok(negativeCard.includes('class="tile-card-head"'));
+assert.ok(negativeCard.indexOf('class="tile-quote"')<negativeCard.indexOf('class="tile-visual"'));
+assert.ok(negativeCard.includes('class="tile-quote-price">HK$180</strong>'));
+assert.ok(negativeCard.includes('2026-10-22'));
+assert.ok(positiveCard.includes('class="tile-quote-price">HK$250</strong>'));
 assert.equal((negativeCard.match(/class="chart-line"/g)||[]).length,3);
 for(const label of ['悲观','基准','乐观'])assert.ok(negativeCard.includes(label));
-assert.ok(negativeCard.includes('最新有效收盘 HK$180（2026-10-22）'));
-assert.ok(positiveCard.includes('最新有效收盘 HK$250（2026-10-22）'));
+assert.ok(negativeCard.includes('竖线：最新有效收盘价'));
 assert.notEqual(negativeCard.match(/class="ref-rule" style="left:([^%]+)%"/)[1],positiveCard.match(/class="ref-rule" style="left:([^%]+)%"/)[1]);
-assert.ok(missingCard.includes('Markdown 历史参考价'));
-assert.ok(missingCard.includes('行情不可用'));
-assert.ok(!negativeCard.includes('tile-benchmark'),'Legacy signed-ratio tile should be replaced');
-assert.ok(negativeCard.includes('基准价（区间中点）'));
+assert.ok(missingCard.includes('class="tile-quote-price is-missing">—</strong>'));
+assert.ok(missingCard.includes('竖线：历史参考价 · 无有效收盘价'));
+assert.ok(!negativeCard.includes('BASE / 基准估值区间'));
+assert.ok(!negativeCard.includes('基准价（区间中点）'));
+assert.ok(!negativeCard.includes('tile-benchmark'));
 assert.ok(negativeCard.includes('HK$'+modelCompany.base.low));
 const aStock=data.items.find(x=>x.code==='601899.SH');
 assert.ok(app.companyTile(aStock,null).includes('¥ / 股'));
