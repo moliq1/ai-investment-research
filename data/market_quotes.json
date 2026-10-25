@@ -92,6 +92,16 @@
       "sourceUrl": "https://cn.investing.com/equities/chaozhou-threecircle-historical-data"
     },
     {
+      "code": "688183.SH",
+      "name": "生益电子",
+      "market": "A股",
+      "symbol": "688183.SS",
+      "currency": "¥",
+      "close": 87.28,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://cn.investing.com/equities/shengyi-electronics-historical-data"
+    },
+    {
       "code": "688498.SH",
       "name": "源杰科技",
       "market": "A股",
