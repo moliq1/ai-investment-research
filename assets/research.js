@@ -201,7 +201,7 @@ function triple(item){
 }
 function companyTile(item,currentQuote=quoteFresh(item)){
  const q=currentQuote&&currentQuote.valid?currentQuote:null;
- const t=q?{price:item.currency+format(q.close),date:q.closeDate}:labelQuote(item);
+ const t=q?{price:item.currency+format(q.close),date:q.closeDate}:{price:'—',date:'无有效收盘价'};
  return '<a class="company-tile" href="'+routeCompany(item)+'" data-company data-match="'+safe((item.name+' '+item.code+' '+item.sector).toLowerCase())+'" data-market="'+safe(item.market)+'">'+
  '<div class="tile-card-head"><div class="tile-identity"><span class="tile-sector">'+safe(item.sector)+'</span><h3>'+safe(item.name)+'</h3><p>'+safe(item.code)+' <span>·</span> '+safe(item.horizon)+'</p></div>'+
  '<div class="tile-quote"><span>有效收盘价</span><strong class="tile-quote-price'+(q?'':' is-missing')+'">'+safe(t.price)+'</strong><small>'+safe(t.date)+'</small></div></div>'+
@@ -229,7 +229,7 @@ function catalog(db,sector=null){
  for(let i=0;i<db.sectors.length;i++){
   const sec=db.sectors[i],group=items.filter(x=>x.sector===sec);if(!group.length)continue;
   h+='<section class="catalog-group" data-catalog-group><div class="group-head"><div class="group-symbol">'+['◇','◈','✧','⬡'][i%4]+'</div><div><h2>'+safe(sec)+'</h2><p>'+group.length+' 家公司 · 最近研究在前</p></div></div>';
-  if(state.layout==='cards')h+='<div class="tile-grid">'+group.map(companyTile).join('')+'</div>';
+  if(state.layout==='cards')h+='<div class="tile-grid">'+group.map(item=>companyTile(item)).join('')+'</div>';
   else h+='<div class="table-list"><div class="table-list-head"><span>公司</span><span>参考价</span><span>基准区间</span><span>相对差幅</span><span>研究日期</span></div>'+group.map(s=>'<a href="'+routeCompany(s)+'" class="table-list-row" data-company data-match="'+safe((s.name+' '+s.code+' '+s.sector).toLowerCase())+'" data-market="'+safe(s.market)+'"><span><b>'+safe(s.name)+'</b><small>'+safe(s.code)+'</small></span><span>'+safe(labelQuote(s).price)+'<small>'+safe(labelQuote(s).date)+'</small></span><span>'+safe(rangeText(s,'base'))+'</span><span>'+safe(delta(s,'base'))+'</span><span>'+safe(s.updated)+' →</span></a>').join('')+'</div>';
   h+='</section>';
  }
