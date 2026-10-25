@@ -337,7 +337,7 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 .company-tile .range-chart.mini .chart-title{gap:10px;margin-bottom:15px;align-items:baseline}
 .company-tile .range-chart.mini .chart-title h3{font-size:12px;letter-spacing:0;margin:0;color:#344a6b;font-weight:750}
 .company-tile .range-chart.mini .chart-title>span{font-size:10px;white-space:nowrap}
-.company-tile .range-chart.mini .chart-line{grid-template-columns:38px minmax(0,1fr) max-content;gap:8px;margin:13px 0}
+.company-tile .range-chart.mini .chart-line{grid-template-columns:38px minmax(0,1fr) 128px;gap:8px;margin:13px 0}
 .company-tile .range-chart.mini .chart-name{font-size:10px;line-height:1.35}
 .company-tile .range-chart.mini .chart-name .tiny-dot{margin-right:4px;width:6px;height:6px}
 .company-tile .range-chart.mini .bar-track,.company-tile .range-chart.mini .value-band{height:9px}
