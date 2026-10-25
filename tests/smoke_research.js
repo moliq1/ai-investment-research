@@ -120,3 +120,34 @@ assert.ok(detailGraph.includes('SCENARIO MAP'));
 assert.ok(!detailGraph.includes('scenario-row-head'),'The full-size detail chart is unchanged');
 const aStock=data.items.find(x=>x.code==='601899.SH');
 assert.ok(app.companyTile(aStock,null).includes('¥ / 股'));
+
+// Regression: Array.map must not pass its index as companyTile's quote parameter.
+// In the live catalogue the header, marker and caption must use ONE quote.
+assert.match(script,/group\.map\(item=>companyTile\(item\)\)/);
+assert.doesNotMatch(script,/group\.map\(companyTile\)/);
+const withLiveQuote=script.replace('window.AtlasResearch={',
+  "state.quotes.set('02099.HK',{valid:true,close:183.2,closeDate:'2026-10-23'});window.AtlasResearch={");
+assert.notEqual(withLiveQuote,script,'Unable to inject regression quote');
+const liveWindow={addEventListener:()=>{},location:{hash:'#/companies'}};
+vm.runInNewContext(withLiveQuote,{
+  window:liveWindow,document,fetch:()=>new Promise(()=>{}),console,location:liveWindow.location
+});
+const liveApp=liveWindow.AtlasResearch;
+const liveCatalog=liveApp.catalog(data,modelCompany.sector);
+const cardPath='href="#/company/02099.HK"';
+const cardAt=liveCatalog.indexOf(cardPath);
+assert.ok(cardAt>=0,'Live China Gold International card missing');
+const liveCard=liveCatalog.slice(liveCatalog.lastIndexOf('<a class="company-tile"',cardAt),liveCatalog.indexOf('</a>',cardAt)+4);
+assert.ok(liveCard.includes('class="tile-quote-price">HK$183.2</strong>'),'Header must show actual valid close');
+assert.ok(liveCard.includes('竖线：最新有效收盘 HK$183.2（2026-10-23）'),'Chart and header must share the quote');
+assert.ok(!liveCard.includes('竖线：历史参考价'),'Live card must not silently use historical quote');
+const markerOffsets=[...liveCard.matchAll(/class="ref-rule" style="left:([^%]+)%"/g)].map(m=>Number(m[1]));
+assert.equal(markerOffsets.length,3);
+assert.ok(markerOffsets.every(x=>x===markerOffsets[0]),'Scenario reference lines must remain aligned');
+const baseBand=liveCard.match(/class="value-band base" style="left:([^%]+)%/);
+assert.ok(baseBand,'Base valuation range missing');
+assert.ok(markerOffsets[0]<Number(baseBand[1]),'HK$183.2 must plot LEFT of HK$189 base lower bound');
+const explicitMissing=liveApp.companyTile(modelCompany,null);
+assert.ok(explicitMissing.includes('class="tile-quote-price is-missing">—</strong>'));
+assert.ok(explicitMissing.includes('竖线：历史参考价 HK$201.6'));
+assert.ok(!explicitMissing.includes('class="tile-quote-price">HK$183.2</strong>'),'A missing quote must not leak a different source into header');
