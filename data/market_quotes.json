@@ -92,16 +92,6 @@
       "sourceUrl": "https://cn.investing.com/equities/chaozhou-threecircle-historical-data"
     },
     {
-      "code": "600183.SH",
-      "name": "生益科技",
-      "market": "A股",
-      "symbol": "600183.SS",
-      "currency": "¥",
-      "close": 110.81,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/"
-    },
-    {
       "code": "688183.SH",
       "name": "生益电子",
       "market": "A股",
@@ -122,6 +112,16 @@
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/"
     },
     {
+      "code": "00522.HK",
+      "name": "ASMPT",
+      "market": "港股",
+      "symbol": "522.HK",
+      "currency": "HK$",
+      "close": 121.7,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://www.investing.com/equities/asm-pacific-historical-data"
+    },
+    {
       "code": "688012.SH",
       "name": "中微公司",
       "market": "A股",
@@ -132,14 +132,94 @@
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/"
     },
     {
-      "code": "00522.HK",
-      "name": "ASMPT",
-      "market": "港股",
-      "symbol": "522.HK",
-      "currency": "HK$",
-      "close": 121.7,
+      "code": "600183.SH",
+      "name": "生益科技",
+      "market": "A股",
+      "symbol": "600183.SS",
+      "currency": "¥",
+      "close": 110.81,
       "closeDate": "2026-10-23",
-      "sourceUrl": "https://www.investing.com/equities/asm-pacific-historical-data"
+      "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/"
+    },
+    {
+      "code": "00992.HK",
+      "name": "联想集团",
+      "market": "港股",
+      "symbol": "992.HK",
+      "currency": "HK$",
+      "close": 22.64,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://www.irasia.com/stocks/0992/historicalquote_english.php"
+    },
+    {
+      "code": "002851.SZ",
+      "name": "麦格米特",
+      "market": "A股",
+      "symbol": "002851.SZ",
+      "currency": "¥",
+      "close": 93.28,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/"
+    },
+    {
+      "code": "600875.SH",
+      "name": "东方电气",
+      "market": "A股",
+      "symbol": "600875.SS",
+      "currency": "¥",
+      "close": 22.39,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://cn.investing.com/equities/dongfang-elec-ss-historical-data"
+    },
+    {
+      "code": "01072.HK",
+      "name": "东方电气",
+      "market": "港股",
+      "symbol": "1072.HK",
+      "currency": "HK$",
+      "close": 15.96,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://etnet.com.hk/www/sc/stocks/realtime/quote_shortsell.php?chart=stock&code=1072&page=1"
+    },
+    {
+      "code": "01133.HK",
+      "name": "哈尔滨电气",
+      "market": "港股",
+      "symbol": "1133.HK",
+      "currency": "HK$",
+      "close": 11.45,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://finance.yahoo.com/quote/1133.HK/history/"
+    },
+    {
+      "code": "300750.SZ",
+      "name": "宁德时代",
+      "market": "A股",
+      "symbol": "300750.SZ",
+      "currency": "¥",
+      "close": 237.6,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/"
+    },
+    {
+      "code": "03750.HK",
+      "name": "宁德时代",
+      "market": "港股",
+      "symbol": "3750.HK",
+      "currency": "HK$",
+      "close": 356.8,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://cn.investing.com/equities/contemporary-amperex-tech-historical-data"
+    },
+    {
+      "code": "300274.SZ",
+      "name": "阳光电源",
+      "market": "A股",
+      "symbol": "300274.SZ",
+      "currency": "¥",
+      "close": 72.2,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://finance.yahoo.com/quote/300274.SZ/history/"
     }
   ]
 }
