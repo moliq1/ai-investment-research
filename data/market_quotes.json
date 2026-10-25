@@ -132,6 +132,16 @@
       "sourceUrl": "https://www.irasia.com/stocks/0992/historicalquote_english.php"
     },
     {
+      "code": "002851.SZ",
+      "name": "麦格米特",
+      "market": "A股",
+      "symbol": "002851.SZ",
+      "currency": "¥",
+      "close": 93.28,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/"
+    },
+    {
       "code": "600875.SH",
       "name": "东方电气",
       "market": "A股",
@@ -160,16 +170,6 @@
       "close": 11.45,
       "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/1133.HK/history/"
-    },
-    {
-      "code": "002851.SZ",
-      "name": "麦格米特",
-      "market": "A股",
-      "symbol": "002851.SZ",
-      "currency": "¥",
-      "close": 93.28,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/"
     },
     {
       "code": "300750.SZ",
