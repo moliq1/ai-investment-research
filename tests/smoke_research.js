@@ -83,12 +83,13 @@ assert.equal(app.ratioClass(0),'ratio-zero');
 assert.equal(app.ratioClass(null),'ratio-unknown');
 assert.ok(radarHtml.includes('绿色')&&radarHtml.includes('红色'));
 
-// Company cards: right-aligned closing price and a compact three-scenario chart.
+// Cards use two-tier scenario rows: each track spans the full card width.
 const sectorPage=app.catalog(data,data.sectors[0]);
-assert.ok(sectorPage.includes('三情景估值区间'),'Sector cards must show compact valuation charts');
+assert.ok(sectorPage.includes('三情景估值区间'));
 const stylesheet=fs.readFileSync(path.join(root,'assets','research.css'),'utf8');
-assert.ok(stylesheet.includes('grid-template-columns:38px minmax(0,1fr) 128px;'), 'Three chart tracks must have equal widths');
-assert.ok(!stylesheet.includes('grid-template-columns:38px minmax(0,1fr) max-content;'));
+assert.ok(stylesheet.includes('.range-chart.mini.compact .bar-track{display:block;width:100%'));
+assert.ok(stylesheet.includes('.range-chart.mini.compact .scenario-row{display:flex;flex-direction:column'));
+assert.ok(!stylesheet.includes('grid-template-columns:38px minmax(0,1fr) 128px;'));
 const modelCompany=data.items.find(x=>x.code==='02099.HK');
 const negativeCard=app.companyTile(modelCompany,{close:180,closeDate:'2026-10-22',valid:true});
 const positiveCard=app.companyTile(modelCompany,{close:250,closeDate:'2026-10-22',valid:true});
@@ -98,15 +99,24 @@ assert.ok(negativeCard.indexOf('class="tile-quote"')<negativeCard.indexOf('class
 assert.ok(negativeCard.includes('class="tile-quote-price">HK$180</strong>'));
 assert.ok(negativeCard.includes('2026-10-22'));
 assert.ok(positiveCard.includes('class="tile-quote-price">HK$250</strong>'));
-assert.equal((negativeCard.match(/class="chart-line"/g)||[]).length,3);
+assert.equal((negativeCard.match(/class="chart-line scenario-row"/g)||[]).length,3);
+assert.equal((negativeCard.match(/class="scenario-row-head"/g)||[]).length,3);
 for(const label of ['悲观','基准','乐观'])assert.ok(negativeCard.includes(label));
-assert.ok(negativeCard.includes('竖线：最新有效收盘价'));
-assert.notEqual(negativeCard.match(/class="ref-rule" style="left:([^%]+)%"/)[1],positiveCard.match(/class="ref-rule" style="left:([^%]+)%"/)[1]);
+assert.ok(negativeCard.includes('竖线：最新有效收盘 HK$180（2026-10-22）'));
+assert.ok(positiveCard.includes('竖线：最新有效收盘 HK$250（2026-10-22）'));
+const marks=[...negativeCard.matchAll(/class="ref-rule" style="left:([^%]+)%"/g)].map(x=>Number(x[1]));
+assert.equal(marks.length,3);
+assert.ok(marks.every(m=>m===marks[0]),'Every track must use exactly the same reference coordinate');
+assert.notEqual(marks[0],Number(positiveCard.match(/class="ref-rule" style="left:([^%]+)%"/)[1]));
 assert.ok(missingCard.includes('class="tile-quote-price is-missing">—</strong>'));
-assert.ok(missingCard.includes('竖线：历史参考价 · 无有效收盘价'));
+assert.ok(missingCard.includes('竖线：历史参考价 HK$201.6'));
+assert.ok(missingCard.includes('无有效收盘价'));
 assert.ok(!negativeCard.includes('BASE / 基准估值区间'));
 assert.ok(!negativeCard.includes('基准价（区间中点）'));
 assert.ok(!negativeCard.includes('tile-benchmark'));
 assert.ok(negativeCard.includes('HK$'+modelCompany.base.low));
+const detailGraph=app.graph(modelCompany,false,{valid:true,close:180,closeDate:'2026-10-22'});
+assert.ok(detailGraph.includes('SCENARIO MAP'));
+assert.ok(!detailGraph.includes('scenario-row-head'),'The full-size detail chart is unchanged');
 const aStock=data.items.find(x=>x.code==='601899.SH');
 assert.ok(app.companyTile(aStock,null).includes('¥ / 股'));
