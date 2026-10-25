@@ -86,6 +86,9 @@ assert.ok(radarHtml.includes('绿色')&&radarHtml.includes('红色'));
 // Company cards: right-aligned closing price and a compact three-scenario chart.
 const sectorPage=app.catalog(data,data.sectors[0]);
 assert.ok(sectorPage.includes('三情景估值区间'),'Sector cards must show compact valuation charts');
+const stylesheet=fs.readFileSync(path.join(root,'assets','research.css'),'utf8');
+assert.ok(stylesheet.includes('grid-template-columns:38px minmax(0,1fr) 128px;'), 'Three chart tracks must have equal widths');
+assert.ok(!stylesheet.includes('grid-template-columns:38px minmax(0,1fr) max-content;'));
 const modelCompany=data.items.find(x=>x.code==='02099.HK');
 const negativeCard=app.companyTile(modelCompany,{close:180,closeDate:'2026-10-22',valid:true});
 const positiveCard=app.companyTile(modelCompany,{close:250,closeDate:'2026-10-22',valid:true});
