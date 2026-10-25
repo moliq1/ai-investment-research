@@ -83,17 +83,23 @@ assert.equal(app.ratioClass(0),'ratio-zero');
 assert.equal(app.ratioClass(null),'ratio-unknown');
 assert.ok(radarHtml.includes('绿色')&&radarHtml.includes('红色'));
 
-// Sector catalogue cards use the EXACT same signed midpoint ratio as Value Radar.
+// Catalogue cards reuse the detail chart's three scenarios and a quote-specific reference line.
 const sectorPage=app.catalog(data,data.sectors[0]);
-assert.ok(sectorPage.includes('相对基准价'),'Sector cards must show signed benchmark ratio');
+assert.ok(sectorPage.includes('SCENARIO MAP'),'Sector cards must show compact valuation charts');
+assert.ok(sectorPage.includes('价值区间分布'));
 const modelCompany=data.items.find(x=>x.code==='02099.HK');
 const negativeCard=app.companyTile(modelCompany,{close:180,closeDate:'2026-10-22',valid:true});
 const positiveCard=app.companyTile(modelCompany,{close:250,closeDate:'2026-10-22',valid:true});
 const missingCard=app.companyTile(modelCompany,null);
-assert.ok(negativeCard.includes('class="tile-benchmark-value ratio-negative"'));
-assert.ok(negativeCard.includes('-12.0%'));
-assert.ok(positiveCard.includes('class="tile-benchmark-value ratio-positive"'));
-assert.ok(positiveCard.includes('+22.2%'));
-assert.ok(missingCard.includes('class="tile-benchmark-value ratio-unknown"'));
-assert.ok(missingCard.includes('>—</strong>'));
+assert.equal((negativeCard.match(/class="chart-line"/g)||[]).length,3);
+for(const label of ['悲观','基准','乐观'])assert.ok(negativeCard.includes(label));
+assert.ok(negativeCard.includes('最新有效收盘 HK$180（2026-10-22）'));
+assert.ok(positiveCard.includes('最新有效收盘 HK$250（2026-10-22）'));
+assert.notEqual(negativeCard.match(/class="ref-rule" style="left:([^%]+)%"/)[1],positiveCard.match(/class="ref-rule" style="left:([^%]+)%"/)[1]);
+assert.ok(missingCard.includes('Markdown 历史参考价'));
+assert.ok(missingCard.includes('行情不可用'));
+assert.ok(!negativeCard.includes('tile-benchmark'),'Legacy signed-ratio tile should be replaced');
 assert.ok(negativeCard.includes('基准价（区间中点）'));
+assert.ok(negativeCard.includes('HK$'+modelCompany.base.low));
+const aStock=data.items.find(x=>x.code==='601899.SH');
+assert.ok(app.companyTile(aStock,null).includes('¥ / 股'));

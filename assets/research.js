@@ -176,8 +176,9 @@ function info(item){
  if(q.close>item.base.high)return '最新收盘价高于模型基准上沿';
  return '最新收盘价处于基准估值区间';
 }
-function graph(item,mini=false){
- const live=quoteFresh(item),ref=live?live.close:item.reference;
+function graph(item,mini=false,quoteOverride=undefined){
+ const live=quoteOverride===undefined?quoteFresh(item):quoteOverride;
+ const ref=live?live.close:item.reference;
  const max=Math.max(ref,item.bear.high,item.base.high,item.bull.high)*1.13;
  const mark=Math.min(99,ref/max*100);
  return '<div class="range-chart '+(mini?'mini':'')+'"><div class="chart-title"><div><span class="eyebrow">SCENARIO MAP</span><h3>价值区间分布</h3></div><span>'+safe(item.currency)+' / 股</span></div>'+
@@ -191,11 +192,8 @@ function triple(item){
 function companyTile(item,currentQuote=quoteFresh(item)){
  const q=currentQuote&&currentQuote.valid?currentQuote:null;
  const t=q?{price:item.currency+format(q.close),date:q.closeDate}:labelQuote(item);
- const info=q?benchmarkInfo(item,q.close):null;
- const relative=info?info.relative:null;
- const change=relative==null?'—':percent(relative);
  const benchmark=item.currency+format((item.base.low+item.base.high)/2);
- return '<a class="company-tile" href="'+routeCompany(item)+'" data-company data-match="'+safe((item.name+' '+item.code+' '+item.sector).toLowerCase())+'" data-market="'+safe(item.market)+'"><div class="tile-head"><span>'+safe(item.sector)+'</span><i>'+icon('arrow')+'</i></div><h3>'+safe(item.name)+'</h3><p>'+safe(item.code)+' <span>·</span> '+safe(item.horizon)+'</p><div class="tile-ref"><span>最新有效收盘价 <small>'+safe(t.date)+'</small></span><strong>'+safe(t.price)+'</strong><small class="historical-line">历史参考价 '+safe(item.referenceText)+'（'+safe(item.closeDate)+'）</small></div><div class="tile-base"><small>BASE / 基准估值区间</small><strong>'+safe(rangeText(item,'base'))+'</strong><span class="tile-base-midpoint">基准价（区间中点） '+safe(benchmark)+'</span><div class="tile-benchmark"><span>相对基准价</span><strong class="tile-benchmark-value '+ratioClass(relative)+'">'+safe(change)+'</strong></div></div><div class="tile-foot"><span>'+safe(item.updated)+' 研究</span><span>研究详情 ↗</span></div></a>';
+ return '<a class="company-tile" href="'+routeCompany(item)+'" data-company data-match="'+safe((item.name+' '+item.code+' '+item.sector).toLowerCase())+'" data-market="'+safe(item.market)+'"><div class="tile-head"><span>'+safe(item.sector)+'</span><i>'+icon('arrow')+'</i></div><h3>'+safe(item.name)+'</h3><p>'+safe(item.code)+' <span>·</span> '+safe(item.horizon)+'</p><div class="tile-ref"><span>最新有效收盘价 <small>'+safe(t.date)+'</small></span><strong>'+safe(t.price)+'</strong><small class="historical-line">历史参考价 '+safe(item.referenceText)+'（'+safe(item.closeDate)+'）</small></div><div class="tile-base"><small>BASE / 基准估值区间</small><strong>'+safe(rangeText(item,'base'))+'</strong><span class="tile-base-midpoint">基准价（区间中点） '+safe(benchmark)+'</span>'+graph(item,true,q)+'</div><div class="tile-foot"><span>'+safe(item.updated)+' 研究</span><span>研究详情 ↗</span></div></a>';
 }
 function sectionTitle(label,desc=''){return '<div class="section-title"><div><span class="eyebrow">ALPHA ATLAS / RESEARCH</span><h2>'+safe(label)+'</h2></div>'+(desc?'<p>'+safe(desc)+'</p>':'')+'</div>'}
 function overview(db){

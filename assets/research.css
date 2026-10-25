@@ -327,13 +327,21 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 .scan-formula strong{font-weight:800}
 
 
-/* Sector and company catalogue cards: signed price deviation vs base-case midpoint. */
+/* Company catalogue cards — condensed version of the detail-page scenario map. */
 .tile-base .tile-base-midpoint{display:block;font-size:11px;color:#8b9ab0;letter-spacing:0;margin-top:0}
-.tile-base .tile-benchmark{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding:13px 14px;border:1px solid #e7edf5;border-radius:9px;background:#f7f9fc}
-.tile-base .tile-benchmark>span{font-size:12px;color:#657791;font-weight:700}
-.tile-base .tile-benchmark-value{display:block;margin:0;font-size:21px;line-height:1.2;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:-.3px}
-.tile-base .tile-benchmark-value.ratio-negative{color:#178669}
-.tile-base .tile-benchmark-value.ratio-positive{color:#cc4e57}
-.tile-base .tile-benchmark-value.ratio-zero{color:#71829b}
-.tile-base .tile-benchmark-value.ratio-unknown{color:#a2aebe}
-@media(max-width:650px){.tile-base .tile-benchmark-value{font-size:23px}}
+.company-tile .range-chart.mini{margin:17px 0 0;padding:13px 13px 11px;border:1px solid #e7edf5;border-radius:9px;background:#f7f9fc}
+.company-tile .range-chart.mini .chart-title{margin-bottom:11px}
+.company-tile .range-chart.mini .chart-title h3{font-size:12px;letter-spacing:0;margin:3px 0 0;color:#263957}
+.company-tile .range-chart.mini .chart-title .eyebrow{font-size:8px;letter-spacing:1.1px}
+.company-tile .range-chart.mini .chart-title>span{font-size:9px}
+.company-tile .range-chart.mini .chart-line{grid-template-columns:38px minmax(0,1fr) max-content;gap:7px;margin:12px 0}
+.company-tile .range-chart.mini .chart-name{font-size:10px}
+.company-tile .range-chart.mini .chart-name .tiny-dot{margin-right:4px;width:6px;height:6px}
+.company-tile .range-chart.mini .bar-track,.company-tile .range-chart.mini .value-band{height:9px}
+.company-tile .range-chart.mini .ref-rule{height:21px;top:-6px}
+.company-tile .range-chart.mini .chart-line>strong{grid-column:auto;text-align:right;margin:0;font-size:10px;line-height:1.3}
+.company-tile .range-chart.mini .graph-caption{margin:9px 0 0;font-size:9px;line-height:1.55}
+@media(max-width:420px){
+ .company-tile .range-chart.mini .chart-line{grid-template-columns:38px minmax(0,1fr);row-gap:5px}
+ .company-tile .range-chart.mini .chart-line>strong{grid-column:2;text-align:left;margin-top:-3px}
+}
