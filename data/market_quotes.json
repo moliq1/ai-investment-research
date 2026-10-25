@@ -92,6 +92,16 @@
       "sourceUrl": "https://cn.investing.com/equities/chaozhou-threecircle-historical-data"
     },
     {
+      "code": "600183.SH",
+      "name": "生益科技",
+      "market": "A股",
+      "symbol": "600183.SS",
+      "currency": "¥",
+      "close": 110.81,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/"
+    },
+    {
       "code": "688183.SH",
       "name": "生益电子",
       "market": "A股",
@@ -112,16 +122,6 @@
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/"
     },
     {
-      "code": "00522.HK",
-      "name": "ASMPT",
-      "market": "港股",
-      "symbol": "522.HK",
-      "currency": "HK$",
-      "close": 121.7,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://www.investing.com/equities/asm-pacific-historical-data"
-    },
-    {
       "code": "688012.SH",
       "name": "中微公司",
       "market": "A股",
@@ -132,14 +132,14 @@
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/"
     },
     {
-      "code": "600183.SH",
-      "name": "生益科技",
-      "market": "A股",
-      "symbol": "600183.SS",
-      "currency": "¥",
-      "close": 110.81,
+      "code": "00522.HK",
+      "name": "ASMPT",
+      "market": "港股",
+      "symbol": "522.HK",
+      "currency": "HK$",
+      "close": 121.7,
       "closeDate": "2026-10-23",
-      "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/"
+      "sourceUrl": "https://www.investing.com/equities/asm-pacific-historical-data"
     },
     {
       "code": "00992.HK",
