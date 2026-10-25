@@ -181,10 +181,20 @@ function graph(item,mini=false,quoteOverride=undefined,compact=false){
  const ref=live?live.close:item.reference;
  const max=Math.max(ref,item.bear.high,item.base.high,item.bull.high)*1.13;
  const mark=Math.min(99,ref/max*100);
- return '<div class="range-chart '+(mini?'mini':'')+'"><div class="chart-title">'+(compact?'<h3>三情景估值区间</h3>':'<div><span class="eyebrow">SCENARIO MAP</span><h3>价值区间分布</h3></div>')+'<span>'+safe(item.currency)+' / 股</span></div>'+
- ['bear','base','bull'].map((k,i)=>{const r=item[k],left=r.low/max*100,width=Math.max(.9,(r.high-r.low)/max*100);
- return '<div class="chart-line"><span class="chart-name"><i class="tiny-dot '+k+'"></i>'+['悲观','基准','乐观'][i]+'</span><div class="bar-track"><i class="ref-rule" style="left:'+mark+'%"></i><i class="value-band '+k+'" style="left:'+left.toFixed(3)+'%;width:'+width.toFixed(3)+'%"></i></div><strong>'+safe(rangeText(item,k))+'</strong></div>'}).join('')+
- '<p class="graph-caption">'+(compact?(live?'竖线：最新有效收盘价':'竖线：历史参考价 · 无有效收盘价'):'竖线为 '+(live?'最新有效收盘 '+safe(item.currency+format(live.close))+'（'+safe(live.closeDate)+'）':'Markdown 历史参考价 '+safe(item.referenceText)+'（'+safe(item.closeDate)+'，行情不可用）')+'；仅在同一公司内部按同一价格轴比较。')+'</p></div>';
+ const rows=['bear','base','bull'].map((k,i)=>{
+  const r=item[k],left=r.low/max*100,width=Math.max(.9,(r.high-r.low)/max*100);
+  const name='<span class="chart-name"><i class="tiny-dot '+k+'"></i>'+['悲观','基准','乐观'][i]+'</span>';
+  const value='<strong>'+safe(rangeText(item,k))+'</strong>';
+  const track='<div class="bar-track" aria-hidden="true"><i class="ref-rule" style="left:'+mark+'%"></i><i class="value-band '+k+'" style="left:'+left.toFixed(3)+'%;width:'+width.toFixed(3)+'%"></i></div>';
+  return compact?'<div class="chart-line scenario-row"><div class="scenario-row-head">'+name+value+'</div>'+track+'</div>'
+   :'<div class="chart-line">'+name+track+value+'</div>';
+ }).join('');
+ const header=compact?'<h3>三情景估值区间</h3>':'<div><span class="eyebrow">SCENARIO MAP</span><h3>价值区间分布</h3></div>';
+ const caption=compact
+  ?live?'竖线：最新有效收盘 '+safe(item.currency+format(live.close))+'（'+safe(live.closeDate)+'）'
+       :'竖线：历史参考价 '+safe(item.referenceText)+'（'+safe(item.closeDate)+'）· 无有效收盘价'
+  :'竖线为 '+(live?'最新有效收盘 '+safe(item.currency+format(live.close))+'（'+safe(live.closeDate)+'）':'Markdown 历史参考价 '+safe(item.referenceText)+'（'+safe(item.closeDate)+'，行情不可用）')+'；仅在同一公司内部按同一价格轴比较。';
+ return '<div class="range-chart '+(mini?'mini':'')+(compact?' compact':'')+'"><div class="chart-title">'+header+'<span>'+safe(item.currency)+' / 股</span></div>'+rows+'<p class="graph-caption">'+caption+'</p></div>';
 }
 function triple(item){
  return '<div class="triple">'+[['bear','悲观情景','BEAR CASE'],['base','基准情景','BASE CASE'],['bull','乐观情景','BULL CASE']].map(([key,label,sub])=>'<div class="case-card '+key+'"><div class="case-label"><b>'+label+'</b><small>'+sub+'</small></div><strong class="case-price">'+safe(rangeText(item,key))+'</strong><div class="case-delta"><span>相对历史参考价</span><b>'+safe(delta(item,key))+'</b></div></div>').join('')+'</div>';
