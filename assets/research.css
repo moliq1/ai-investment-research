@@ -332,18 +332,20 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 .scan-formula strong{font-weight:800}
 
 
-/* Compact catalogue valuation charts with a clearly separated closing-price header. */
-.company-tile .range-chart.mini{width:100%;margin:0;padding:16px 14px 12px;border:1px solid #e5ecf5;border-radius:10px;background:#f7f9fd}
-.company-tile .range-chart.mini .chart-title{gap:10px;margin-bottom:15px;align-items:baseline}
-.company-tile .range-chart.mini .chart-title h3{font-size:12px;letter-spacing:0;margin:0;color:#344a6b;font-weight:750}
-.company-tile .range-chart.mini .chart-title>span{font-size:10px;white-space:nowrap}
-.company-tile .range-chart.mini .chart-line{grid-template-columns:38px minmax(0,1fr) 128px;gap:8px;margin:13px 0}
-.company-tile .range-chart.mini .chart-name{font-size:10px;line-height:1.35}
-.company-tile .range-chart.mini .chart-name .tiny-dot{margin-right:4px;width:6px;height:6px}
-.company-tile .range-chart.mini .bar-track,.company-tile .range-chart.mini .value-band{height:9px}
-.company-tile .range-chart.mini .ref-rule{height:21px;top:-6px}
-.company-tile .range-chart.mini .chart-line>strong{grid-column:auto;text-align:right;margin:0;color:#253650;font-size:10px;font-weight:750;line-height:1.35;white-space:nowrap;font-variant-numeric:tabular-nums}
-.company-tile .range-chart.mini .graph-caption{font-size:9px;line-height:1.55;margin:15px 0 0;padding-top:10px;border-top:1px solid #e7ecf5;color:#8a9ab1}
+/* Compact card chart: two-tier rows preserve one full-width shared price axis. */
+.company-tile .range-chart.mini.compact{width:100%;margin:0;padding:17px 16px 14px;border:1px solid #e5ecf5;border-radius:12px;background:#f7f9fd}
+.company-tile .range-chart.mini.compact .chart-title{gap:12px;margin-bottom:19px;align-items:baseline}
+.company-tile .range-chart.mini.compact .chart-title h3{font-size:13px;letter-spacing:0;margin:0;color:#304666;font-weight:750}
+.company-tile .range-chart.mini.compact .chart-title>span{font-size:10px;white-space:nowrap}
+.company-tile .range-chart.mini.compact .scenario-row{display:flex;flex-direction:column;gap:9px;margin:0 0 20px;min-width:0;grid-template-columns:none}
+.company-tile .range-chart.mini.compact .scenario-row-head{display:flex;justify-content:space-between;align-items:center;gap:10px;min-width:0}
+.company-tile .range-chart.mini.compact .chart-name{display:inline-flex;align-items:center;white-space:nowrap;font-size:11px;line-height:1.3}
+.company-tile .range-chart.mini.compact .chart-name .tiny-dot{margin-right:7px;width:7px;height:7px}
+.company-tile .range-chart.mini.compact .scenario-row-head>strong{font-size:11px;line-height:1.3;color:#253650;font-weight:750;white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
+.company-tile .range-chart.mini.compact .bar-track{display:block;width:100%;height:11px;flex-shrink:0;border-radius:999px;background:#e9eef5}
+.company-tile .range-chart.mini.compact .value-band{height:11px;min-width:3px;border-radius:999px}
+.company-tile .range-chart.mini.compact .ref-rule{top:-7px;height:25px;width:2px;border-radius:2px;background:#56637b;opacity:.88}
+.company-tile .range-chart.mini.compact .graph-caption{margin:4px 0 0;padding-top:12px;border-top:1px solid #e4eaf3;font-size:10px;line-height:1.65;color:#8293ab}
 @media(max-width:420px){
  .company-tile{padding:20px 18px 0}
  .company-tile .tile-quote-price{font-size:20px}
@@ -351,6 +353,7 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
  .company-tile .tile-identity h3{font-size:19px}
  .company-tile .tile-visual{margin-top:18px}
  .company-tile .tile-foot{margin:0 -18px;padding:13px 18px}
- .company-tile .range-chart.mini .chart-line{grid-template-columns:38px minmax(0,1fr);row-gap:5px}
- .company-tile .range-chart.mini .chart-line>strong{grid-column:2;text-align:left;margin-top:-3px}
+ .company-tile .range-chart.mini.compact{padding:15px 13px 13px}
+ .company-tile .range-chart.mini.compact .scenario-row{gap:9px;margin-bottom:18px}
+ .company-tile .range-chart.mini.compact .scenario-row-head>strong{font-size:10px}
 }
