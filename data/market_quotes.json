@@ -72,6 +72,26 @@
       "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/"
     },
     {
+      "code": "300408.SZ",
+      "name": "三环集团",
+      "market": "A股",
+      "symbol": "300408.SZ",
+      "currency": "¥",
+      "close": 93.99,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/"
+    },
+    {
+      "code": "06951.HK",
+      "name": "三环集团",
+      "market": "港股",
+      "symbol": "6951.HK",
+      "currency": "HK$",
+      "close": 81.65,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://cn.investing.com/equities/chaozhou-threecircle-historical-data"
+    },
+    {
       "code": "688498.SH",
       "name": "源杰科技",
       "market": "A股",
@@ -110,26 +130,6 @@
       "close": 110.81,
       "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/"
-    },
-    {
-      "code": "300408.SZ",
-      "name": "三环集团",
-      "market": "A股",
-      "symbol": "300408.SZ",
-      "currency": "¥",
-      "close": 93.99,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/"
-    },
-    {
-      "code": "06951.HK",
-      "name": "三环集团",
-      "market": "港股",
-      "symbol": "6951.HK",
-      "currency": "HK$",
-      "close": 81.65,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://cn.investing.com/equities/chaozhou-threecircle-historical-data"
     },
     {
       "code": "00992.HK",
