@@ -72,6 +72,16 @@
       "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/"
     },
     {
+      "code": "688498.SH",
+      "name": "源杰科技",
+      "market": "A股",
+      "symbol": "688498.SS",
+      "currency": "¥",
+      "close": 925.15,
+      "closeDate": "2026-10-23",
+      "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/"
+    },
+    {
       "code": "00522.HK",
       "name": "ASMPT",
       "market": "港股",
@@ -90,16 +100,6 @@
       "close": 266.7,
       "closeDate": "2026-10-23",
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/"
-    },
-    {
-      "code": "688498.SH",
-      "name": "源杰科技",
-      "market": "A股",
-      "symbol": "688498.SS",
-      "currency": "¥",
-      "close": 925.15,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/"
     },
     {
       "code": "600183.SH",
