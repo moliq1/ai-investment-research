@@ -24,7 +24,7 @@
 | `sources/AI投研_公司估值情景汇总.md` | **唯一正式研究主档案**；估值总表、公司当前三情景、参数、投资逻辑、核验节点、季度简表、变更记录 | 每次**正式新增公司/重估**必须更新；不是行情日更文件 |
 | `reports/<slug>/YYYYQn.md` | 每季完整复查档案：原始财报事实、预测误差、模型修订、风险及来源 | 每次季报复查新建一个文件；旧季报修订须说明版本、修订原因 |
 | `data/market_quotes.json` | 每只证券的最近有效收盘快照（close、closeDate、currency、sourceUrl） | 由 `scripts/update_market_quotes.py` 和 Actions 抓取；不要用假价格填缺口 |
-| `assets/research.js`、`index.html` | 网页解析主 MD、显示 A/H 估值与“低估发现” | 改动数据结构或新的公司标题语法时，需同步检查/修改解析器 |
+| `assets/research.js`、`index.html` | 网页解析主 MD、显示 A/H 估值与“低估发现” | 改动数据结构或新的公司标题语法时，需同步检查/修改解析器；公司名称行情跳转：A 股同花顺六位代码，港股经济通五位代码（`00522`、`00992`） |
 | `scripts/build_site.py` | 生成 `.site/` 网页发布包 | 目前仅复制首页、样式/脚本、主 MD、行情 JSON；**不会复制 reports 文件夹** |
 | `.github/workflows/pages.yml` | `main` 推送后校验、构建并部署 GitHub Pages | **先看本次运行状态，不仅看是否触发** |
 | `.github/workflows/quotes.yml` | A/H 收盘快照计划任务及独立部署 | 现设北京时间工作日 18:30 与 21:30 尝试，不保证每次有新行情 |

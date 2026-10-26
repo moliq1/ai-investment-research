@@ -90,11 +90,14 @@ const stylesheet=fs.readFileSync(path.join(root,'assets','research.css'),'utf8')
 assert.ok(stylesheet.includes('.range-chart.mini.compact .bar-track{display:block;width:100%'));
 assert.ok(stylesheet.includes('.range-chart.mini.compact .scenario-row{display:flex;flex-direction:column'));
 assert.ok(!stylesheet.includes('grid-template-columns:38px minmax(0,1fr) 128px;'));
-// Every card title opens the correct A/H stock quote, while details remain an internal link.
+// Every card title opens a resolvable A/H market quote, preserving HKEX codes.
 const aLink=app.marketPage({code:'600183.SH'});
 assert.equal(aLink,'https://stockpage.10jqka.com.cn/600183/');
-assert.equal(app.marketPage({code:'02099.HK'}),'https://stockpage.10jqka.com.cn/HK2099/');
-assert.equal(app.marketPage({code:'02899.HK'}),'https://stockpage.10jqka.com.cn/HK2899/');
+assert.equal(app.marketPage({code:'000807.SZ'}),'https://stockpage.10jqka.com.cn/000807/');
+const hkMarketPage=code=>'https://content.etnet.com.hk/content/cpyrevamp/sc/stock_quote.php?code='+code;
+for(const code of ['00522','00992','02099','02899']){
+  assert.equal(app.marketPage({code:code+'.HK'}),hkMarketPage(code));
+}
 assert.equal(app.marketPage({code:'bad'}),null);
 const pct={valid:true,close:101.23,previousClose:100};
 assert.ok(Math.abs(app.quoteDailyChange(pct)-1.23)<1e-8);
@@ -108,8 +111,15 @@ const missingCard=app.companyTile(modelCompany,null);
 assert.ok(negativeCard.includes('class="tile-card-head"'));
 assert.ok(negativeCard.indexOf('class="tile-quote"')<negativeCard.indexOf('class="tile-visual"'));
 assert.ok(negativeCard.includes('class="tile-quote-price">HK$180</strong>'));
-assert.ok(negativeCard.includes('href="https://stockpage.10jqka.com.cn/HK2099/"'));
+assert.ok(negativeCard.includes('href="https://content.etnet.com.hk/content/cpyrevamp/sc/stock_quote.php?code=02099"'));
 assert.ok(negativeCard.includes('target="_blank" rel="noopener noreferrer"'));
+assert.ok(negativeCard.includes('经济通港股行情'));
+for(const code of ['00522.HK','00992.HK']){
+  const item=data.items.find(x=>x.code===code);
+  assert.ok(item,'Missing regression ticker: '+code);
+  const card=app.companyTile(item,null);
+  assert.ok(card.includes('href="'+hkMarketPage(code.slice(0,5))+'"'));
+}
 assert.ok(negativeCard.includes('class="tile-detail-link" href="#/company/02099.HK"'));
 assert.ok(negativeCard.startsWith('<article class="company-tile"'));
 assert.ok(negativeCard.includes('日涨跌 —'));
