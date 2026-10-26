@@ -19,7 +19,17 @@ assert.ok(html.indexOf('<script>')<html.indexOf('assets/research.css'),'Theme bo
 const themeSource=(html.match(/<script>([\s\S]*?)<\/script>/)||[])[1];
 assert.ok(themeSource,'Theme bootstrap script missing');
 const themeCss=fs.readFileSync(path.join(root,'assets','research.css'),'utf8');
-assert.ok(themeCss.includes(':root[data-theme="dark"]'));
+assert.ok(themeCss.includes(':root[data-theme="dark"]'))
+
+/* Regression for white detail banners with almost-white text in dark mode. */
+assert.match(themeCss,/:root\[data-theme="dark"\] \.company-banner\s*\{[^}]*background:linear-gradient\([^}]*#1d304c[^}]*\)/);
+assert.match(themeCss,/:root\[data-theme="dark"\] \.company-banner h1,\s*:root\[data-theme="dark"\] \.banner-reference strong\s*\{color:#f3f7ff\}/);
+assert.match(themeCss,/:root\[data-theme="dark"\] \.breadcrumbs b\s*\{color:#dfebfc\}/);
+assert.match(themeCss,/:root\[data-theme="dark"\] \.company-industry\s*\{[^}]*background:#304c73;[^}]*color:#bfd7ff/);
+const detailPreview=app.detail(data,data.items.find(x=>x.code==='000426.SZ'));
+assert.ok(detailPreview.includes('class="company-banner"'),'Company detail must include a themed banner');
+assert.ok(detailPreview.includes('class="banner-reference"'),'Detail price must use the themed contrast rules');
+;
 for(const selector of ['.company-tile','.article-section','.scan-table','.range-chart.mini.compact']){
   assert.ok(themeCss.includes(selector),'Dark palette is missing '+selector);
 }
