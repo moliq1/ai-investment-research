@@ -159,16 +159,14 @@ function parseMarkdown(text){
 }
 const state={db:null,quotes:new Map(),term:'',market:'全部',layout:'cards',opFilter:'all',opSector:'全部'};
 const routeCompany=item=>'#/company/'+encode(item.code);
-// A shares open Tonghuashun; HK shares open ET Net with the full 5-digit HKEX code.
-// Do not strip leading zeros: e.g. 00522, 00992 have different valid destinations.
+// Use Tonghuashun for all stocks. Its HK tickers require >= 4 digits:
+// 00522.HK -> HK0522, 00992.HK -> HK0992, 02899.HK -> HK2899.
 function marketPage(item){
  const match=String(item.code||'').match(/^(\d{5,6})\.(SH|SZ|HK)$/);
  if(!match)return null;
  const [,digits,market]=match;
- if(market==='HK'){
-   return 'https://content.etnet.com.hk/content/cpyrevamp/sc/stock_quote.php?code='+digits.padStart(5,'0');
- }
- return 'https://stockpage.10jqka.com.cn/'+digits+'/';
+ const symbol=market==='HK'?'HK'+String(Number(digits)).padStart(4,'0'):digits;
+ return 'https://stockpage.10jqka.com.cn/'+symbol+'/';
 }
 function quoteDailyChange(q){
  if(!q||!q.valid||q.previousClose==null)return null;
@@ -224,7 +222,7 @@ function companyTile(item,currentQuote=quoteFresh(item)){
  const changeLabel=change==null?'日涨跌 —':'日涨跌 '+(change>0?'+':'')+change.toFixed(2)+'%';
  const changeClass=change==null?'unknown':change>0?'up':change<0?'down':'flat';
  const marketUrl=marketPage(item);
- const name=marketUrl?'<a class="tile-market-link" href="'+safe(marketUrl)+'" target="_blank" rel="noopener noreferrer" title="查看 '+safe(item.name)+' 的'+(item.code.endsWith('.HK')?'经济通港股':'同花顺')+'行情">'+safe(item.name)+icon('external')+'</a>':safe(item.name);
+ const name=marketUrl?'<a class="tile-market-link" href="'+safe(marketUrl)+'" target="_blank" rel="noopener noreferrer" title="查看 '+safe(item.name)+' 的'+'同花顺'+'行情">'+safe(item.name)+icon('external')+'</a>':safe(item.name);
  return '<article class="company-tile" data-company data-match="'+safe((item.name+' '+item.code+' '+item.sector).toLowerCase())+'" data-market="'+safe(item.market)+'">'+
  '<div class="tile-card-head"><div class="tile-identity"><span class="tile-sector">'+safe(item.sector)+'</span><h3>'+name+'</h3><p>'+safe(item.code)+' <span>·</span> '+safe(item.horizon)+'</p></div>'+
  '<div class="tile-quote"><span>有效收盘价</span><strong class="tile-quote-price'+(q?'':' is-missing')+'">'+safe(t.price)+'</strong><div class="tile-quote-bottom"><small>'+safe(t.date)+'</small><span class="tile-day-change '+changeClass+'">'+safe(changeLabel)+'</span></div></div></div>'+
