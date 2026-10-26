@@ -139,7 +139,7 @@
       "market": "A股",
       "symbol": "688498.SS",
       "currency": "¥",
-      "close": 875.0,
+      "close": 875,
       "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/",
       "previousClose": 925.15,
@@ -235,7 +235,7 @@
       "market": "A股",
       "symbol": "300750.SZ",
       "currency": "¥",
-      "close": 238.0,
+      "close": 238,
       "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/",
       "previousClose": 237.6,
@@ -251,7 +251,7 @@
       "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/3750.HK/history/",
       "previousClose": 356.8,
-      "changePercent": 0.0
+      "changePercent": 0
     },
     {
       "code": "300274.SZ",
@@ -264,6 +264,30 @@
       "sourceUrl": "https://finance.yahoo.com/quote/300274.SZ/history/",
       "previousClose": 72.2,
       "changePercent": -2.73
+    },
+    {
+      "code": "603259.SH",
+      "name": "药明康德",
+      "market": "A股",
+      "symbol": "603259.SS",
+      "currency": "¥",
+      "close": 146,
+      "closeDate": "2026-10-26",
+      "sourceUrl": "https://cn.investing.com/equities/wuxi-apptec-historical-data",
+      "previousClose": 144.72,
+      "changePercent": 0.88
+    },
+    {
+      "code": "02359.HK",
+      "name": "药明康德",
+      "market": "港股",
+      "symbol": "2359.HK",
+      "currency": "HK$",
+      "close": 188.3,
+      "closeDate": "2026-10-26",
+      "sourceUrl": "https://cn.investing.com/equities/wuxi-apptec-co-historical-data",
+      "previousClose": 186,
+      "changePercent": 1.24
     }
   ]
 }
