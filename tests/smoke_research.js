@@ -10,6 +10,72 @@ const script=fs.readFileSync(path.join(root,'assets','research.js'),'utf8');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert.match(html,/assets\/research\.js/);
 assert.match(html,/assets\/research\.css/);
+
+assert.ok(html.includes('id="theme-mode"'));
+assert.ok(html.includes('<option value="system">跟随系统</option>'));
+assert.ok(html.includes('<option value="light">浅色</option>'));
+assert.ok(html.includes('<option value="dark">深色</option>'));
+assert.ok(html.indexOf('<script>')<html.indexOf('assets/research.css'),'Theme bootstrap must run before CSS');
+const themeSource=(html.match(/<script>([\s\S]*?)<\/script>/)||[])[1];
+assert.ok(themeSource,'Theme bootstrap script missing');
+const themeCss=fs.readFileSync(path.join(root,'assets','research.css'),'utf8');
+assert.ok(themeCss.includes(':root[data-theme="dark"]'));
+for(const selector of ['.company-tile','.article-section','.scan-table','.range-chart.mini.compact']){
+  assert.ok(themeCss.includes(selector),'Dark palette is missing '+selector);
+}
+function themeHarness(saved,dark,blockStorage=false,legacyMedia=false){
+  const handlers={};
+  const mediaHandlers={};
+  const root={dataset:{},style:{}};
+  const select={value:'system',addEventListener:(event,handler)=>handlers[event]=handler};
+  const meta={content:null,setAttribute:(name,value)=>{if(name==='content')meta.content=value}};
+  const store={
+    value:saved,
+    getItem(){if(blockStorage)throw Error('Storage unavailable');return this.value},
+    setItem(key,value){if(blockStorage)throw Error('Storage unavailable');this.value=value},
+  };
+  const media={matches:dark,addEventListener:(event,handler)=>mediaHandlers[event]=handler,
+    addListener(handler){mediaHandlers.change=handler}};
+  const doc={
+    documentElement:root,
+    querySelector:query=>query==='meta[name="theme-color"]'?meta:null,
+    getElementById:id=>id==='theme-mode'?select:null,
+    addEventListener:(event,handler)=>handlers[event]=handler,
+  };
+  const win={localStorage:store,matchMedia:query=>{
+    assert.equal(query,'(prefers-color-scheme: dark)');
+    if(legacyMedia)media.addEventListener=undefined;
+    return media;
+  }};
+  vm.runInNewContext(themeSource,{window:win,document:doc});
+  assert.equal(typeof win.AtlasTheme.getMode,'function');
+  handlers.DOMContentLoaded();
+  return {window:win,root,media,meta,store,select,handlers,mediaHandlers};
+}
+const following=themeHarness(null,true);
+assert.equal(following.window.AtlasTheme.getMode(),'system');
+assert.equal(following.root.dataset.theme,'dark');
+assert.equal(following.meta.content,'#0d1524');
+following.media.matches=false;following.mediaHandlers.change();
+assert.equal(following.root.dataset.theme,'light','System changes should apply automatically');
+following.select.value='dark';following.handlers.change();
+assert.equal(following.store.value,'dark','Manual mode must persist');
+assert.equal(following.root.dataset.theme,'dark');
+following.media.matches=false;following.mediaHandlers.change();
+assert.equal(following.root.dataset.theme,'dark','Manual mode must override system events');
+following.select.value='system';following.handlers.change();
+assert.equal(following.root.dataset.theme,'light','Switching back to system should re-enable matching');
+const savedLight=themeHarness('light',true);
+assert.equal(savedLight.root.dataset.theme,'light','Saved preference must win on reload');
+assert.equal(savedLight.select.value,'light');
+const inaccessible=themeHarness(null,true,true,true);
+assert.equal(inaccessible.root.dataset.theme,'dark','Unavailable storage must not break initial theme');
+inaccessible.select.value='light';inaccessible.handlers.change();
+assert.equal(inaccessible.root.dataset.theme,'light','Unavailable storage must not break manual switch');
+inaccessible.select.value='system';inaccessible.handlers.change();
+inaccessible.media.matches=true;inaccessible.mediaHandlers.change();
+assert.equal(inaccessible.root.dataset.theme,'dark','Legacy media listener should still work');
+
 assert.doesNotMatch(html,/assets\/app\.js|assets\/master\.js/);
 assert.match(script,/const MD='sources\/AI投研_公司估值情景汇总\.md'/);
 assert.match(script,/data\/market_quotes\.json/);
