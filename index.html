@@ -6,6 +6,45 @@
 <meta name="theme-color" content="#101f35">
 <meta name="description" content="Alpha Atlas AI 投研工作台：从同一份 Markdown 展示公司三情景估值、现金流假设、投资逻辑、反向估值与核验节点。">
 <title>Alpha Atlas · AI 投研工作台</title>
+<script>
+/* Apply the preferred palette before CSS loads to avoid a light-mode flash. */
+(function(){
+  'use strict';
+  const KEY='alpha-atlas-theme';
+  const choices=['system','light','dark'];
+  const media=typeof window.matchMedia==='function'?window.matchMedia('(prefers-color-scheme: dark)'):null;
+  let mode='system';
+  try{const saved=window.localStorage.getItem(KEY);if(choices.includes(saved))mode=saved}catch(_){}
+  function applyTheme(){
+    const effective=mode==='system'?(media&&media.matches?'dark':'light'):mode;
+    const root=document.documentElement;
+    root.dataset.theme=effective;
+    root.dataset.themeMode=mode;
+    root.style.colorScheme=effective;
+    const meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute('content',effective==='dark'?'#0d1524':'#f5f7fa');
+    const select=document.getElementById('theme-mode');
+    if(select)select.value=mode;
+  }
+  applyTheme();
+  const onSystemChange=()=>{if(mode==='system')applyTheme()};
+  if(media){
+    if(typeof media.addEventListener==='function')media.addEventListener('change',onSystemChange);
+    else if(typeof media.addListener==='function')media.addListener(onSystemChange);
+  }
+  document.addEventListener('DOMContentLoaded',()=>{
+    const select=document.getElementById('theme-mode');
+    if(!select)return;
+    select.value=mode;
+    select.addEventListener('change',()=>{
+      mode=choices.includes(select.value)?select.value:'system';
+      try{window.localStorage.setItem(KEY,mode)}catch(_){}
+      applyTheme();
+    });
+  });
+  window.AtlasTheme={getMode:()=>mode,getEffective:()=>document.documentElement.dataset.theme};
+})();
+</script>
 <link rel="stylesheet" href="assets/research.css">
 <script src="assets/research.js" defer></script>
 </head>
@@ -15,7 +54,7 @@
 <div id="workspace">
   <header id="topbar">
     <div class="top-path"><button id="mobile-menu" type="button" aria-label="打开导航菜单"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><span>WORKSPACE</span><span class="top-sep">/</span><b id="crumb">研究总览</b></div>
-    <div class="top-utilities"><span class="top-label">MARKDOWN RESEARCH</span><span class="top-version" id="version">DOC —</span><a class="top-link" href="https://github.com/moliq1/ai-investment-research" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 查看仓库">GITHUB ↗</a></div>
+    <div class="top-utilities"><span class="top-label">MARKDOWN RESEARCH</span><span class="top-version" id="version">DOC —</span><label class="theme-control" for="theme-mode"><span class="theme-glyph" aria-hidden="true">◐</span><span class="theme-label">外观</span><select id="theme-mode" aria-label="外观模式"><option value="system">跟随系统</option><option value="light">浅色</option><option value="dark">深色</option></select></label><a class="top-link" href="https://github.com/moliq1/ai-investment-research" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 查看仓库">GITHUB ↗</a></div>
   </header>
   <main id="content" aria-live="polite"><div class="loading" style="padding:80px 20px;text-align:center;color:#8797ad">正在读取 Markdown 研究报告…</div></main>
   <footer id="footer">© 2026 Alpha Atlas · 基于 GitHub Markdown 的独立投研档案 · 历史情景估值并非实时行情或买卖建议</footer>
