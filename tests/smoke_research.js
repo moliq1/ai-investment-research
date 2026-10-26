@@ -26,11 +26,7 @@ assert.match(themeCss,/:root\[data-theme="dark"\] \.company-banner\s*\{[^}]*back
 assert.match(themeCss,/:root\[data-theme="dark"\] \.company-banner h1,\s*:root\[data-theme="dark"\] \.banner-reference strong\s*\{color:#f3f7ff\}/);
 assert.match(themeCss,/:root\[data-theme="dark"\] \.breadcrumbs b\s*\{color:#dfebfc\}/);
 assert.match(themeCss,/:root\[data-theme="dark"\] \.company-industry\s*\{[^}]*background:#304c73;[^}]*color:#bfd7ff/);
-const detailPreview=app.detail(data,data.items.find(x=>x.code==='000426.SZ'));
-assert.ok(detailPreview.includes('class="company-banner"'),'Company detail must include a themed banner');
-assert.ok(detailPreview.includes('class="banner-reference"'),'Detail price must use the themed contrast rules');
-;
-for(const selector of ['.company-tile','.article-section','.scan-table','.range-chart.mini.compact']){
+;for(const selector of ['.company-tile','.article-section','.scan-table','.range-chart.mini.compact']){
   assert.ok(themeCss.includes(selector),'Dark palette is missing '+selector);
 }
 function themeHarness(saved,dark,blockStorage=false,legacyMedia=false){
@@ -97,6 +93,10 @@ vm.runInNewContext(script,{window,document,fetch:()=>new Promise(()=>{}),console
 const app=window.AtlasResearch;
 assert.ok(app,'The UI parser must be exposed for validation');
 const data=app.parseMarkdown(markdown);
+const detailPreview=app.detail(data,data.items.find(x=>x.code==='000426.SZ'));
+assert.ok(detailPreview.includes('class="company-banner"'),'Company detail must include a themed banner');
+assert.ok(detailPreview.includes('class="banner-reference"'),'Detail price must use the themed contrast rules');
+
 const tableRows=markdown.split(/\r?\n/).filter(line=>/^\|\s*[^|]+\s*\|\s*\d{5,6}\.(?:HK|SH|SZ)\s*\|/.test(line));
 assert.equal(data.items.length,tableRows.length);
 assert.ok(data.items.length>=12);
