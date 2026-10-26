@@ -114,7 +114,7 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 .group-head{display:flex;align-items:center;gap:14px;margin-bottom:15px}.group-symbol{width:42px;height:42px;display:grid;place-items:center;background:#e8edf7;border:1px solid #dbe4f2;color:#5874a9;border-radius:11px;font-size:23px}
 .group-head h2{font-size:18px;margin:0 0 5px}.group-head p{margin:0;color:#99a5b6;font-size:11px}
 .tile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.company-tile{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);background:#fff;border-radius:15px;padding:22px 22px 0;overflow:hidden;box-shadow:var(--shadow);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.company-tile{position:relative;display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);background:#fff;border-radius:15px;padding:22px 22px 0;overflow:hidden;box-shadow:var(--shadow);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
 .company-tile:hover{border-color:#cbd9ed}
 .tile-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}
 .tile-identity{flex:1;min-width:0}
@@ -131,6 +131,29 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 .tile-foot{border-top:1px solid var(--line-2);margin:0 -22px;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:10px;color:#96a4b8;background:#fbfcff}
 .tile-foot span:last-child{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-weight:750;color:#637ead}
 .tile-foot svg{width:14px;height:14px}
+
+/* Price change uses the same dated close as the valuation marker, never a live intraday tick. */
+.tile-quote-bottom{display:flex;align-items:flex-end;flex-direction:column;gap:7px;margin-top:6px}
+.tile-quote-bottom small{margin-top:0}
+.tile-day-change{display:inline-flex;align-items:center;padding:4px 7px;border-radius:5px;font-size:10px;font-weight:750;line-height:1.35;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tile-day-change.up{color:#b7354c;background:#fff0f1}
+.tile-day-change.down{color:#168765;background:#eaf7f1}
+.tile-day-change.flat{color:#697d95;background:#f0f3f7}
+.tile-day-change.unknown{color:#98a5b6;background:#f3f5f9;font-weight:600}
+.tile-identity h3 .tile-market-link{color:inherit;text-decoration:none;display:inline;position:relative;z-index:3}
+.tile-market-link svg{width:13px;height:13px;vertical-align:baseline;margin-left:5px;color:#91a2b9;transition:color .2s ease}
+.tile-market-link:hover,.tile-market-link:focus-visible{color:#466ab0!important}
+.tile-market-link:hover svg{color:#466ab0}
+.tile-detail-link{position:relative;z-index:2;display:inline-flex;align-items:center;gap:5px;color:#637ead;font-weight:750}
+
+.tile-detail-link::after{content:"";position:absolute;inset:0;z-index:1}
+.tile-detail-link{position:static;z-index:auto}
+.tile-detail-link svg{position:relative;z-index:2}
+@media(max-width:420px){
+ .tile-quote-bottom{gap:6px}
+ .tile-day-change{font-size:9px;padding:4px 6px}
+}
+
 .table-list{border:1px solid var(--line);border-radius:12px;background:white;overflow-x:auto;box-shadow:var(--shadow)}
 .table-list-head,.table-list-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr .85fr;gap:13px;align-items:center;min-width:830px;padding:15px 22px}
 .table-list-head{background:#f8faff;color:#8c9bb0;font-size:10px;font-weight:750;letter-spacing:.5px}
