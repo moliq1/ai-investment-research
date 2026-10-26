@@ -7,9 +7,9 @@
       "market": "A股",
       "symbol": "000426.SZ",
       "currency": "¥",
-      "close": 27.89,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://cn.investing.com/equities/inner-mongolia-xingye-mining-co-ltd-historical-data"
+      "close": 26.66,
+      "closeDate": "2026-10-26",
+      "sourceUrl": "https://finance.yahoo.com/quote/000426.SZ/history/"
     },
     {
       "code": "601899.SH",
@@ -17,8 +17,8 @@
       "market": "A股",
       "symbol": "601899.SS",
       "currency": "¥",
-      "close": 28.79,
-      "closeDate": "2026-10-23",
+      "close": 27.47,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/601899.SS/history/"
     },
     {
@@ -27,8 +27,8 @@
       "market": "港股",
       "symbol": "2899.HK",
       "currency": "HK$",
-      "close": 29.46,
-      "closeDate": "2026-10-23",
+      "close": 27.74,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/2899.HK/history/"
     },
     {
@@ -37,8 +37,8 @@
       "market": "A股",
       "symbol": "603799.SS",
       "currency": "¥",
-      "close": 32.14,
-      "closeDate": "2026-10-23",
+      "close": 31.49,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/603799.SS/history/"
     },
     {
@@ -47,8 +47,8 @@
       "market": "港股",
       "symbol": "2099.HK",
       "currency": "HK$",
-      "close": 183.2,
-      "closeDate": "2026-10-23",
+      "close": 177.6,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/2099.HK/history/"
     },
     {
@@ -57,8 +57,8 @@
       "market": "A股",
       "symbol": "000807.SZ",
       "currency": "¥",
-      "close": 25.16,
-      "closeDate": "2026-10-23",
+      "close": 25.3,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/"
     },
     {
@@ -67,8 +67,8 @@
       "market": "港股",
       "symbol": "1378.HK",
       "currency": "HK$",
-      "close": 19.02,
-      "closeDate": "2026-10-23",
+      "close": 19.5,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/"
     },
     {
@@ -77,8 +77,8 @@
       "market": "A股",
       "symbol": "300408.SZ",
       "currency": "¥",
-      "close": 93.99,
-      "closeDate": "2026-10-23",
+      "close": 82.59,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/"
     },
     {
@@ -87,9 +87,9 @@
       "market": "港股",
       "symbol": "6951.HK",
       "currency": "HK$",
-      "close": 81.65,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://cn.investing.com/equities/chaozhou-threecircle-historical-data"
+      "close": 76.3,
+      "closeDate": "2026-10-26",
+      "sourceUrl": "https://finance.yahoo.com/quote/6951.HK/history/"
     },
     {
       "code": "600183.SH",
@@ -97,8 +97,8 @@
       "market": "A股",
       "symbol": "600183.SS",
       "currency": "¥",
-      "close": 110.81,
-      "closeDate": "2026-10-23",
+      "close": 100.26,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/"
     },
     {
@@ -107,9 +107,9 @@
       "market": "A股",
       "symbol": "688183.SS",
       "currency": "¥",
-      "close": 87.28,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://cn.investing.com/equities/shengyi-electronics-historical-data"
+      "close": 81.09,
+      "closeDate": "2026-10-26",
+      "sourceUrl": "https://finance.yahoo.com/quote/688183.SS/history/"
     },
     {
       "code": "688498.SH",
@@ -117,8 +117,8 @@
       "market": "A股",
       "symbol": "688498.SS",
       "currency": "¥",
-      "close": 925.15,
-      "closeDate": "2026-10-23",
+      "close": 875.0,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/"
     },
     {
@@ -127,8 +127,8 @@
       "market": "A股",
       "symbol": "688012.SS",
       "currency": "¥",
-      "close": 266.7,
-      "closeDate": "2026-10-23",
+      "close": 251.55,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/"
     },
     {
@@ -157,8 +157,8 @@
       "market": "A股",
       "symbol": "002851.SZ",
       "currency": "¥",
-      "close": 93.28,
-      "closeDate": "2026-10-23",
+      "close": 89.53,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/"
     },
     {
@@ -167,9 +167,9 @@
       "market": "A股",
       "symbol": "600875.SS",
       "currency": "¥",
-      "close": 22.39,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://cn.investing.com/equities/dongfang-elec-ss-historical-data"
+      "close": 21.96,
+      "closeDate": "2026-10-26",
+      "sourceUrl": "https://finance.yahoo.com/quote/600875.SS/history/"
     },
     {
       "code": "01072.HK",
@@ -177,9 +177,9 @@
       "market": "港股",
       "symbol": "1072.HK",
       "currency": "HK$",
-      "close": 15.96,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://etnet.com.hk/www/sc/stocks/realtime/quote_shortsell.php?chart=stock&code=1072&page=1"
+      "close": 15.86,
+      "closeDate": "2026-10-26",
+      "sourceUrl": "https://finance.yahoo.com/quote/1072.HK/history/"
     },
     {
       "code": "01133.HK",
@@ -187,8 +187,8 @@
       "market": "港股",
       "symbol": "1133.HK",
       "currency": "HK$",
-      "close": 11.45,
-      "closeDate": "2026-10-23",
+      "close": 11.37,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/1133.HK/history/"
     },
     {
@@ -197,8 +197,8 @@
       "market": "A股",
       "symbol": "300750.SZ",
       "currency": "¥",
-      "close": 237.6,
-      "closeDate": "2026-10-23",
+      "close": 238.0,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/"
     },
     {
@@ -208,8 +208,8 @@
       "symbol": "3750.HK",
       "currency": "HK$",
       "close": 356.8,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://cn.investing.com/equities/contemporary-amperex-tech-historical-data"
+      "closeDate": "2026-10-26",
+      "sourceUrl": "https://finance.yahoo.com/quote/3750.HK/history/"
     },
     {
       "code": "300274.SZ",
@@ -217,8 +217,8 @@
       "market": "A股",
       "symbol": "300274.SZ",
       "currency": "¥",
-      "close": 72.2,
-      "closeDate": "2026-10-23",
+      "close": 70.23,
+      "closeDate": "2026-10-26",
       "sourceUrl": "https://finance.yahoo.com/quote/300274.SZ/history/"
     }
   ]
