@@ -159,6 +159,21 @@ function parseMarkdown(text){
 }
 const state={db:null,quotes:new Map(),term:'',market:'全部',layout:'cards',opFilter:'all',opSector:'全部'};
 const routeCompany=item=>'#/company/'+encode(item.code);
+// 同花顺证券页：A 股使用 6 位代码；港股使用 HK + 不带前导零的代码。
+function marketPage(item){
+ const match=String(item.code||'').match(/^(\d{5,6})\.(SH|SZ|HK)$/);
+ if(!match)return null;
+ const [,digits,market]=match;
+ const code=market==='HK'?'HK'+String(Number(digits)):digits;
+ return 'https://stockpage.10jqka.com.cn/'+code+'/';
+}
+function quoteDailyChange(q){
+ if(!q||!q.valid||q.previousClose==null)return null;
+ const prior=Number(q.previousClose),close=Number(q.close);
+ if(!Number.isFinite(prior)||prior<=0||!Number.isFinite(close)||close<=0)return null;
+ return (close/prior-1)*100;
+}
+
 function side(route){
  const d=state.db;
  const sectorLinks=d.sectors.map((s,i)=>'<a href="#/sector/'+encode(s)+'" class="side-item '+(route.type==='sector'&&route.sector===s?'selected':'')+'"><span class="sector-mark">'+['◇','◈','✧','⬡'][i%4]+'</span><span>'+safe(s)+'</span><em>'+d.items.filter(x=>x.sector===s).length+'</em></a>').join('');
@@ -202,11 +217,16 @@ function triple(item){
 function companyTile(item,currentQuote=quoteFresh(item)){
  const q=currentQuote&&currentQuote.valid?currentQuote:null;
  const t=q?{price:item.currency+format(q.close),date:q.closeDate}:{price:'—',date:'无有效收盘价'};
- return '<a class="company-tile" href="'+routeCompany(item)+'" data-company data-match="'+safe((item.name+' '+item.code+' '+item.sector).toLowerCase())+'" data-market="'+safe(item.market)+'">'+
- '<div class="tile-card-head"><div class="tile-identity"><span class="tile-sector">'+safe(item.sector)+'</span><h3>'+safe(item.name)+'</h3><p>'+safe(item.code)+' <span>·</span> '+safe(item.horizon)+'</p></div>'+
- '<div class="tile-quote"><span>有效收盘价</span><strong class="tile-quote-price'+(q?'':' is-missing')+'">'+safe(t.price)+'</strong><small>'+safe(t.date)+'</small></div></div>'+
+ const change=quoteDailyChange(q);
+ const changeLabel=change==null?'日涨跌 —':'日涨跌 '+(change>0?'+':'')+change.toFixed(2)+'%';
+ const changeClass=change==null?'unknown':change>0?'up':change<0?'down':'flat';
+ const marketUrl=marketPage(item);
+ const name=marketUrl?'<a class="tile-market-link" href="'+safe(marketUrl)+'" target="_blank" rel="noopener noreferrer" title="查看 '+safe(item.name)+' 的同花顺行情">'+safe(item.name)+icon('external')+'</a>':safe(item.name);
+ return '<article class="company-tile" data-company data-match="'+safe((item.name+' '+item.code+' '+item.sector).toLowerCase())+'" data-market="'+safe(item.market)+'">'+
+ '<div class="tile-card-head"><div class="tile-identity"><span class="tile-sector">'+safe(item.sector)+'</span><h3>'+name+'</h3><p>'+safe(item.code)+' <span>·</span> '+safe(item.horizon)+'</p></div>'+
+ '<div class="tile-quote"><span>有效收盘价</span><strong class="tile-quote-price'+(q?'':' is-missing')+'">'+safe(t.price)+'</strong><div class="tile-quote-bottom"><small>'+safe(t.date)+'</small><span class="tile-day-change '+changeClass+'">'+safe(changeLabel)+'</span></div></div></div>'+
  '<div class="tile-visual">'+graph(item,true,q,true)+'</div>'+
- '<div class="tile-foot"><span>'+safe(item.updated)+' · 研究更新</span><span>研究详情 '+icon('arrow')+'</span></div></a>';
+ '<div class="tile-foot"><span>'+safe(item.updated)+' · 研究更新</span><a class="tile-detail-link" href="'+routeCompany(item)+'">研究详情 '+icon('arrow')+'</a></div></article>';
 }
 function sectionTitle(label,desc=''){return '<div class="section-title"><div><span class="eyebrow">ALPHA ATLAS / RESEARCH</span><h2>'+safe(label)+'</h2></div>'+(desc?'<p>'+safe(desc)+'</p>':'')+'</div>'}
 function overview(db){
@@ -357,6 +377,6 @@ async function start(){
   render();
  }catch(err){$('content').innerHTML='<div class="load-fail"><h1>研究数据加载失败</h1><p>'+safe(err.message)+'</p><p>请通过 GitHub Pages 或本地 HTTP 服务打开，并检查 Markdown 文档格式。</p><a href="'+ORIGINAL+'" target="_blank" rel="noopener noreferrer">打开原始文件 ↗</a></div>'}
 }
-window.AtlasResearch={parseMarkdown,parseQuotes,dayAge,benchmarkInfo,ratioClass,companyTile,renderMarkdown,graph,detail,catalog,overview,opportunities,discountInfo,modelOld};
+window.AtlasResearch={parseMarkdown,parseQuotes,dayAge,benchmarkInfo,ratioClass,companyTile,marketPage,quoteDailyChange,renderMarkdown,graph,detail,catalog,overview,opportunities,discountInfo,modelOld};
 start();
 })();
