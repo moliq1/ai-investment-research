@@ -598,6 +598,40 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 :root[data-theme="dark"] .scan-company b{color:var(--ink)}
 :root[data-theme="dark"] .scan-hero,
 :root[data-theme="dark"] .about-banner{background:linear-gradient(120deg,#182f4d,#0c1b33)}
+
+/* Dark company detail: its light-only gradient previously washed out the
+   inherited light text (company name, closing price and update labels). */
+:root[data-theme="dark"] .company-banner{
+  background:linear-gradient(112deg,#1d304c 0%,#18283e 58%,#23364f 100%);
+  border-color:#3a5272;
+  box-shadow:0 14px 36px rgba(0,0,0,.16);
+  color:#edf4ff;
+}
+:root[data-theme="dark"] .company-banner h1,
+:root[data-theme="dark"] .banner-reference strong{color:#f3f7ff}
+:root[data-theme="dark"] .company-industry{
+  background:#304c73;
+  color:#bfd7ff;
+}
+:root[data-theme="dark"] .ticker,
+:root[data-theme="dark"] .company-banner>div>p,
+:root[data-theme="dark"] .company-tags,
+:root[data-theme="dark"] .banner-reference>span{color:#b5c9e3}
+:root[data-theme="dark"] .banner-reference small{color:#a9bedb}
+:root[data-theme="dark"] .company-banner .company-tags svg{color:#a2bced}
+:root[data-theme="dark"] .breadcrumbs a{color:#a1bff1}
+:root[data-theme="dark"] .breadcrumbs b{color:#dfebfc}
+:root[data-theme="dark"] .position-summary strong{color:#e4f0ff}
+:root[data-theme="dark"] .case-card>div:last-child span{color:#a9bed7}
+:root[data-theme="dark"] .case-card.bear>div:last-child b{color:#f19ca7}
+:root[data-theme="dark"] .case-card.base>div:last-child b{color:#a3b9ff}
+:root[data-theme="dark"] .case-card.bull>div:last-child b{color:#7bdfc0}
+@media(max-width:650px){
+ :root[data-theme="dark"] .banner-reference{
+   border-top-color:#405977;
+ }
+}
+
 :root[data-theme="dark"] .scan-hero p strong{color:#f3f8ff}
 :root[data-theme="dark"] .no-results{background:#192943;border-color:#4a607f;color:#c1d3ea}
 @media(prefers-reduced-motion:reduce){
