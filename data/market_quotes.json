@@ -9,7 +9,9 @@
       "currency": "¥",
       "close": 26.66,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/000426.SZ/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/000426.SZ/history/",
+      "previousClose": 27.89,
+      "changePercent": -4.41
     },
     {
       "code": "601899.SH",
@@ -19,7 +21,9 @@
       "currency": "¥",
       "close": 27.47,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/601899.SS/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/601899.SS/history/",
+      "previousClose": 28.79,
+      "changePercent": -4.58
     },
     {
       "code": "02899.HK",
@@ -29,7 +33,9 @@
       "currency": "HK$",
       "close": 27.74,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/2899.HK/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/2899.HK/history/",
+      "previousClose": 29.46,
+      "changePercent": -5.84
     },
     {
       "code": "603799.SH",
@@ -39,7 +45,9 @@
       "currency": "¥",
       "close": 31.49,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/603799.SS/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/603799.SS/history/",
+      "previousClose": 32.14,
+      "changePercent": -2.02
     },
     {
       "code": "02099.HK",
@@ -49,7 +57,9 @@
       "currency": "HK$",
       "close": 177.6,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/2099.HK/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/2099.HK/history/",
+      "previousClose": 183.2,
+      "changePercent": -3.06
     },
     {
       "code": "000807.SZ",
@@ -59,7 +69,9 @@
       "currency": "¥",
       "close": 25.3,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/",
+      "previousClose": 25.16,
+      "changePercent": 0.56
     },
     {
       "code": "01378.HK",
@@ -69,7 +81,9 @@
       "currency": "HK$",
       "close": 19.5,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/",
+      "previousClose": 19.02,
+      "changePercent": 2.52
     },
     {
       "code": "300408.SZ",
@@ -79,7 +93,9 @@
       "currency": "¥",
       "close": 82.59,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/",
+      "previousClose": 93.99,
+      "changePercent": -12.13
     },
     {
       "code": "06951.HK",
@@ -89,7 +105,9 @@
       "currency": "HK$",
       "close": 76.3,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/6951.HK/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/6951.HK/history/",
+      "previousClose": 81.65,
+      "changePercent": -6.55
     },
     {
       "code": "600183.SH",
@@ -99,7 +117,9 @@
       "currency": "¥",
       "close": 100.26,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/",
+      "previousClose": 110.81,
+      "changePercent": -9.52
     },
     {
       "code": "688183.SH",
@@ -109,7 +129,9 @@
       "currency": "¥",
       "close": 81.09,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/688183.SS/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/688183.SS/history/",
+      "previousClose": 87.28,
+      "changePercent": -7.09
     },
     {
       "code": "688498.SH",
@@ -119,7 +141,9 @@
       "currency": "¥",
       "close": 875.0,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/",
+      "previousClose": 925.15,
+      "changePercent": -5.42
     },
     {
       "code": "688012.SH",
@@ -129,7 +153,9 @@
       "currency": "¥",
       "close": 251.55,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/",
+      "previousClose": 266.7,
+      "changePercent": -5.68
     },
     {
       "code": "00522.HK",
@@ -159,7 +185,9 @@
       "currency": "¥",
       "close": 89.53,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/",
+      "previousClose": 93.28,
+      "changePercent": -4.02
     },
     {
       "code": "600875.SH",
@@ -169,7 +197,9 @@
       "currency": "¥",
       "close": 21.96,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/600875.SS/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/600875.SS/history/",
+      "previousClose": 22.39,
+      "changePercent": -1.92
     },
     {
       "code": "01072.HK",
@@ -179,7 +209,9 @@
       "currency": "HK$",
       "close": 15.86,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/1072.HK/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/1072.HK/history/",
+      "previousClose": 15.96,
+      "changePercent": -0.63
     },
     {
       "code": "01133.HK",
@@ -189,7 +221,9 @@
       "currency": "HK$",
       "close": 11.37,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/1133.HK/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/1133.HK/history/",
+      "previousClose": 11.45,
+      "changePercent": -0.7
     },
     {
       "code": "300750.SZ",
@@ -199,7 +233,9 @@
       "currency": "¥",
       "close": 238.0,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/",
+      "previousClose": 237.6,
+      "changePercent": 0.17
     },
     {
       "code": "03750.HK",
@@ -209,7 +245,9 @@
       "currency": "HK$",
       "close": 356.8,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/3750.HK/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/3750.HK/history/",
+      "previousClose": 356.8,
+      "changePercent": 0.0
     },
     {
       "code": "300274.SZ",
@@ -219,7 +257,9 @@
       "currency": "¥",
       "close": 70.23,
       "closeDate": "2026-10-26",
-      "sourceUrl": "https://finance.yahoo.com/quote/300274.SZ/history/"
+      "sourceUrl": "https://finance.yahoo.com/quote/300274.SZ/history/",
+      "previousClose": 72.2,
+      "changePercent": -2.73
     }
   ]
 }
