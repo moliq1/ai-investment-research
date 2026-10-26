@@ -20,6 +20,13 @@ class MarketQuoteTests(unittest.TestCase):
         cls.universe = mod.master_stocks(MD.read_text("utf-8"))
         cls.current = json.loads(MARKET.read_text("utf-8"))
 
+    def canonical_snapshot(self):
+        snapshot = json.loads(json.dumps(self.current))
+        mapping = {stock["code"]: stock["symbol"] for stock in self.universe}
+        for quote in snapshot["quotes"]:
+            quote["symbol"] = mapping[quote["code"]]
+        return snapshot
+
     def test_markdown_controls_coverage(self):
         self.assertGreaterEqual(len(self.universe), 12)
         self.assertEqual(len(self.current["quotes"]), len(self.universe))
@@ -30,12 +37,69 @@ class MarketQuoteTests(unittest.TestCase):
         mapping = {x["code"]: x["symbol"] for x in self.universe}
         self.assertEqual(mapping["02099.HK"], "2099.HK")
         self.assertEqual(mapping["01378.HK"], "1378.HK")
+        self.assertEqual(mapping["00522.HK"], "0522.HK")
+        self.assertEqual(mapping["00992.HK"], "0992.HK")
         self.assertEqual(mapping["688012.SH"], "688012.SS")
         self.assertEqual(mapping["000807.SZ"], "000807.SZ")
         self.assertEqual(mapping["000426.SZ"], "000426.SZ")
 
+    def test_legacy_short_hk_symbols_preserve_closes_when_lookup_fails(self):
+        earlier = self.canonical_snapshot()
+        legacy = {"00522.HK": ("522.HK", 121.7),
+                  "00992.HK": ("992.HK", 22.64)}
+        for quote in earlier["quotes"]:
+            if quote["code"] in legacy:
+                quote["symbol"], quote["close"] = legacy[quote["code"]]
+                quote["closeDate"] = "2026-10-23"
+        result, refreshed = mod.refresh(
+            self.universe, earlier, lambda _: None,
+            datetime(2026, 10, 26, 20, 0, tzinfo=TZ),
+        )
+        self.assertEqual(refreshed, [])
+        quotes = {q["code"]: q for q in result["quotes"]}
+        for code, (old_symbol, old_close) in legacy.items():
+            self.assertNotEqual(quotes[code]["symbol"], old_symbol)
+            self.assertEqual(quotes[code]["symbol"], "0" + old_symbol)
+            self.assertEqual(quotes[code]["close"], old_close)
+            self.assertEqual(quotes[code]["closeDate"], "2026-10-23")
+
+    def test_legacy_short_hk_symbols_fetch_new_close(self):
+        earlier = self.canonical_snapshot()
+        for quote in earlier["quotes"]:
+            if quote["code"] in ("00522.HK", "00992.HK"):
+                quote["symbol"] = str(int(quote["code"].split(".")[0])) + ".HK"
+                quote["closeDate"] = "2026-10-23"
+        fetches = {"0522.HK": ("2026-10-26", 100.0, 110.0),
+                   "0992.HK": ("2026-10-26", 90.0, 100.0)}
+        result, refreshed = mod.refresh(
+            self.universe, earlier, fetches.get,
+            datetime(2026, 10, 26, 20, 0, tzinfo=TZ),
+        )
+        self.assertEqual(set(refreshed), {"00522.HK", "00992.HK"})
+        by_code = {q["code"]: q for q in result["quotes"]}
+        self.assertEqual(by_code["00522.HK"]["close"], 100.0)
+        self.assertEqual(by_code["00522.HK"]["changePercent"], -9.09)
+        self.assertEqual(by_code["00992.HK"]["close"], 90.0)
+        self.assertEqual(by_code["00992.HK"]["changePercent"], -10.0)
+        self.assertEqual(by_code["00992.HK"]["sourceUrl"],
+                         "https://finance.yahoo.com/quote/0992.HK/history/")
+
+    def test_unrelated_hk_symbol_cannot_reuse_close(self):
+        earlier = self.canonical_snapshot()
+        row = next(q for q in earlier["quotes"] if q["code"] == "00522.HK")
+        row.update(symbol="9999.HK", close=123.0, closeDate="2026-10-23")
+        result, _ = mod.refresh(
+            self.universe, earlier, lambda _: None,
+            datetime(2026, 10, 26, 20, 0, tzinfo=TZ),
+        )
+        actual = next(q for q in result["quotes"] if q["code"] == "00522.HK")
+        self.assertEqual(actual["symbol"], "0522.HK")
+        self.assertIsNone(actual["close"])
+        self.assertIsNone(actual["closeDate"])
+
+
     def test_invalid_future_quotes_cannot_overwrite(self):
-        earlier = json.loads(json.dumps(self.current))
+        earlier = self.canonical_snapshot()
         fixed = datetime(2026, 10, 22, 20, 0, tzinfo=TZ)
         newer, updated = mod.refresh(self.universe, earlier, lambda _: ("2030-01-01", 9999), fixed)
         self.assertEqual(updated, [])
@@ -61,7 +125,7 @@ class MarketQuoteTests(unittest.TestCase):
 
     def test_intraday_and_old_candles_rejected(self):
         fixed = datetime(2026, 10, 22, 14, 0, tzinfo=TZ)
-        older = json.loads(json.dumps(self.current))
+        older = self.canonical_snapshot()
         result, updated = mod.refresh(self.universe, older, lambda _: ("2026-10-22", 190), fixed)
         self.assertEqual(updated, [])
         self.assertEqual(result["quotes"], older["quotes"])

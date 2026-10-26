@@ -66,7 +66,7 @@ scripts/build_site.py         只发布新版静态资源与 sources
 
 ## v3.1 · 最新收盘价与低估发现
 
-1. **行情清单自动同步**：`scripts/update_market_quotes.py` 直接读取 Markdown 总表，生成覆盖全部证券的 `data/market_quotes.json`；A股沪市映射 Yahoo `.SS`，深市 `.SZ`，港股删除前导零映射 `.HK`。
+1. **行情清单自动同步**：`scripts/update_market_quotes.py` 直接读取 Markdown 总表，生成覆盖全部证券的 `data/market_quotes.json`；A股沪市映射 Yahoo `.SS`，深市 `.SZ`，港股映射为 Yahoo 至少四位代码（如 `00522.HK → 0522.HK`、`00992.HK → 0992.HK`、`02899.HK → 2899.HK`）。
 2. **每日收盘后更新**：`.github/workflows/quotes.yml` 计划在北京时间工作日 **18:30** 和 **21:30** 尝试更新行情，使用非官方 Yahoo Finance / yfinance 数据源。两次执行是首次及重试，并不保证数据供应商当日提供所有证券。
 3. **行情和模型分层**：实时展示的是“最近有效交易日收盘价”，**不是实时盘口价**。最新价有独立日期与来源；原 Markdown 历史参考价永久保留。刷新行情后网站会自动重新部署。
 4. **低估发现 `#/opportunities`**：默认展示最新有效收盘价相对**基准估值区间中点**的涨跌幅：`(当前价 / ((基准下沿 + 基准上沿) / 2) - 1) × 100%`。负值**绿色**表示低于基准价，正值**红色**表示高于基准价，按比例从低到高排序；不再把基准下沿折价率当作显示指标。

@@ -34,8 +34,9 @@ def master_stocks(markdown: str):
             raise ValueError("Malformed valuation master table")
         name, code, _, market, _, ref, *_ = columns
         if code.endswith(".HK"):
-            # Yahoo HK tickers do not preserve 5-digit zero padding.
-            symbol = str(int(code.split(".")[0])) + ".HK"
+            # Yahoo uses at least four digits for HK tickers (00522 -> 0522).
+            # Strip only surplus leading zeros; preserve padding for 1-3 digit codes.
+            symbol = str(int(code.split(".")[0])).zfill(4) + ".HK"
             unit = "HK$"
         elif code.endswith(".SH"):
             symbol = code[:-3] + ".SS"
@@ -64,7 +65,12 @@ def refresh(master_entries, existing, lookup, now=None):
     for stock in master_entries:
         code = stock["code"]
         last = old_map.get(code, {})
-        valid_old = (last.get("symbol") == stock["symbol"] and
+        # Accept snapshots written by the former, over-aggressive HK zero
+        # stripping rule so a temporary Yahoo outage cannot erase valid closes.
+        compatible_symbols = {stock["symbol"]}
+        if code.endswith(".HK"):
+            compatible_symbols.add(str(int(code.split(".")[0])) + ".HK")
+        valid_old = (last.get("symbol") in compatible_symbols and
                      last.get("currency") == stock["currency"])
         close = last.get("close") if valid_old else None
         date = last.get("closeDate") if valid_old else None
