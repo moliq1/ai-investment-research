@@ -71,5 +71,75 @@ class MarketQuoteTests(unittest.TestCase):
         self.assertEqual(result["quotes"], older["quotes"])
 
 
+    def test_new_close_includes_previous_trading_close_and_day_change(self):
+        earlier = json.loads(json.dumps(self.current))
+        fixed = datetime(2026, 10, 22, 20, 0, tzinfo=TZ)
+        target = next(entry for entry in earlier["quotes"] if entry["code"] == "02099.HK")
+        target.update(close=180, closeDate="2026-10-21")
+        result, refreshed = mod.refresh(
+            self.universe, earlier,
+            lambda symbol: ("2026-10-22", 183.2, 181.0) if symbol == "2099.HK" else None,
+            fixed,
+        )
+        row = next(x for x in result["quotes"] if x["code"] == "02099.HK")
+        self.assertIn("02099.HK", refreshed)
+        self.assertEqual(row["close"], 183.2)
+        self.assertEqual(row["previousClose"], 181.0)
+        self.assertEqual(row["changePercent"], 1.22)
+
+    def test_same_day_backfills_change_without_overwriting_close(self):
+        earlier = json.loads(json.dumps(self.current))
+        fixed = datetime(2026, 10, 22, 20, 0, tzinfo=TZ)
+        target = next(x for x in earlier["quotes"] if x["code"] == "02099.HK")
+        target.update(closeDate="2026-10-22", close=183.2)
+        target.pop("previousClose", None)
+        target.pop("changePercent", None)
+        result, refreshed = mod.refresh(
+            self.universe, earlier,
+            lambda symbol: ("2026-10-22", 183.2, 181.0) if symbol == "2099.HK" else None,
+            fixed,
+        )
+        row = next(x for x in result["quotes"] if x["code"] == "02099.HK")
+        self.assertEqual(refreshed, [])
+        self.assertEqual(row["close"], 183.2)
+        self.assertEqual(row["closeDate"], "2026-10-22")
+        self.assertEqual(row["previousClose"], 181)
+        self.assertEqual(row["changePercent"], 1.22)
+
+    def test_stale_change_is_not_used_for_a_new_close_without_previous_data(self):
+        earlier = json.loads(json.dumps(self.current))
+        fixed = datetime(2026, 10, 22, 20, 0, tzinfo=TZ)
+        target = next(x for x in earlier["quotes"] if x["code"] == "02099.HK")
+        target.update(closeDate="2026-10-21", close=180,
+                      previousClose=170, changePercent=5.88)
+        result, refreshed = mod.refresh(
+            self.universe, earlier,
+            lambda symbol: ("2026-10-22", 183.2) if symbol == "2099.HK" else None,
+            fixed,
+        )
+        row = next(x for x in result["quotes"] if x["code"] == "02099.HK")
+        self.assertEqual(refreshed, ["02099.HK"])
+        self.assertIsNone(row["previousClose"])
+        self.assertIsNone(row["changePercent"])
+
+    def test_mismatched_same_day_bar_does_not_fabricate_day_change(self):
+        earlier = json.loads(json.dumps(self.current))
+        fixed = datetime(2026, 10, 22, 20, 0, tzinfo=TZ)
+        target = next(x for x in earlier["quotes"] if x["code"] == "02099.HK")
+        target.update(closeDate="2026-10-22", close=183.2)
+        target.pop("previousClose", None)
+        target.pop("changePercent", None)
+        result, refreshed = mod.refresh(
+            self.universe, earlier,
+            lambda symbol: ("2026-10-22", 184.0, 181.0) if symbol == "2099.HK" else None,
+            fixed,
+        )
+        row = next(x for x in result["quotes"] if x["code"] == "02099.HK")
+        self.assertEqual(refreshed, [])
+        self.assertEqual(row["close"], 183.2)
+        self.assertNotIn("previousClose", row)
+        self.assertNotIn("changePercent", row)
+
+
 if __name__ == "__main__":
     unittest.main()
