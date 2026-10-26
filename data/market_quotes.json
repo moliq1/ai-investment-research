@@ -161,21 +161,25 @@
       "code": "00522.HK",
       "name": "ASMPT",
       "market": "港股",
-      "symbol": "522.HK",
+      "symbol": "0522.HK",
       "currency": "HK$",
-      "close": 121.7,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://www.investing.com/equities/asm-pacific-historical-data"
+      "close": 117.8,
+      "closeDate": "2026-10-26",
+      "sourceUrl": "https://finance.yahoo.com/quote/0522.HK/history/",
+      "previousClose": 121.7,
+      "changePercent": -3.2
     },
     {
       "code": "00992.HK",
       "name": "联想集团",
       "market": "港股",
-      "symbol": "992.HK",
+      "symbol": "0992.HK",
       "currency": "HK$",
-      "close": 22.64,
-      "closeDate": "2026-10-23",
-      "sourceUrl": "https://www.irasia.com/stocks/0992/historicalquote_english.php"
+      "close": 21.74,
+      "closeDate": "2026-10-26",
+      "sourceUrl": "https://finance.yahoo.com/quote/0992.HK/history/",
+      "previousClose": 22.64,
+      "changePercent": -3.98
     },
     {
       "code": "002851.SZ",
