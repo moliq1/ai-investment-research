@@ -2,6 +2,18 @@
   "schemaVersion": 1,
   "quotes": [
     {
+      "code": "01378.HK",
+      "name": "中国宏桥",
+      "market": "港股",
+      "symbol": "1378.HK",
+      "currency": "HK$",
+      "close": 19.9,
+      "closeDate": "2026-10-28",
+      "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/",
+      "previousClose": 19.75,
+      "changePercent": 0.76
+    },
+    {
       "code": "000426.SZ",
       "name": "兴业银锡",
       "market": "A股",
@@ -72,18 +84,6 @@
       "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/",
       "previousClose": 26.1,
       "changePercent": -0.73
-    },
-    {
-      "code": "01378.HK",
-      "name": "中国宏桥",
-      "market": "港股",
-      "symbol": "1378.HK",
-      "currency": "HK$",
-      "close": 19.9,
-      "closeDate": "2026-10-28",
-      "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/",
-      "previousClose": 19.75,
-      "changePercent": 0.76
     },
     {
       "code": "00522.HK",
