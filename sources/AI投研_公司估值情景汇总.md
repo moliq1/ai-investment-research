@@ -138,7 +138,7 @@
 
 #### 原始聊天与研究来源
 
-- 《中国宏桥估值分析》（2026-10-16）；《三季报后估值更新》（2026-10-28）。未取得可核实原始ChatGPT分享URL。
+- **原研究对话**：《中国宏桥估值分析》（2026-10-16）；更新对话：《三季报后估值更新》（2026-10-28）。未取得可核实原始ChatGPT分享URL。
 - [宏桥控股2026Q3报告](https://static.cninfo.com.cn/finalpage/2026-10-23/1225615131.PDF)；[中国宏桥2026中报](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0928/2026092800640.pdf)；[01378.HK历史价格](https://hk.investing.com/equities/chinahongqiao-historical-data)。
 - [原版2026-10-16研究摘要](https://github.com/moliq1/ai-investment-research/blob/main/reports/china-hongqiao.md)保留未改，不作为最新估值。
 
