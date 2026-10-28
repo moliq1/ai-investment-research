@@ -7,11 +7,11 @@
       "market": "A股",
       "symbol": "000426.SZ",
       "currency": "¥",
-      "close": 25.9,
-      "closeDate": "2026-10-27",
+      "close": 25.65,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/000426.SZ/history/",
-      "previousClose": 26.66,
-      "changePercent": -2.85
+      "previousClose": 25.9,
+      "changePercent": -0.97
     },
     {
       "code": "601899.SH",
@@ -19,11 +19,11 @@
       "market": "A股",
       "symbol": "601899.SS",
       "currency": "¥",
-      "close": 27.85,
-      "closeDate": "2026-10-27",
+      "close": 27.95,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/601899.SS/history/",
-      "previousClose": 27.47,
-      "changePercent": 1.38
+      "previousClose": 27.85,
+      "changePercent": 0.36
     },
     {
       "code": "02899.HK",
@@ -31,11 +31,11 @@
       "market": "港股",
       "symbol": "2899.HK",
       "currency": "HK$",
-      "close": 27.68,
-      "closeDate": "2026-10-27",
+      "close": 28.64,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/2899.HK/history/",
-      "previousClose": 27.74,
-      "changePercent": -0.22
+      "previousClose": 27.68,
+      "changePercent": 3.47
     },
     {
       "code": "603799.SH",
@@ -43,11 +43,11 @@
       "market": "A股",
       "symbol": "603799.SS",
       "currency": "¥",
-      "close": 30.72,
-      "closeDate": "2026-10-27",
+      "close": 30.85,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/603799.SS/history/",
-      "previousClose": 31.49,
-      "changePercent": -2.45
+      "previousClose": 30.72,
+      "changePercent": 0.42
     },
     {
       "code": "02099.HK",
@@ -55,11 +55,11 @@
       "market": "港股",
       "symbol": "2099.HK",
       "currency": "HK$",
-      "close": 178.6,
-      "closeDate": "2026-10-27",
+      "close": 184.5,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/2099.HK/history/",
-      "previousClose": 177.6,
-      "changePercent": 0.56
+      "previousClose": 178.6,
+      "changePercent": 3.3
     },
     {
       "code": "000807.SZ",
@@ -67,11 +67,11 @@
       "market": "A股",
       "symbol": "000807.SZ",
       "currency": "¥",
-      "close": 26.1,
-      "closeDate": "2026-10-27",
+      "close": 25.91,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/",
-      "previousClose": 25.3,
-      "changePercent": 3.16
+      "previousClose": 26.1,
+      "changePercent": -0.73
     },
     {
       "code": "01378.HK",
@@ -79,11 +79,11 @@
       "market": "港股",
       "symbol": "1378.HK",
       "currency": "HK$",
-      "close": 19.75,
-      "closeDate": "2026-10-27",
+      "close": 19.9,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/1378.HK/history/",
-      "previousClose": 19.5,
-      "changePercent": 1.28
+      "previousClose": 19.75,
+      "changePercent": 0.76
     },
     {
       "code": "300408.SZ",
@@ -91,11 +91,11 @@
       "market": "A股",
       "symbol": "300408.SZ",
       "currency": "¥",
-      "close": 81.5,
-      "closeDate": "2026-10-27",
+      "close": 87.0,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/",
-      "previousClose": 82.59,
-      "changePercent": -1.32
+      "previousClose": 81.5,
+      "changePercent": 6.75
     },
     {
       "code": "06951.HK",
@@ -103,11 +103,11 @@
       "market": "港股",
       "symbol": "6951.HK",
       "currency": "HK$",
-      "close": 79.4,
-      "closeDate": "2026-10-27",
+      "close": 85.9,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/6951.HK/history/",
-      "previousClose": 76.3,
-      "changePercent": 4.06
+      "previousClose": 79.4,
+      "changePercent": 8.19
     },
     {
       "code": "600183.SH",
@@ -115,11 +115,11 @@
       "market": "A股",
       "symbol": "600183.SS",
       "currency": "¥",
-      "close": 97.61,
-      "closeDate": "2026-10-27",
+      "close": 102.49,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/",
-      "previousClose": 100.26,
-      "changePercent": -2.64
+      "previousClose": 97.61,
+      "changePercent": 5.0
     },
     {
       "code": "688183.SH",
@@ -127,11 +127,11 @@
       "market": "A股",
       "symbol": "688183.SS",
       "currency": "¥",
-      "close": 77.55,
-      "closeDate": "2026-10-27",
+      "close": 80.7,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/688183.SS/history/",
-      "previousClose": 81.09,
-      "changePercent": -4.37
+      "previousClose": 77.55,
+      "changePercent": 4.06
     },
     {
       "code": "688498.SH",
@@ -139,11 +139,11 @@
       "market": "A股",
       "symbol": "688498.SS",
       "currency": "¥",
-      "close": 833.58,
-      "closeDate": "2026-10-27",
+      "close": 840.0,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/",
-      "previousClose": 875.0,
-      "changePercent": -4.73
+      "previousClose": 833.58,
+      "changePercent": 0.77
     },
     {
       "code": "688012.SH",
@@ -151,11 +151,11 @@
       "market": "A股",
       "symbol": "688012.SS",
       "currency": "¥",
-      "close": 238.23,
-      "closeDate": "2026-10-27",
+      "close": 240.0,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/",
-      "previousClose": 251.55,
-      "changePercent": -5.3
+      "previousClose": 238.23,
+      "changePercent": 0.74
     },
     {
       "code": "00522.HK",
@@ -163,11 +163,11 @@
       "market": "港股",
       "symbol": "0522.HK",
       "currency": "HK$",
-      "close": 121.2,
-      "closeDate": "2026-10-27",
+      "close": 118.3,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/0522.HK/history/",
-      "previousClose": 117.8,
-      "changePercent": 2.89
+      "previousClose": 121.2,
+      "changePercent": -2.39
     },
     {
       "code": "00992.HK",
@@ -175,11 +175,11 @@
       "market": "港股",
       "symbol": "0992.HK",
       "currency": "HK$",
-      "close": 22.38,
-      "closeDate": "2026-10-27",
+      "close": 23.78,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/0992.HK/history/",
-      "previousClose": 21.74,
-      "changePercent": 2.94
+      "previousClose": 22.38,
+      "changePercent": 6.26
     },
     {
       "code": "002851.SZ",
@@ -187,11 +187,11 @@
       "market": "A股",
       "symbol": "002851.SZ",
       "currency": "¥",
-      "close": 85.73,
-      "closeDate": "2026-10-27",
+      "close": 89.16,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/",
-      "previousClose": 89.53,
-      "changePercent": -4.24
+      "previousClose": 85.73,
+      "changePercent": 4.0
     },
     {
       "code": "600875.SH",
@@ -199,11 +199,11 @@
       "market": "A股",
       "symbol": "600875.SS",
       "currency": "¥",
-      "close": 22.63,
-      "closeDate": "2026-10-27",
+      "close": 22.71,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/600875.SS/history/",
-      "previousClose": 21.96,
-      "changePercent": 3.05
+      "previousClose": 22.63,
+      "changePercent": 0.35
     },
     {
       "code": "01072.HK",
@@ -211,11 +211,11 @@
       "market": "港股",
       "symbol": "1072.HK",
       "currency": "HK$",
-      "close": 16.48,
-      "closeDate": "2026-10-27",
+      "close": 16.57,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/1072.HK/history/",
-      "previousClose": 15.86,
-      "changePercent": 3.91
+      "previousClose": 16.48,
+      "changePercent": 0.55
     },
     {
       "code": "01133.HK",
@@ -223,11 +223,11 @@
       "market": "港股",
       "symbol": "1133.HK",
       "currency": "HK$",
-      "close": 11.45,
-      "closeDate": "2026-10-27",
+      "close": 11.67,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/1133.HK/history/",
-      "previousClose": 11.37,
-      "changePercent": 0.7
+      "previousClose": 11.45,
+      "changePercent": 1.92
     },
     {
       "code": "300750.SZ",
@@ -235,11 +235,11 @@
       "market": "A股",
       "symbol": "300750.SZ",
       "currency": "¥",
-      "close": 233.0,
-      "closeDate": "2026-10-27",
+      "close": 229.14,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/",
-      "previousClose": 238.0,
-      "changePercent": -2.1
+      "previousClose": 233.0,
+      "changePercent": -1.66
     },
     {
       "code": "03750.HK",
@@ -247,11 +247,11 @@
       "market": "港股",
       "symbol": "3750.HK",
       "currency": "HK$",
-      "close": 348.6,
-      "closeDate": "2026-10-27",
+      "close": 346.4,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/3750.HK/history/",
-      "previousClose": 356.8,
-      "changePercent": -2.3
+      "previousClose": 348.6,
+      "changePercent": -0.63
     },
     {
       "code": "300274.SZ",
@@ -259,11 +259,11 @@
       "market": "A股",
       "symbol": "300274.SZ",
       "currency": "¥",
-      "close": 68.24,
-      "closeDate": "2026-10-27",
+      "close": 68.23,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/300274.SZ/history/",
-      "previousClose": 70.23,
-      "changePercent": -2.83
+      "previousClose": 68.24,
+      "changePercent": -0.01
     },
     {
       "code": "603259.SH",
@@ -271,11 +271,11 @@
       "market": "A股",
       "symbol": "603259.SS",
       "currency": "¥",
-      "close": 141.48,
-      "closeDate": "2026-10-27",
+      "close": 142.4,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/603259.SS/history/",
-      "previousClose": 146.0,
-      "changePercent": -3.1
+      "previousClose": 141.48,
+      "changePercent": 0.65
     },
     {
       "code": "02359.HK",
@@ -283,11 +283,11 @@
       "market": "港股",
       "symbol": "2359.HK",
       "currency": "HK$",
-      "close": 185.6,
-      "closeDate": "2026-10-27",
+      "close": 190.6,
+      "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/2359.HK/history/",
-      "previousClose": 188.3,
-      "changePercent": -1.43
+      "previousClose": 185.6,
+      "changePercent": 2.69
     }
   ]
 }
