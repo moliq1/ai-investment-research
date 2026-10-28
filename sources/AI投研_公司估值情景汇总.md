@@ -641,6 +641,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 
 #### 原始聊天与研究来源
 
+- 原研究对话：《ASM 太平洋公司质地初筛》及后续《2026Q2、Q3业绩复核与估值更新》（2026年8–10月）；**原始 ChatGPT 对话链接：未取得可核实的分享 URL，不能伪造。**
 1. [HKEX 2026Q3正式未经审计公告（10-28 06:33）](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/1028/2026102800023.pdf)：订单/利润/分部/股份支付/Q4指引。
 2. [ASMPT 2026Q3新闻稿](https://www.asmpt.com/en/investor-relations/news-events/asmpt-announces-2026-third-quarter-results-record-group-bookings-and-strong-earnings-across-semi-smt2/)。
 3. [2026中期报告](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0828/2026082800691.pdf)：H1现金流，不是Q3数据。
