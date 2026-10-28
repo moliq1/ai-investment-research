@@ -86,6 +86,18 @@
       "changePercent": 0.76
     },
     {
+      "code": "00522.HK",
+      "name": "ASMPT",
+      "market": "港股",
+      "symbol": "0522.HK",
+      "currency": "HK$",
+      "close": 118.3,
+      "closeDate": "2026-10-28",
+      "sourceUrl": "https://finance.yahoo.com/quote/0522.HK/history/",
+      "previousClose": 121.2,
+      "changePercent": -2.39
+    },
+    {
       "code": "300408.SZ",
       "name": "三环集团",
       "market": "A股",
@@ -156,18 +168,6 @@
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/",
       "previousClose": 238.23,
       "changePercent": 0.74
-    },
-    {
-      "code": "00522.HK",
-      "name": "ASMPT",
-      "market": "港股",
-      "symbol": "0522.HK",
-      "currency": "HK$",
-      "close": 118.3,
-      "closeDate": "2026-10-28",
-      "sourceUrl": "https://finance.yahoo.com/quote/0522.HK/history/",
-      "previousClose": 121.2,
-      "changePercent": -2.39
     },
     {
       "code": "00992.HK",
