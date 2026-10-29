@@ -278,30 +278,6 @@
       "changePercent": -1.49
     },
     {
-      "code": "603259.SH",
-      "name": "药明康德",
-      "market": "A股",
-      "symbol": "603259.SS",
-      "currency": "¥",
-      "close": 142.89,
-      "closeDate": "2026-10-29",
-      "sourceUrl": "https://finance.yahoo.com/quote/603259.SS/history/",
-      "previousClose": 142.4,
-      "changePercent": 0.34
-    },
-    {
-      "code": "02359.HK",
-      "name": "药明康德",
-      "market": "港股",
-      "symbol": "2359.HK",
-      "currency": "HK$",
-      "close": 191.1,
-      "closeDate": "2026-10-29",
-      "sourceUrl": "https://finance.yahoo.com/quote/2359.HK/history/",
-      "previousClose": 190.6,
-      "changePercent": 0.26
-    },
-    {
       "code": "600276.SH",
       "name": "恒瑞医药",
       "market": "A股",
@@ -324,6 +300,30 @@
       "sourceUrl": "https://cn.investing.com/equities/jiangsu-hengrui-pharmaceuticals-historical-data",
       "previousClose": 49.56,
       "changePercent": 2.2
+    },
+    {
+      "code": "603259.SH",
+      "name": "药明康德",
+      "market": "A股",
+      "symbol": "603259.SS",
+      "currency": "¥",
+      "close": 142.89,
+      "closeDate": "2026-10-29",
+      "sourceUrl": "https://finance.yahoo.com/quote/603259.SS/history/",
+      "previousClose": 142.4,
+      "changePercent": 0.34
+    },
+    {
+      "code": "02359.HK",
+      "name": "药明康德",
+      "market": "港股",
+      "symbol": "2359.HK",
+      "currency": "HK$",
+      "close": 191.1,
+      "closeDate": "2026-10-29",
+      "sourceUrl": "https://finance.yahoo.com/quote/2359.HK/history/",
+      "previousClose": 190.6,
+      "changePercent": 0.26
     }
   ]
 }
