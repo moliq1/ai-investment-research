@@ -1319,7 +1319,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 
 - [官方三季报转载全文](https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12675152&stockid=601138)，2026-10-29晚披露（公告日期10-30）；[2026H1](https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12487983&stockid=601138)；[2025FY](https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=11990023&stockid=601138)。
 - [2026-10-29收盘行情/价格来源](https://xueqiu.com/S/SH601138)；[正式Q3报告与假设说明](https://github.com/moliq1/ai-investment-research/blob/main/reports/foxconn-industrial-internet/2026Q3.md)。
-- 原始对话标题：「工业富联成长质量与估值预期差一体化分析」（2026-10-29）。**原始 ChatGPT 对话链接：未取得可核实的分享 URL**，不能将GitHub摘要链接当作分享URL。
+- 原研究对话：「工业富联成长质量与估值预期差一体化分析」（2026-10-29）。**原始 ChatGPT 对话链接：未取得可核实的分享 URL**，不能将GitHub摘要链接当作分享URL。
 
 ### 14. 联想集团（00992.HK）
 
