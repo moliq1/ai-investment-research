@@ -202,7 +202,10 @@ function graph(item,mini=false,quoteOverride=undefined,compact=false){
   const name='<span class="chart-name"><i class="tiny-dot '+k+'"></i>'+['悲观','基准','乐观'][i]+'</span>';
   const value='<strong>'+safe(rangeText(item,k))+'</strong>';
   const track='<div class="bar-track" aria-hidden="true"><i class="ref-rule" style="left:'+mark+'%"></i><i class="value-band '+k+'" style="left:'+left.toFixed(3)+'%;width:'+width.toFixed(3)+'%"></i></div>';
-  return compact?'<div class="chart-line scenario-row"><div class="scenario-row-head">'+name+value+'</div>'+track+'</div>'
+  // Keep the shared price axis fixed; move captions to their own valuation-band position.
+  const labelPosition=k==='bear'?left:k==='base'?left+width/2:left+width;
+  const alignClass=k==='bear'?'align-left':k==='base'?'align-center':'align-right';
+  return compact?'<div class="chart-line scenario-row"><div class="scenario-row-head '+alignClass+'" style="--label-position:'+labelPosition.toFixed(3)+'%"><div class="scenario-row-label">'+name+value+'</div></div>'+track+'</div>'
    :'<div class="chart-line">'+name+track+value+'</div>';
  }).join('');
  const header=compact?'<h3>三情景估值区间</h3>':'<div><span class="eyebrow">SCENARIO MAP</span><h3>价值区间分布</h3></div>';
