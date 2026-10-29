@@ -103,7 +103,7 @@
       "market": "A股",
       "symbol": "300408.SZ",
       "currency": "¥",
-      "close": 87.0,
+      "close": 87,
       "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/",
       "previousClose": 81.5,
@@ -131,7 +131,7 @@
       "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/600183.SS/history/",
       "previousClose": 97.61,
-      "changePercent": 5.0
+      "changePercent": 5
     },
     {
       "code": "688183.SH",
@@ -151,7 +151,7 @@
       "market": "A股",
       "symbol": "688498.SS",
       "currency": "¥",
-      "close": 840.0,
+      "close": 840,
       "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/",
       "previousClose": 833.58,
@@ -163,7 +163,7 @@
       "market": "A股",
       "symbol": "688012.SS",
       "currency": "¥",
-      "close": 240.0,
+      "close": 240,
       "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/",
       "previousClose": 238.23,
@@ -191,7 +191,7 @@
       "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/",
       "previousClose": 85.73,
-      "changePercent": 4.0
+      "changePercent": 4
     },
     {
       "code": "600875.SH",
@@ -199,11 +199,11 @@
       "market": "A股",
       "symbol": "600875.SS",
       "currency": "¥",
-      "close": 22.71,
-      "closeDate": "2026-10-28",
-      "sourceUrl": "https://finance.yahoo.com/quote/600875.SS/history/",
-      "previousClose": 22.63,
-      "changePercent": 0.35
+      "close": 22.41,
+      "closeDate": "2026-10-29",
+      "sourceUrl": "https://cn.investing.com/equities/dongfang-elec-ss-historical-data",
+      "previousClose": 22.71,
+      "changePercent": -1.32
     },
     {
       "code": "01072.HK",
@@ -211,11 +211,11 @@
       "market": "港股",
       "symbol": "1072.HK",
       "currency": "HK$",
-      "close": 16.57,
-      "closeDate": "2026-10-28",
-      "sourceUrl": "https://finance.yahoo.com/quote/1072.HK/history/",
-      "previousClose": 16.48,
-      "changePercent": 0.55
+      "close": 16.37,
+      "closeDate": "2026-10-29",
+      "sourceUrl": "https://kr.investing.com/equities/dongfang-elec-historical-data",
+      "previousClose": 16.57,
+      "changePercent": -1.21
     },
     {
       "code": "01133.HK",
@@ -238,7 +238,7 @@
       "close": 229.14,
       "closeDate": "2026-10-28",
       "sourceUrl": "https://finance.yahoo.com/quote/300750.SZ/history/",
-      "previousClose": 233.0,
+      "previousClose": 233,
       "changePercent": -1.66
     },
     {
