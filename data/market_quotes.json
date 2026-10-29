@@ -324,6 +324,18 @@
       "sourceUrl": "https://finance.yahoo.com/quote/2359.HK/history/",
       "previousClose": 190.6,
       "changePercent": 0.26
+    },
+    {
+      "code": "01651.HK",
+      "name": "津上机床中国",
+      "market": "港股",
+      "symbol": "1651.HK",
+      "currency": "HK$",
+      "close": 37.76,
+      "closeDate": "2026-10-29",
+      "sourceUrl": "https://ph.investing.com/equities/precision-tsugami-historical-data",
+      "previousClose": 40.46,
+      "changePercent": -6.67
     }
   ]
 }
