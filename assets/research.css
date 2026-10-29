@@ -360,8 +360,8 @@ svg{vertical-align:middle;flex-shrink:0}a,button{transition:background-color .18
 .company-tile .range-chart.mini.compact .chart-title{gap:12px;margin-bottom:19px;align-items:baseline}
 .company-tile .range-chart.mini.compact .chart-title h3{font-size:13px;letter-spacing:0;margin:0;color:#304666;font-weight:750}
 .company-tile .range-chart.mini.compact .chart-title>span{font-size:10px;white-space:nowrap}
-.company-tile .range-chart.mini.compact .scenario-row{display:flex;flex-direction:column;gap:9px;margin:0 0 20px;min-width:0;grid-template-columns:none}
-.company-tile .range-chart.mini.compact .scenario-row-head{position:relative;height:24px;min-width:0}
+.company-tile .range-chart.mini.compact .scenario-row{display:flex;flex-direction:column;align-items:stretch;gap:9px;margin:0 0 20px;min-width:0;grid-template-columns:none}
+.company-tile .range-chart.mini.compact .scenario-row-head{position:relative;width:100%;align-self:stretch;flex:0 0 auto;height:24px;min-width:0}
 .company-tile .range-chart.mini.compact .scenario-row-label{position:absolute;top:0;display:inline-flex;align-items:center;gap:9px;max-width:100%;white-space:nowrap}
 .company-tile .range-chart.mini.compact .scenario-row-head.align-left .scenario-row-label{left:clamp(0%,var(--label-position),25%)}
 .company-tile .range-chart.mini.compact .scenario-row-head.align-center .scenario-row-label{left:clamp(35%,var(--label-position),65%);transform:translateX(-50%)}
