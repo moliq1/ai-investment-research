@@ -67,7 +67,7 @@
       "market": "港股",
       "symbol": "2099.HK",
       "currency": "HK$",
-      "close": 178.0,
+      "close": 178,
       "closeDate": "2026-10-29",
       "sourceUrl": "https://finance.yahoo.com/quote/2099.HK/history/",
       "previousClose": 184.5,
@@ -118,7 +118,7 @@
       "close": 84.54,
       "closeDate": "2026-10-29",
       "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/",
-      "previousClose": 87.0,
+      "previousClose": 87,
       "changePercent": -2.83
     },
     {
@@ -154,7 +154,7 @@
       "close": 742.33,
       "closeDate": "2026-10-29",
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/",
-      "previousClose": 840.0,
+      "previousClose": 840,
       "changePercent": -11.63
     },
     {
@@ -163,11 +163,23 @@
       "market": "A股",
       "symbol": "688012.SS",
       "currency": "¥",
-      "close": 227.0,
+      "close": 227,
       "closeDate": "2026-10-29",
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/",
-      "previousClose": 240.0,
+      "previousClose": 240,
       "changePercent": -5.42
+    },
+    {
+      "code": "601138.SH",
+      "name": "工业富联",
+      "market": "A股",
+      "symbol": "601138.SS",
+      "currency": "¥",
+      "close": 45.22,
+      "closeDate": "2026-10-29",
+      "sourceUrl": "https://xueqiu.com/S/SH601138",
+      "previousClose": 48.64,
+      "changePercent": -7.03
     },
     {
       "code": "00992.HK",
