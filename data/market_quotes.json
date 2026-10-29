@@ -278,6 +278,30 @@
       "changePercent": -1.49
     },
     {
+      "code": "600276.SH",
+      "name": "恒瑞医药",
+      "market": "A股",
+      "symbol": "600276.SS",
+      "currency": "¥",
+      "close": 48.62,
+      "closeDate": "2026-10-29",
+      "sourceUrl": "https://cn.investing.com/equities/hengrui-medi-historical-data",
+      "previousClose": 48.36,
+      "changePercent": 0.54
+    },
+    {
+      "code": "01276.HK",
+      "name": "恒瑞医药",
+      "market": "港股",
+      "symbol": "1276.HK",
+      "currency": "HK$",
+      "close": 50.65,
+      "closeDate": "2026-10-29",
+      "sourceUrl": "https://cn.investing.com/equities/jiangsu-hengrui-pharmaceuticals-historical-data",
+      "previousClose": 49.56,
+      "changePercent": 2.2
+    },
+    {
       "code": "603259.SH",
       "name": "药明康德",
       "market": "A股",
