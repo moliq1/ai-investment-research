@@ -182,18 +182,6 @@
       "changePercent": -6.9
     },
     {
-      "code": "002851.SZ",
-      "name": "麦格米特",
-      "market": "A股",
-      "symbol": "002851.SZ",
-      "currency": "¥",
-      "close": 82.59,
-      "closeDate": "2026-10-29",
-      "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/",
-      "previousClose": 89.16,
-      "changePercent": -7.37
-    },
-    {
       "code": "600875.SH",
       "name": "东方电气",
       "market": "A股",
@@ -216,6 +204,18 @@
       "sourceUrl": "https://finance.yahoo.com/quote/1072.HK/history/",
       "previousClose": 16.57,
       "changePercent": -1.21
+    },
+    {
+      "code": "002851.SZ",
+      "name": "麦格米特",
+      "market": "A股",
+      "symbol": "002851.SZ",
+      "currency": "¥",
+      "close": 82.59,
+      "closeDate": "2026-10-29",
+      "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/",
+      "previousClose": 89.16,
+      "changePercent": -7.37
     },
     {
       "code": "01133.HK",
