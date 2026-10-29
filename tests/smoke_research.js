@@ -205,7 +205,21 @@ assert.ok(negativeCard.includes('日涨跌 —'));
 assert.ok(negativeCard.includes('2026-10-22'));
 assert.ok(positiveCard.includes('class="tile-quote-price">HK$250</strong>'));
 assert.equal((negativeCard.match(/class="chart-line scenario-row"/g)||[]).length,3);
-assert.equal((negativeCard.match(/class="scenario-row-head"/g)||[]).length,3);
+assert.equal((negativeCard.match(/class="scenario-row-head align-/g)||[]).length,3);
+assert.equal((negativeCard.match(/class="scenario-row-label"/g)||[]).length,3);
+const alignedLabels=[...negativeCard.matchAll(/class="scenario-row-head (align-left|align-center|align-right)" style="--label-position:([\d.]+)%"/g)];
+assert.deepEqual(Array.from(alignedLabels,m=>m[1]),['align-left','align-center','align-right']);
+const axisMax=Math.max(180,modelCompany.bear.high,modelCompany.base.high,modelCompany.bull.high)*1.13;
+const expectedLabelPositions=[
+  modelCompany.bear.low/axisMax*100,
+  (modelCompany.base.low+modelCompany.base.high)/2/axisMax*100,
+  modelCompany.bull.high/axisMax*100
+];
+for(let i=0;i<3;i++)assert.ok(Math.abs(Number(alignedLabels[i][2])-expectedLabelPositions[i])<0.001,'Caption anchors must follow the valuation bands');
+assert.ok(stylesheet.includes('.scenario-row-head.align-left .scenario-row-label{left:clamp(0%'));
+assert.ok(stylesheet.includes('.scenario-row-head.align-center .scenario-row-label{left:clamp(35%'));
+assert.ok(stylesheet.includes('.scenario-row-head.align-right .scenario-row-label{right:clamp(0%'));
+assert.ok(stylesheet.includes(':root[data-theme="dark"] .company-tile .range-chart.mini.compact .scenario-row-label>strong'));
 for(const label of ['悲观','基准','乐观'])assert.ok(negativeCard.includes(label));
 assert.ok(negativeCard.includes('竖线：最新有效收盘 HK$180（2026-10-22）'));
 assert.ok(positiveCard.includes('竖线：最新有效收盘 HK$250（2026-10-22）'));
@@ -223,6 +237,7 @@ assert.ok(negativeCard.includes('HK$'+modelCompany.base.low));
 const detailGraph=app.graph(modelCompany,false,{valid:true,close:180,closeDate:'2026-10-22'});
 assert.ok(detailGraph.includes('SCENARIO MAP'));
 assert.ok(!detailGraph.includes('scenario-row-head'),'The full-size detail chart is unchanged');
+assert.ok(!detailGraph.includes('scenario-row-label'),'Detail chart must retain its original layout');
 const shengyi=data.items.find(x=>x.code==='600183.SH');
 const shengyiCard=app.companyTile(shengyi,{valid:true,close:75,closeDate:'2026-10-26',previousClose:72});
 assert.ok(shengyiCard.includes('href="https://stockpage.10jqka.com.cn/600183/"'));
