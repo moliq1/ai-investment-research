@@ -166,7 +166,7 @@ const stylesheet=fs.readFileSync(path.join(root,'assets','research.css'),'utf8')
 assert.ok(stylesheet.includes('.range-chart.mini.compact .bar-track{display:block;width:100%'));
 assert.ok(stylesheet.includes('.range-chart.mini.compact .scenario-row{display:flex;flex-direction:column'))
 assert.ok(stylesheet.includes('.scenario-row{display:flex;flex-direction:column;align-items:stretch;'),'The chart row must not inherit align-items:center from the shared detail chart');
-assert.ok(stylesheet.includes('.scenario-row-head{position:relative;width:100%;align-self:stretch;'),'The caption head must use the same coordinate width as its full-width price track');
+assert.ok(stylesheet.includes('.scenario-row-head{display:flex;width:100%;align-self:stretch;'),'The caption head must match full-width price tracks');
 ;
 assert.ok(!stylesheet.includes('grid-template-columns:38px minmax(0,1fr) 128px;'));
 // Card titles always open Tonghuashun; HK stockpage symbols have >=4 digits.
@@ -210,18 +210,13 @@ assert.ok(positiveCard.includes('class="tile-quote-price">HK$250</strong>'));
 assert.equal((negativeCard.match(/class="chart-line scenario-row"/g)||[]).length,3);
 assert.equal((negativeCard.match(/class="scenario-row-head align-/g)||[]).length,3);
 assert.equal((negativeCard.match(/class="scenario-row-label"/g)||[]).length,3);
-const alignedLabels=[...negativeCard.matchAll(/class="scenario-row-head (align-left|align-center|align-right)" style="--label-position:([\d.]+)%"/g)];
+const alignedLabels=[...negativeCard.matchAll(/class="scenario-row-head (align-left|align-center|align-right)"/g)];
 assert.deepEqual(Array.from(alignedLabels,m=>m[1]),['align-left','align-center','align-right']);
-const axisMax=Math.max(180,modelCompany.bear.high,modelCompany.base.high,modelCompany.bull.high)*1.13;
-const expectedLabelPositions=[
-  modelCompany.bear.low/axisMax*100,
-  (modelCompany.base.low+modelCompany.base.high)/2/axisMax*100,
-  modelCompany.bull.high/axisMax*100
-];
-for(let i=0;i<3;i++)assert.ok(Math.abs(Number(alignedLabels[i][2])-expectedLabelPositions[i])<0.001,'Caption anchors must follow the valuation bands');
-assert.ok(stylesheet.includes('.scenario-row-head.align-left .scenario-row-label{left:clamp(0%'));
-assert.ok(stylesheet.includes('.scenario-row-head.align-center .scenario-row-label{left:clamp(35%'));
-assert.ok(stylesheet.includes('.scenario-row-head.align-right .scenario-row-label{right:clamp(0%'));
+assert.ok(!negativeCard.includes('--label-position:'),'Fixed alignment must not depend on valuation prices');
+for(const [position,justify] of [['left','flex-start'],['center','center'],['right','flex-end']]){
+ assert.ok(stylesheet.includes('.scenario-row-head.align-'+position+'{justify-content:'+justify+'}'),'Missing '+position+' alignment');
+}
+assert.ok(!stylesheet.includes('.scenario-row-label{position:absolute'),'Labels must stay in the flex layout');
 assert.ok(stylesheet.includes(':root[data-theme="dark"] .company-tile .range-chart.mini.compact .scenario-row-label>strong'));
 for(const label of ['悲观','基准','乐观'])assert.ok(negativeCard.includes(label));
 assert.ok(negativeCard.includes('竖线：最新有效收盘 HK$180（2026-10-22）'));
