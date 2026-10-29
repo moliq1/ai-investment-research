@@ -1441,6 +1441,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 
 #### 原始聊天与研究来源
 
+- **原研究对话**：《INV-东方电气估值分析》（2026-08-04起）；2026-10-29按正式三季报更新。**原始 ChatGPT 对话链接未取得可核实的分享 URL，不能伪造**。本节提供的是独立研究与GitHub档案，并非聊天分享链接。
 - [2026年第三季度报告PDF原文镜像](https://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2026/2026-10/2026-10-30/12674752.PDF)（2026-10-29盘后披露、2026-10-30公告日期）。
 - [2026Q3报告全文](https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12674752&stockid=600875)；[2026年半年度报告](https://static.cninfo.com.cn/finalpage/2026-08-26/1225505169.PDF)。
 - [A股2026-10-29收盘历史行情](https://cn.investing.com/equities/dongfang-elec-ss-historical-data)；[H股2026-10-29历史收盘行情](https://kr.investing.com/equities/dongfang-elec-historical-data)。
