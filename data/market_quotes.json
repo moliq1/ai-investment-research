@@ -2,6 +2,18 @@
   "schemaVersion": 1,
   "quotes": [
     {
+      "code": "000807.SZ",
+      "name": "云铝股份",
+      "market": "A股",
+      "symbol": "000807.SZ",
+      "currency": "¥",
+      "close": 25.98,
+      "closeDate": "2026-10-29",
+      "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/",
+      "previousClose": 25.91,
+      "changePercent": 0.27
+    },
+    {
       "code": "01378.HK",
       "name": "中国宏桥",
       "market": "港股",
@@ -72,18 +84,6 @@
       "sourceUrl": "https://finance.yahoo.com/quote/2099.HK/history/",
       "previousClose": 184.5,
       "changePercent": -3.52
-    },
-    {
-      "code": "000807.SZ",
-      "name": "云铝股份",
-      "market": "A股",
-      "symbol": "000807.SZ",
-      "currency": "¥",
-      "close": 25.98,
-      "closeDate": "2026-10-29",
-      "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/",
-      "previousClose": 25.91,
-      "changePercent": 0.27
     },
     {
       "code": "600183.SH",
