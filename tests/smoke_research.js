@@ -164,7 +164,10 @@ const sectorPage=app.catalog(data,data.sectors[0]);
 assert.ok(sectorPage.includes('三情景估值区间'));
 const stylesheet=fs.readFileSync(path.join(root,'assets','research.css'),'utf8');
 assert.ok(stylesheet.includes('.range-chart.mini.compact .bar-track{display:block;width:100%'));
-assert.ok(stylesheet.includes('.range-chart.mini.compact .scenario-row{display:flex;flex-direction:column'));
+assert.ok(stylesheet.includes('.range-chart.mini.compact .scenario-row{display:flex;flex-direction:column'))
+assert.ok(stylesheet.includes('.scenario-row{display:flex;flex-direction:column;align-items:stretch;'),'The chart row must not inherit align-items:center from the shared detail chart');
+assert.ok(stylesheet.includes('.scenario-row-head{position:relative;width:100%;align-self:stretch;'),'The caption head must use the same coordinate width as its full-width price track');
+;
 assert.ok(!stylesheet.includes('grid-template-columns:38px minmax(0,1fr) 128px;'));
 // Card titles always open Tonghuashun; HK stockpage symbols have >=4 digits.
 const aLink=app.marketPage({code:'600183.SH'});
