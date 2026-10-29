@@ -702,7 +702,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 
 #### 原始聊天与研究来源
 
-- 原始研究《INV-生益科技成长估值分析》及2026-10-25三季报前更新；**原始 ChatGPT 分享URL未取得，不能伪造**。
+- 原研究对话：《INV-生益科技成长估值分析》及2026-10-25三季报前更新；**原始 ChatGPT 分享URL未取得，不能伪造**。
 - [2026Q3正式季报公告全文（10-29晚发布，公告标注10-30）](https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12679933&stockid=600183)
 - [2026H1正式报告公告全文](https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12496809&stockid=600183)
 - [10-17业绩预告](https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12645926&stockid=600183)
