@@ -735,7 +735,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 
 #### 原始聊天与研究来源
 
-- 研究沿革：2026-08-26三环集团成长估值研究、2026-10-25 H1/Q2复查、2026-11-01 Q3重估；真实ChatGPT原始分享链接尚未提供，不能伪造。
+- **原研究对话**：《INV-三环集团估值分析》（2026-08-26起）；2026-10-25 H1/Q2复查及2026-11-01 Q3重估；原始ChatGPT分享链接尚未提供，不能伪造。
 - [本次2026Q3完整研究快照](https://github.com/moliq1/ai-investment-research/blob/main/reports/three-circle-group/2026Q3.md)
 - [2026年第三季度报告（巨潮，公告2026-10-29）](https://static.cninfo.com.cn/finalpage/2026-10-29/1225633826.PDF)
 - [2026H1中期报告（港交所）](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0924/2026092401479.pdf)
