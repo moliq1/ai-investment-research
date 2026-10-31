@@ -88,6 +88,18 @@
       "changePercent": -4.21
     },
     {
+      "code": "688183.SH",
+      "name": "生益电子",
+      "market": "A股",
+      "symbol": "688183.SS",
+      "currency": "¥",
+      "close": 65.33,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://finance.yahoo.com/quote/688183.SS/history/",
+      "previousClose": 71.5,
+      "changePercent": -8.63
+    },
+    {
       "code": "688012.SH",
       "name": "中微公司",
       "market": "A股",
@@ -158,18 +170,6 @@
       "sourceUrl": "https://finance.yahoo.com/quote/6951.HK/history/",
       "previousClose": 81.3,
       "changePercent": -4.92
-    },
-    {
-      "code": "688183.SH",
-      "name": "生益电子",
-      "market": "A股",
-      "symbol": "688183.SS",
-      "currency": "¥",
-      "close": 65.33,
-      "closeDate": "2026-10-30",
-      "sourceUrl": "https://finance.yahoo.com/quote/688183.SS/history/",
-      "previousClose": 71.5,
-      "changePercent": -8.63
     },
     {
       "code": "601138.SH",
