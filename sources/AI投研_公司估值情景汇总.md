@@ -719,7 +719,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 - [机构预测，2026-10-31统计8家](https://basic.10jqka.com.cn/144/688183/worth.html)
 - [旧版v3.5原始Git提交](https://github.com/moliq1/ai-investment-research/commit/cc6ba759ac2262c592507d3b6a047df5f39fea05)
 - [本季2026Q3独立档案](https://github.com/moliq1/ai-investment-research/blob/main/reports/shengyi-electronics/2026Q3.md)
-- 原始ChatGPT分享URL未验证，不编造；与生益科技母子公司关系分开判断。
+- **原研究对话**：2026-08-28《生益科技成长估值分析》后续《它的母公司生益电子呢？》及2026-10-25《按季报和SOP更新估值》。原始ChatGPT分享URL未验证，不编造；与生益科技母子公司关系分开判断。
 
 ### 8. 中微公司（688012.SH）
 
