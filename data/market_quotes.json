@@ -88,6 +88,18 @@
       "changePercent": -4.21
     },
     {
+      "code": "688498.SH",
+      "name": "源杰科技",
+      "market": "A股",
+      "symbol": "688498.SS",
+      "currency": "¥",
+      "close": 688.99,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/",
+      "previousClose": 742.33,
+      "changePercent": -7.19
+    },
+    {
       "code": "600183.SH",
       "name": "生益科技",
       "market": "A股",
@@ -146,18 +158,6 @@
       "sourceUrl": "https://finance.yahoo.com/quote/688183.SS/history/",
       "previousClose": 71.5,
       "changePercent": -8.63
-    },
-    {
-      "code": "688498.SH",
-      "name": "源杰科技",
-      "market": "A股",
-      "symbol": "688498.SS",
-      "currency": "¥",
-      "close": 688.99,
-      "closeDate": "2026-10-30",
-      "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/",
-      "previousClose": 742.33,
-      "changePercent": -7.19
     },
     {
       "code": "688012.SH",
