@@ -205,5 +205,87 @@ class MarketQuoteTests(unittest.TestCase):
         self.assertNotIn("changePercent", row)
 
 
+    def test_cash_dividend_reference_reproduces_yunlu_2026_10_30(self):
+        # Company filing: RMB 8.87 per 10 shares; 2026-10-30 ex-dividend.
+        # Official exchange reference: 25.98 - 0.887 -> 25.09 (fen precision).
+        action = {"cashDividend": 0.887, "stockSplit": 0}
+        self.assertEqual(mod.reference_close(25.98, action, "A股"), 25.09)
+        previous = self.canonical_snapshot()
+        target = next(q for q in previous["quotes"] if q["code"] == "000807.SZ")
+        target.update(close=25.98, closeDate="2026-10-29",
+                      previousClose=25.91, changePercent=0.27)
+        result, updated = mod.refresh(
+            self.universe, previous,
+            lambda symbol: ("2026-10-30", 25.36, 25.98, action)
+            if symbol == "000807.SZ" else None,
+            datetime(2026, 10, 30, 20, 0, tzinfo=TZ),
+        )
+        self.assertIn("000807.SZ", updated)
+        row = next(q for q in result["quotes"] if q["code"] == "000807.SZ")
+        self.assertEqual(row["close"], 25.36)
+        self.assertEqual(row["previousClose"], 25.09)
+        self.assertEqual(row["changePercent"], 1.08)
+        self.assertEqual(row["rawPreviousClose"], 25.98)
+        self.assertEqual(row["cashDividend"], 0.887)
+
+    def test_dividend_correction_replaces_prior_wrong_same_day_ratio(self):
+        previous = self.canonical_snapshot()
+        target = next(q for q in previous["quotes"] if q["code"] == "000807.SZ")
+        target.update(close=25.36, closeDate="2026-10-30",
+                      previousClose=25.98, changePercent=-2.39)
+        target.pop("cashDividend", None)
+        target.pop("rawPreviousClose", None)
+        result, updated = mod.refresh(
+            self.universe, previous,
+            lambda symbol: ("2026-10-30", 25.36, 25.98,
+                            {"cashDividend": 0.887, "stockSplit": 0})
+            if symbol == "000807.SZ" else None,
+            datetime(2026, 10, 30, 20, 0, tzinfo=TZ),
+        )
+        self.assertEqual(updated, [])
+        row = next(q for q in result["quotes"] if q["code"] == "000807.SZ")
+        self.assertEqual(row["previousClose"], 25.09)
+        self.assertEqual(row["changePercent"], 1.08)
+
+    def test_corporate_action_without_exchange_reference_hides_percentage(self):
+        self.assertIsNone(mod.reference_close(25.98, {"stockSplit": 2}, "A股"))
+        self.assertIsNone(mod.reference_close(100, {"cashDividend": 1}, "港股"))
+        self.assertIsNone(mod.reference_close(1, {"cashDividend": 2}, "A股"))
+        previous = self.canonical_snapshot()
+        target = next(q for q in previous["quotes"] if q["code"] == "000807.SZ")
+        target.update(close=25.98, closeDate="2026-10-29",
+                      previousClose=25.91, changePercent=0.27)
+        result, updated = mod.refresh(
+            self.universe, previous,
+            lambda symbol: ("2026-10-30", 25.36, 25.98,
+                            {"stockSplit": 2, "cashDividend": 0})
+            if symbol == "000807.SZ" else None,
+            datetime(2026, 10, 30, 20, 0, tzinfo=TZ),
+        )
+        self.assertIn("000807.SZ", updated)
+        row = next(q for q in result["quotes"] if q["code"] == "000807.SZ")
+        self.assertIsNone(row["previousClose"])
+        self.assertIsNone(row["changePercent"])
+
+    def test_verified_oct_30_snapshot_is_not_clobbered_by_missing_action(self):
+        # Keeping a corrected exchange reference is safer than accepting
+        # Yahoo's raw previous close when action metadata is missing.
+        previous = self.canonical_snapshot()
+        target = next(q for q in previous["quotes"] if q["code"] == "000807.SZ")
+        target.update(close=25.36, closeDate="2026-10-30",
+                      previousClose=25.09, changePercent=1.08,
+                      cashDividend=0.887, rawPreviousClose=25.98)
+        result, updated = mod.refresh(
+            self.universe, previous,
+            lambda symbol: ("2026-10-30", 25.36, 25.98)
+            if symbol == "000807.SZ" else None,
+            datetime(2026, 10, 30, 20, 0, tzinfo=TZ),
+        )
+        row = next(q for q in result["quotes"] if q["code"] == "000807.SZ")
+        self.assertEqual(updated, [])
+        self.assertEqual(row["previousClose"], 25.09)
+        self.assertEqual(row["changePercent"], 1.08)
+
+
 if __name__ == "__main__":
     unittest.main()
