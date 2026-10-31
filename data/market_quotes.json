@@ -88,6 +88,30 @@
       "changePercent": -4.21
     },
     {
+      "code": "300408.SZ",
+      "name": "三环集团",
+      "market": "A股",
+      "symbol": "300408.SZ",
+      "currency": "¥",
+      "close": 79.23,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/",
+      "previousClose": 84.54,
+      "changePercent": -6.28
+    },
+    {
+      "code": "06951.HK",
+      "name": "三环集团",
+      "market": "港股",
+      "symbol": "6951.HK",
+      "currency": "HK$",
+      "close": 77.3,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://finance.yahoo.com/quote/6951.HK/history/",
+      "previousClose": 81.3,
+      "changePercent": -4.92
+    },
+    {
       "code": "688183.SH",
       "name": "生益电子",
       "market": "A股",
@@ -146,30 +170,6 @@
       "sourceUrl": "https://finance.yahoo.com/quote/0522.HK/history/",
       "previousClose": 113.2,
       "changePercent": -7.24
-    },
-    {
-      "code": "300408.SZ",
-      "name": "三环集团",
-      "market": "A股",
-      "symbol": "300408.SZ",
-      "currency": "¥",
-      "close": 79.23,
-      "closeDate": "2026-10-30",
-      "sourceUrl": "https://finance.yahoo.com/quote/300408.SZ/history/",
-      "previousClose": 84.54,
-      "changePercent": -6.28
-    },
-    {
-      "code": "06951.HK",
-      "name": "三环集团",
-      "market": "港股",
-      "symbol": "6951.HK",
-      "currency": "HK$",
-      "close": 77.3,
-      "closeDate": "2026-10-30",
-      "sourceUrl": "https://finance.yahoo.com/quote/6951.HK/history/",
-      "previousClose": 81.3,
-      "changePercent": -4.92
     },
     {
       "code": "601138.SH",
