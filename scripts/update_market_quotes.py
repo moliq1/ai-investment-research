@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import math
 from datetime import datetime, timedelta
+from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -56,6 +57,37 @@ def master_stocks(markdown: str):
         raise ValueError("Duplicate ticker in master")
     return stocks
 
+def reference_close(raw_prior, action, market):
+    """Use an A-share cash-dividend ex-date reference, not yesterday's raw close.
+
+    Without corporate actions, the prior daily close is the comparison basis.
+    Splits/rights and non-A-share cash actions require an independently verified
+    exchange reference; omit the percentage rather than imply a wrong direction.
+    """
+    if raw_prior is None:
+        return None
+    prior = float(raw_prior)
+    if not math.isfinite(prior) or prior <= 0:
+        return None
+    action = action or {}
+    dividend = float(action.get("cashDividend") or 0)
+    split = float(action.get("stockSplit") or 0)
+    if not math.isfinite(dividend) or not math.isfinite(split) or dividend < 0:
+        return None
+    if split != 0:
+        return None
+    if dividend == 0:
+        return round(prior, 4)
+    if market != "A股" or dividend >= prior:
+        return None
+    # A-shares trade in ¥0.01 ticks. E.g. 25.98 - 0.887 = 25.093
+    # becomes the ¥25.09 ex-dividend reference published by the exchange.
+    adjusted = (Decimal(str(prior)) - Decimal(str(dividend))).quantize(
+        Decimal("0.01"), rounding=ROUND_HALF_UP
+    )
+    return float(adjusted)
+
+
 def refresh(master_entries, existing, lookup, now=None):
     now = now or datetime.now(CN_TZ)
     today = now.date()
@@ -78,15 +110,18 @@ def refresh(master_entries, existing, lookup, now=None):
         previous_close = last.get("previousClose") if valid_old else None
         change_percent = last.get("changePercent") if valid_old else None
         has_change_fields = valid_old and ("previousClose" in last or "changePercent" in last)
+        action_data = {key: last[key] for key in ("rawPreviousClose", "cashDividend")
+                       if valid_old and key in last}
         try:
             result = lookup(stock["symbol"])
             if result:
-                # Two values remain accepted for older clients; new fetchers return
-                # (latest closed trading day, unadjusted close, prior daily close).
-                if len(result) not in (2, 3):
-                    raise ValueError("Quote lookup must return two or three values")
+                # (date, close, raw_prior, corporate_actions). Preserve older
+                # two/three-field adapters for test clients.
+                if len(result) not in (2, 3, 4):
+                    raise ValueError("Quote lookup must return 2, 3 or 4 values")
                 day_value, price_value = result[:2]
-                prior_value = result[2] if len(result) == 3 else None
+                prior_value = result[2] if len(result) >= 3 else None
+                action = result[3] if len(result) == 4 else {}
                 day = datetime.strptime(str(day_value)[:10], "%Y-%m-%d").date()
                 price = float(price_value)
                 valid = (math.isfinite(price) and 0 < price < 1_000_000 and
@@ -97,31 +132,34 @@ def refresh(master_entries, existing, lookup, now=None):
                 is_new = valid and (date is None or day_text > date)
                 # Backfill the percentage on a verified SAME-DAY bar without
                 # overwriting the published price from a different source.
-                is_backfill = (valid and date == day_text and close is not None and
-                               abs(round(price, 4) - float(close)) < 0.00005 and
-                               (previous_close is None or change_percent is None))
-                if is_new or is_backfill:
-                    prior = None
-                    if prior_value is not None:
-                        candidate = float(prior_value)
-                        if math.isfinite(candidate) and 0 < candidate < 1_000_000:
-                            prior = round(candidate, 4)
+                same_close = (valid and date == day_text and close is not None and
+                              abs(round(price, 4) - float(close)) < 0.00005)
+                reference = reference_close(prior_value, action, stock["market"])
+                dividend = float((action or {}).get("cashDividend") or 0)
+                # If Yahoo now supplies a dividend event, repair a previously
+                # published same-day percentage without changing the close.
+                is_correction = (same_close and dividend > 0 and reference is not None
+                                 and previous_close != reference)
+                is_backfill = same_close and (previous_close is None or change_percent is None)
+                if is_new or is_backfill or is_correction:
                     if is_new:
                         close = round(price, 4)
                         date = day_text
                         source_url = "https://finance.yahoo.com/quote/" + stock["symbol"] + "/history/"
                         refreshed.append(code)
                         print("UPDATED", code, stock["symbol"], date, close)
-                    if prior is not None:
-                        previous_close = prior
-                        change_percent = round((float(close) / prior - 1) * 100, 2)
-                        has_change_fields = True
-                        if is_backfill:
-                            print("ENRICHED daily change", code, date, change_percent)
-                    elif is_new:
-                        # A new daily close must not inherit the previous day's change.
-                        previous_close, change_percent = None, None
-                        has_change_fields = True
+                    previous_close = reference
+                    change_percent = (round((float(close) / reference - 1) * 100, 2)
+                                      if reference is not None else None)
+                    has_change_fields = True
+                    action_data = {}
+                    if dividend > 0 and reference is not None:
+                        action_data = {"cashDividend": round(dividend, 6),
+                                       "rawPreviousClose": round(float(prior_value), 4)}
+                    if is_correction:
+                        print("CORRECTED ex-dividend change", code, date, change_percent)
+                    elif is_backfill:
+                        print("ENRICHED daily change", code, date, change_percent)
                 elif not valid:
                     print("SKIP invalid/intraday/stale quote", stock["symbol"], day)
         except Exception as exc:
@@ -130,6 +168,7 @@ def refresh(master_entries, existing, lookup, now=None):
         if has_change_fields:
             entry["previousClose"] = previous_close
             entry["changePercent"] = change_percent
+            entry.update(action_data)
         quotes.append(entry)
     return {"schemaVersion": 1, "quotes": quotes}, refreshed
 
@@ -149,7 +188,13 @@ def main():
         if frame.empty:
             return None
         previous_close = float(frame.iloc[-2]["Close"]) if len(frame) >= 2 else None
-        return frame.index[-1].date().isoformat(), float(frame.iloc[-1]["Close"]), previous_close
+        latest = frame.iloc[-1]
+        actions = {
+            "cashDividend": float(latest.get("Dividends", 0) or 0),
+            "stockSplit": float(latest.get("Stock Splits", 0) or 0),
+        }
+        return (frame.index[-1].date().isoformat(),
+                float(latest["Close"]), previous_close, actions)
 
     updated, refreshed = refresh(stocks, previous, fetch_quote)
     serialized = json.dumps(updated, indent=2, ensure_ascii=False) + "\n"
