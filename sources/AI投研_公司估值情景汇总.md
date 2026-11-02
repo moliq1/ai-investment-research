@@ -1701,7 +1701,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 
 #### 原始聊天与研究来源
 
-- 原始 ChatGPT 对话链接：未取得可核实的分享 URL（原对话标题：杰瑞股份成长质量与估值预期差一体化分析；日期：2026-11-02）；研究正文以本次Git档案为准，不把Git摘要冒充原始聊天。
+- 原研究对话：原始 ChatGPT 对话链接：未取得可核实的分享 URL（原对话标题：杰瑞股份成长质量与估值预期差一体化分析；日期：2026-11-02）；研究正文以本次Git档案为准，不把Git摘要冒充原始聊天。
 - [公司2026Q3三季度报告，2026-10-22](https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12652578&stockid=002353)
 - [公司2026H1半年度报告，2026-08-14](https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12493026&stockid=002353)
 - [公司2025年度报告，2026-04-17](https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12103164&stockid=002353)
