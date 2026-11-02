@@ -2582,7 +2582,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 
 #### 原始聊天与研究来源
 
-- 原始研究对话：《陕西煤业成长质量与估值预期差一体化分析》（2026-11-02）；**原始 ChatGPT 对话链接：未取得可核实的分享 URL**。该对话不属于仓库旧模型。
+- 原研究对话：《陕西煤业成长质量与估值预期差一体化分析》（2026-11-02）；**原始 ChatGPT 对话链接：未取得可核实的分享 URL**。该对话不属于仓库旧模型。
 - [2026Q3财报（2026-10-28）](https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12664284&stockid=601225)；[2026H1半年报（2026-08-28）](https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12556071&stockid=601225)；[2025FY审计年报（2026-04-25）](https://static.cninfo.com.cn/finalpage/2026-04-25/1225178190.PDF)。
 - [2026年9月煤炭与电力运营公告（2026-10-09）](https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12631775&stockid=601225)；[2026-10-30有效收盘¥28.08](https://cn.investing.com/equities/shaanxi-coal-historical-data)。
 - [2026Q3独立报告](../reports/shaanxi-coal/2026Q3.md)。
