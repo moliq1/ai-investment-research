@@ -172,6 +172,30 @@
       "changePercent": -7.24
     },
     {
+      "code": "300308.SZ",
+      "name": "中际旭创",
+      "market": "A股",
+      "symbol": "300308.SZ",
+      "currency": "¥",
+      "close": 553,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://cn.investing.com/equities/shandong-zhongji-electrical-historical-data",
+      "previousClose": 582.05,
+      "changePercent": -4.99
+    },
+    {
+      "code": "03308.HK",
+      "name": "中际旭创",
+      "market": "港股",
+      "symbol": "3308.HK",
+      "currency": "HK$",
+      "close": 676,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://content.etnet.com.hk/content/sywg/sc/quote.php?code=03308",
+      "previousClose": 706.5,
+      "changePercent": -4.32
+    },
+    {
       "code": "601138.SH",
       "name": "工业富联",
       "market": "A股",
