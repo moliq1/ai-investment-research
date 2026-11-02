@@ -59,7 +59,7 @@ class MasterValuationArchiveTests(unittest.TestCase):
             if not row.startswith("|"): break
             if all(ch in '| -:' for ch in row): continue
             rows.append([c.strip().replace("**", "") for c in row.strip("|").split("|")])
-        industries = ["有色金属与矿业", "半导体与电子材料", "计算机与AI基础设施", "电力装备与电源", "新能源与储能", "医药与CXO", "机械设备与工业母机", "能源工程服务", "煤炭与能源"]
+        industries = ["有色金属与矿业", "半导体与电子材料", "计算机与AI基础设施", "电力装备与电源", "新能源与储能", "医药与CXO", "机械设备与工业母机", "能源工程服务", "煤炭与能源", "消费电子与精密制造"]
         self.assertEqual([industries.index(r[2]) for r in rows], sorted(industries.index(r[2]) for r in rows))
         for sector in industries:
             dates = [r[11] for r in rows if r[2] == sector]

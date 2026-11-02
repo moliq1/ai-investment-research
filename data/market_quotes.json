@@ -434,6 +434,30 @@
       "sourceUrl": "https://cn.investing.com/equities/shaanxi-coal-historical-data",
       "previousClose": 27.5,
       "changePercent": 2.11
+    },
+    {
+      "code": "002475.SZ",
+      "name": "立讯精密",
+      "market": "A股",
+      "symbol": "002475.SZ",
+      "currency": "¥",
+      "close": 45.6,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://finance.yahoo.com/quote/002475.SZ/history/",
+      "previousClose": 48.07,
+      "changePercent": -5.14
+    },
+    {
+      "code": "02475.HK",
+      "name": "立讯精密",
+      "market": "港股",
+      "symbol": "2475.HK",
+      "currency": "HK$",
+      "close": 45.3,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://finance.yahoo.com/quote/2475.HK/history/",
+      "previousClose": 47.38,
+      "changePercent": -4.39
     }
   ]
 }
