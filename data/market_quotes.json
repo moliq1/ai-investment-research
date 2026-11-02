@@ -386,6 +386,18 @@
       "sourceUrl": "https://finance.yahoo.com/quote/2386.HK/history/",
       "previousClose": 5.37,
       "changePercent": 0.37
+    },
+    {
+      "code": "601225.SH",
+      "name": "陕西煤业",
+      "market": "A股",
+      "symbol": "601225.SS",
+      "currency": "¥",
+      "close": 28.08,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://cn.investing.com/equities/shaanxi-coal-historical-data",
+      "previousClose": 27.5,
+      "changePercent": 2.11
     }
   ]
 }
