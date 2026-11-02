@@ -208,6 +208,18 @@
       "changePercent": -7.41
     },
     {
+      "code": "002851.SZ",
+      "name": "麦格米特",
+      "market": "A股",
+      "symbol": "002851.SZ",
+      "currency": "¥",
+      "close": 77.72,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/",
+      "previousClose": 82.59,
+      "changePercent": -5.9
+    },
+    {
       "code": "600875.SH",
       "name": "东方电气",
       "market": "A股",
@@ -230,18 +242,6 @@
       "sourceUrl": "https://finance.yahoo.com/quote/1072.HK/history/",
       "previousClose": 16.37,
       "changePercent": -4.95
-    },
-    {
-      "code": "002851.SZ",
-      "name": "麦格米特",
-      "market": "A股",
-      "symbol": "002851.SZ",
-      "currency": "¥",
-      "close": 77.72,
-      "closeDate": "2026-10-30",
-      "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/",
-      "previousClose": 82.59,
-      "changePercent": -5.9
     },
     {
       "code": "01133.HK",
@@ -350,6 +350,18 @@
       "sourceUrl": "https://finance.yahoo.com/quote/1651.HK/history/",
       "previousClose": 37.76,
       "changePercent": -2.91
+    },
+    {
+      "code": "02386.HK",
+      "name": "中石化炼化工程",
+      "market": "港股",
+      "symbol": "2386.HK",
+      "currency": "HK$",
+      "close": 5.39,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://finance.yahoo.com/quote/2386.HK/history/",
+      "previousClose": 5.37,
+      "changePercent": 0.37
     }
   ]
 }
