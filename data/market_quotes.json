@@ -88,6 +88,30 @@
       "changePercent": -4.21
     },
     {
+      "code": "688008.SH",
+      "name": "澜起科技",
+      "market": "A股",
+      "symbol": "688008.SS",
+      "currency": "¥",
+      "close": 158.3,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://cn.investing.com/equities/montage-technology-co-ltd-historical-data",
+      "previousClose": 166.79,
+      "changePercent": -5.09
+    },
+    {
+      "code": "06809.HK",
+      "name": "澜起科技",
+      "market": "港股",
+      "symbol": "6809.HK",
+      "currency": "HK$",
+      "close": 207.6,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://stockanalysis.com/quote/hkg/6809/history/",
+      "previousClose": 215,
+      "changePercent": -3.44
+    },
+    {
       "code": "01888.HK",
       "name": "建滔积层板",
       "market": "港股",
