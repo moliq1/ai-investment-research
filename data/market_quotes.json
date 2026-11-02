@@ -338,6 +338,18 @@
       "sourceUrl": "https://finance.yahoo.com/quote/1651.HK/history/",
       "previousClose": 37.76,
       "changePercent": -2.91
+    },
+    {
+      "code": "02386.HK",
+      "name": "中石化炼化工程",
+      "market": "港股",
+      "symbol": "2386.HK",
+      "currency": "HK$",
+      "close": 5.39,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://finance.yahoo.com/quote/2386.HK/history/",
+      "previousClose": 5.37,
+      "changePercent": 0.37
     }
   ]
 }
