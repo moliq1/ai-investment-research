@@ -232,6 +232,18 @@
       "changePercent": -7.41
     },
     {
+      "code": "002353.SZ",
+      "name": "杰瑞股份",
+      "market": "A股",
+      "symbol": "002353.SZ",
+      "currency": "¥",
+      "close": 88.4,
+      "closeDate": "2026-10-30",
+      "sourceUrl": "https://cn.investing.com/equities/jereh-oilfield-a-historical-data",
+      "previousClose": 88.1,
+      "changePercent": 0.34
+    },
+    {
       "code": "002851.SZ",
       "name": "麦格米特",
       "market": "A股",
