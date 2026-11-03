@@ -2757,7 +2757,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 
 #### 原始聊天与研究来源
 
-- 原始研究对话《兖矿能源成长质量与估值预期差一体化分析》（2026-11-02）；**原始 ChatGPT 对话链接：未取得可核实的分享 URL**；不能把该讨论当成Git旧预测。
+- 原研究对话《兖矿能源成长质量与估值预期差一体化分析》（2026-11-02）；**原始 ChatGPT 对话链接：未取得可核实的分享 URL**；不能把该讨论当成Git旧预测。
 - [2026Q3三季报（公司官网，2026-10-30）](https://www.ykenergy.com/451722/451723/)；[三季报公告全文（2026-10-31刊载）](https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12683097&stockid=600188)；[2026H1半年报（2026-08-29）](https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12572743&stockid=600188)；[2025FY经审计年报（2026-03-28）](https://static.cninfo.com.cn/finalpage/2026-03-28/1225048701.PDF)；[红隼煤矿交割公告（2026-10-08）](https://data.eastmoney.com/notices/detail/600188/AN202610071830184979%2C%E5%85%96%E7%9F%BF%E8%83%BD%E6%BA%90.html)；[A股收盘历史（¥18.89）](https://cn.investing.com/equities/yanzhou-coal-historical-data)；[H股收盘历史（HK$11.11）](https://www.investing.com/equities/yanzhou-coal-mining-historical-data)；[官方港元人民币汇率（0.85595）](https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do)；[2026Q3完整档案](../reports/yankuang-energy/2026Q3.md)。
 
 
