@@ -10,6 +10,10 @@ const script=fs.readFileSync(path.join(root,'assets','research.js'),'utf8');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert.match(html,/assets\/research\.js/);
 assert.match(html,/assets\/research\.css/);
+assert.ok(html.includes('id="quote-status"'),'Missing quote-check status');
+assert.match(script,/visibilitychange/);
+assert.match(script,/QUOTE_REFRESH_INTERVAL_MS=5\*60\*1000/);
+assert.match(script,/MARKET\+'\?ts='\+now/);
 
 assert.ok(html.includes('id="theme-mode"'));
 assert.ok(html.includes('<option value="system">跟随系统</option>'));
@@ -277,3 +281,54 @@ const explicitMissing=liveApp.companyTile(modelCompany,null);
 assert.ok(explicitMissing.includes('class="tile-quote-price is-missing">—</strong>'));
 assert.ok(explicitMissing.includes('竖线：历史参考价 HK$201.6'));
 assert.ok(!explicitMissing.includes('class="tile-quote-price">HK$183.2</strong>'),'A missing quote must not leak a different source into header');
+
+// Regression: a new close must replace the card immediately without a page reload.
+// If a later fetch fails, the last valid quote remains visible.
+const quoteHandlers={};
+const quoteNodes={};
+const todayUTC=new Date().toISOString().slice(0,10);
+let livePrice=180,failQuotes=false,quoteFetches=0,periodic=null;
+const quoteDoc={
+ hidden:false,
+ body:{classList:{remove(){}}},
+ getElementById(id){return quoteNodes[id]??={innerHTML:'',textContent:'',dataset:{},title:''}},
+ querySelectorAll(){return []},
+ addEventListener(name,fn){quoteHandlers[name]=fn}
+};
+const quoteWin={
+ location:{hash:'#/companies'},
+ scrollTo(){},
+ addEventListener(name,fn){quoteHandlers[name]=fn},
+ setInterval(fn,interval){periodic={fn,interval};return 1}
+};
+const mockFetch=async(url,opts)=>{
+ if(url.startsWith('sources/'))return {ok:true,text:async()=>markdown};
+ assert.match(url,/^data\/market_quotes\.json\?ts=\d+$/);
+ assert.equal(opts.cache,'no-store');
+ quoteFetches++;
+ if(failQuotes)return {ok:false,status:503};
+ return {ok:true,json:async()=>({schemaVersion:1,quotes:[
+  {code:'02099.HK',currency:'HK$',close:livePrice,closeDate:todayUTC,previousClose:175}
+ ]})};
+};
+vm.runInNewContext(script,{window:quoteWin,document:quoteDoc,fetch:mockFetch,console,location:quoteWin.location});
+(async()=>{
+ await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(periodic.interval,5*60*1000);
+ for(const event of ['visibilitychange','focus','pageshow'])assert.equal(typeof quoteHandlers[event],'function');
+ assert.equal(quoteFetches,1);
+ assert.ok(quoteNodes.content.innerHTML.includes('HK$180'));
+ assert.ok(quoteNodes['quote-status'].textContent.includes(todayUTC));
+ livePrice=222;
+ await quoteWin.AtlasResearch.refreshQuotes(true);
+ assert.equal(quoteFetches,2);
+ assert.ok(quoteNodes.content.innerHTML.includes('HK$222'),'Price change did not rerender');
+ const unchanged=quoteNodes.content.innerHTML;
+ failQuotes=true;
+ await quoteWin.AtlasResearch.refreshQuotes(true);
+ assert.equal(quoteFetches,3);
+ assert.equal(quoteNodes.content.innerHTML,unchanged,'Failure removed the last good price');
+ assert.match(quoteNodes['quote-status'].textContent,/行情检查失败/);
+ assert.equal(quoteNodes['quote-status'].dataset.error,'true');
+ console.log('Quote lifecycle smoke PASS');
+})().catch(err=>{console.error(err);process.exitCode=1});
