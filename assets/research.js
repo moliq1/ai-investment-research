@@ -3,6 +3,8 @@
 'use strict';
 const MD='sources/AI投研_公司估值情景汇总.md';
 const MARKET='data/market_quotes.json';
+const QUOTE_REFRESH_INTERVAL_MS=5*60*1000;
+const QUOTE_FOCUS_COOLDOWN_MS=60*1000;
 const QUOTE_MAX_AGE=5;
 const MODEL_REVIEW_AGE=60;
 const REPO='https://github.com/moliq1/ai-investment-research';
@@ -157,7 +159,8 @@ function parseMarkdown(text){
  const intro=text.slice(0,text.indexOf('## 一、')).replace(/^# .*\n/,'').replace(/^>\s*/gm,'').trim();
  return {items,sectors,version,changes,intro};
 }
-const state={db:null,quotes:new Map(),term:'',market:'全部',layout:'cards',opFilter:'all',opSector:'全部'};
+const state={db:null,quotes:new Map(),term:'',market:'全部',layout:'cards',opFilter:'all',opSector:'全部',quoteFingerprint:'',lastQuoteCheck:0,lastQuoteSuccess:0,quoteError:false};
+let quoteRequest=null;
 const routeCompany=item=>'#/company/'+encode(item.code);
 // Use Tonghuashun for all stocks. Its HK tickers require >= 4 digits:
 // 00522.HK -> HK0522, 00992.HK -> HK0992, 02899.HK -> HK2899.
@@ -352,6 +355,7 @@ function render(){
  $('content').innerHTML=html;
  $('crumb').textContent=r.type==='company'?'公司研究 / '+r.item.name:r.type==='sector'?r.sector:r.type==='about'?'方法与记录':r.type==='opportunities'?'低估发现':r.type==='companies'?'公司估值库':'研究总览';
  $('version').textContent='DOC '+d.version;
+  updateQuoteStatus();
  document.title=(r.type==='company'?r.item.name+' | ':'')+'Alpha Atlas · AI 投研工作台';
  document.body.classList.remove('mobile-open');
  if(r.type==='companies'||r.type==='sector')filter();
@@ -372,14 +376,81 @@ document.addEventListener('click',event=>{
 document.addEventListener('change',event=>{if(event.target.id==='scan-sector'){state.opSector=event.target.value;render()}});
 document.addEventListener('input',event=>{if(event.target.id==='search'){state.term=event.target.value.trim();filter()}});
 window.addEventListener('hashchange',navigate);
+function quoteFingerprint(quotes){
+ return JSON.stringify([...quotes].map(([code,q])=>
+  [code,q.closeDate,q.close,q.previousClose,q.changePercent,q.valid]));
+}
+function updateQuoteStatus(){
+ const target=$('quote-status');
+ if(!target||!state.db)return;
+ const valid=[...state.quotes.values()].filter(q=>q.valid);
+ const latest=valid.map(q=>q.closeDate).sort().at(-1)||'暂无';
+ const count=valid.length+'/'+state.db.items.length;
+ const checked=state.lastQuoteSuccess
+  ?new Date(state.lastQuoteSuccess).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Shanghai'})
+  :'—';
+ target.textContent=state.quoteError
+  ?'行情检查失败 · 保留已有报价 · 最近成功 '+checked+'（北京）'
+  :'行情截至 '+latest+' · '+count+' · 检查 '+checked+'（北京）';
+ target.dataset.mobile=state.quoteError?'行情检查失败':latest.slice(5)+' · '+count;
+ target.dataset.error=state.quoteError?'true':'false';
+ target.title=target.textContent;
+}
+async function refreshQuotes(force=false,renderOnChange=true){
+ if(!state.db)return false;
+ if(quoteRequest)return quoteRequest;
+ const now=Date.now();
+ if(!force&&now-state.lastQuoteCheck<QUOTE_FOCUS_COOLDOWN_MS)return false;
+ state.lastQuoteCheck=now;
+ quoteRequest=(async()=>{
+  try{
+   // Use a unique URL to bypass intermediary caches as well as browser caching.
+   const response=await fetch(MARKET+'?ts='+now,{cache:'no-store'});
+   if(!response.ok)throw Error('读取行情失败：HTTP '+response.status);
+   const next=parseQuotes(await response.json(),state.db);
+   const fingerprint=quoteFingerprint(next);
+   const changed=fingerprint!==state.quoteFingerprint;
+   state.quotes=next;
+   state.quoteFingerprint=fingerprint;
+   state.lastQuoteSuccess=Date.now();
+   state.quoteError=false;
+   if(changed&&renderOnChange)render();
+   else updateQuoteStatus();
+   return changed;
+  }catch(err){
+   // Keep the last successfully loaded prices on network/JSON errors.
+   state.quoteError=true;
+   console.warn('行情刷新失败，保留已有报价',err.message);
+   updateQuoteStatus();
+   return false;
+  }finally{
+   quoteRequest=null;
+  }
+ })();
+ return quoteRequest;
+}
+document.addEventListener('visibilitychange',()=>{
+ if(!document.hidden)refreshQuotes();
+});
+window.addEventListener('focus',()=>{
+ if(!document.hidden)refreshQuotes();
+});
+window.addEventListener('pageshow',event=>{
+ if(event.persisted)refreshQuotes(true);
+});
+if(typeof window.setInterval==='function'){
+ window.setInterval(()=>{
+  if(!document.hidden)refreshQuotes();
+ },QUOTE_REFRESH_INTERVAL_MS);
+}
 async function start(){
  try{
   const response=await fetch(MD,{cache:'no-store'});if(!response.ok)throw Error('读取 Markdown 失败：HTTP '+response.status);
   state.db=parseMarkdown(await response.text());
-  try{const q=await fetch(MARKET,{cache:'no-store'});if(q.ok)state.quotes=parseQuotes(await q.json(),state.db);else console.warn('行情暂不可用：HTTP '+q.status)}catch(quoteError){console.warn('行情读取失败，不影响研究内容',quoteError.message)}
+  await refreshQuotes(true,false);
   render();
  }catch(err){$('content').innerHTML='<div class="load-fail"><h1>研究数据加载失败</h1><p>'+safe(err.message)+'</p><p>请通过 GitHub Pages 或本地 HTTP 服务打开，并检查 Markdown 文档格式。</p><a href="'+ORIGINAL+'" target="_blank" rel="noopener noreferrer">打开原始文件 ↗</a></div>'}
 }
-window.AtlasResearch={parseMarkdown,parseQuotes,dayAge,benchmarkInfo,ratioClass,companyTile,marketPage,quoteDailyChange,renderMarkdown,graph,detail,catalog,overview,opportunities,discountInfo,modelOld};
+window.AtlasResearch={parseMarkdown,parseQuotes,dayAge,benchmarkInfo,ratioClass,companyTile,marketPage,quoteDailyChange,renderMarkdown,graph,detail,catalog,overview,opportunities,discountInfo,modelOld,refreshQuotes};
 start();
 })();
