@@ -151,7 +151,7 @@
 2. [2025年度审计报告（2026-03-20）](https://www.hkexnews.hk/listedco/listconews/sehk/2026/0320/2026032001296_c.pdf)。
 3. [10月22日完成股权交易与H股定增](https://paper.cnstock.com/html/2026-10/23/content_2280108.htm)；[2026Q3业绩说明会](https://roadshow.sseinfo.com/stayTuned/41794)。
 4. [A股11-06收盘历史](https://cn.investing.com/equities/jilong-gold-historical-data)；[H股11-06收盘历史](https://finance.yahoo.com/quote/6693.HK/history/)；[官方港元汇率](https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do)；[华安证券11-04单家预测](https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/lastest/rptid/847163353489/index.phtml)。
-5. 原聊天研究《赤峰黄金成长质量与估值预期差一体化分析》（2026-11-07）。**原始 ChatGPT 对话链接：未取得可核实的分享 URL**，不把聊天草案冒充历史Git研究。
+5. **原研究对话**：《赤峰黄金成长质量与估值预期差一体化分析》（2026-11-07）。**原始 ChatGPT 对话链接：未取得可核实的分享 URL**，不把聊天草案冒充历史Git研究。
 
 ### 2. 洛阳钼业（603993.SH / 03993.HK）
 
