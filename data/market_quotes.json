@@ -2,6 +2,30 @@
   "schemaVersion": 1,
   "quotes": [
     {
+      "code": "600988.SH",
+      "name": "赤峰黄金",
+      "market": "A股",
+      "symbol": "600988.SS",
+      "currency": "¥",
+      "close": 37.39,
+      "closeDate": "2026-11-06",
+      "sourceUrl": "https://finance.yahoo.com/quote/600988.SS/history/",
+      "previousClose": 37.58,
+      "changePercent": -0.51
+    },
+    {
+      "code": "06693.HK",
+      "name": "赤峰黄金",
+      "market": "港股",
+      "symbol": "6693.HK",
+      "currency": "HK$",
+      "close": 32.48,
+      "closeDate": "2026-11-06",
+      "sourceUrl": "https://finance.yahoo.com/quote/6693.HK/history/",
+      "previousClose": 32.76,
+      "changePercent": -0.85
+    },
+    {
       "code": "603993.SH",
       "name": "洛阳钼业",
       "market": "A股",
