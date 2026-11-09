@@ -134,6 +134,26 @@
       "changePercent": -6.6
     },
     {
+      "code": "688347.SH",
+      "name": "华虹宏力",
+      "market": "A股",
+      "symbol": "688347.SS",
+      "currency": "¥",
+      "close": 173.12,
+      "closeDate": "2026-11-06",
+      "sourceUrl": "https://cn.investing.com/equities/hua-hong-semiconductor-historical-data"
+    },
+    {
+      "code": "01347.HK",
+      "name": "华虹宏力",
+      "market": "港股",
+      "symbol": "1347.HK",
+      "currency": "HK$",
+      "close": 70.2,
+      "closeDate": "2026-11-06",
+      "sourceUrl": "https://www.chenglanai.com/hk/01347/"
+    },
+    {
       "code": "688008.SH",
       "name": "澜起科技",
       "market": "A股",
