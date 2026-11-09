@@ -2,6 +2,18 @@
   "schemaVersion": 1,
   "quotes": [
     {
+      "code": "000807.SZ",
+      "name": "云铝股份",
+      "market": "A股",
+      "symbol": "000807.SZ",
+      "currency": "¥",
+      "close": 24.52,
+      "closeDate": "2026-11-06",
+      "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/",
+      "previousClose": 25.3,
+      "changePercent": -3.08
+    },
+    {
       "code": "600988.SH",
       "name": "赤峰黄金",
       "market": "A股",
@@ -48,18 +60,6 @@
       "sourceUrl": "https://cn.investing.com/equities/china-molybden-historical-data?cid=100147",
       "previousClose": 12.8,
       "changePercent": -5.86
-    },
-    {
-      "code": "000807.SZ",
-      "name": "云铝股份",
-      "market": "A股",
-      "symbol": "000807.SZ",
-      "currency": "¥",
-      "close": 24.52,
-      "closeDate": "2026-11-06",
-      "sourceUrl": "https://finance.yahoo.com/quote/000807.SZ/history/",
-      "previousClose": 25.3,
-      "changePercent": -3.08
     },
     {
       "code": "01378.HK",
