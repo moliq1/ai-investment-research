@@ -287,5 +287,80 @@ class MarketQuoteTests(unittest.TestCase):
         self.assertEqual(row["changePercent"], 1.08)
 
 
+    def test_eastmoney_market_codes_and_latest_session(self):
+        self.assertEqual(mod.eastmoney_secid("601899.SS"), "1.601899")
+        self.assertEqual(mod.eastmoney_secid("300750.SZ"), "0.300750")
+        self.assertEqual(mod.eastmoney_secid("2899.HK"), "116.02899")
+        self.assertEqual(mod.eastmoney_secid("0522.HK"), "116.00522")
+        self.assertEqual(mod.expected_closed_session(
+            datetime(2026, 11, 13, 0, 6, tzinfo=TZ)).isoformat(), "2026-11-12")
+        self.assertEqual(mod.expected_closed_session(
+            datetime(2026, 11, 16, 12, 0, tzinfo=TZ)).isoformat(), "2026-11-13")
+
+    def test_eastmoney_unadjusted_daily_bar_parsing_and_selection(self):
+        payload = {"rc": 0, "data": {"klines": [
+            "2026-11-11,27.50,27.86,27.95,27.18,123,456,1,-1.14,-0.32",
+            "2026-11-12,27.31,26.78,27.51,26.70,321,654,1,-3.88,-1.08",
+        ]}}
+        em = mod.parse_eastmoney_quote(payload, "https://example.com/eastmoney")
+        self.assertEqual(em[:3], ("2026-11-12", 26.78, 27.86))
+        self.assertEqual(em[4], "https://example.com/eastmoney")
+        yahoo = ("2026-11-11", 27.86, 28.18, {})
+        self.assertIs(mod.latest_available_quote(yahoo, em), em)
+        self.assertIs(mod.latest_available_quote(em, yahoo), em)
+        self.assertEqual(mod.latest_available_quote(None, em), em)
+        newer = ("2026-11-13", 27.11, 26.78, {})
+        self.assertIs(mod.latest_available_quote(newer, em), newer)
+
+    def test_eastmoney_ambiguous_exdate_and_bad_payload(self):
+        payload = {"data": {"klines": [
+            "2026-10-29,25.00,25.98,26,25,123,456,1,1.00",
+            "2026-10-30,25.10,25.36,26,25,123,456,1,1.08",
+        ]}}
+        quote = mod.parse_eastmoney_quote(payload, "https://example.com")
+        self.assertEqual(quote[:2], ("2026-10-30", 25.36))
+        self.assertIsNone(quote[2], "Ex-date raw prior is not the exchange reference")
+        self.assertIsNone(mod.parse_eastmoney_quote({"data": {"klines": []}}, "https://example.com"))
+        self.assertIsNone(mod.parse_eastmoney_quote({"data": None}, "https://example.com"))
+
+    def test_eastmoney_quote_fetch_uses_unadjusted_klines(self):
+        class Response:
+            url = "https://example.com/kline?secid=116.02899"
+            def raise_for_status(self): pass
+            def json(self):
+                return {"data": {"klines": [
+                    "2026-11-11,28.91,28.94,29.1,28.8,100,50,1,-0.62",
+                    "2026-11-12,28.0,27.88,28.1,27.7,100,50,1,-3.66"
+                ]}}
+        class Session:
+            def get(self, url, params, headers, timeout):
+                self.params = params
+                self.timeout = timeout
+                return Response()
+        session = Session()
+        quote = mod.fetch_eastmoney_quote("2899.HK", session)
+        self.assertEqual(session.params["secid"], "116.02899")
+        self.assertEqual(session.params["fqt"], "0")
+        self.assertEqual(session.params["klt"], "101")
+        self.assertEqual(quote[0], "2026-11-12")
+
+    def test_fallback_source_url_is_preserved_in_snapshot(self):
+        previous = self.canonical_snapshot()
+        target = next(x for x in previous["quotes"] if x["code"] == "601899.SH")
+        target.update(closeDate="2026-11-11", close=27.86)
+        source = "https://example.com/kline?secid=1.601899"
+        result, updated = mod.refresh(
+            self.universe, previous,
+            lambda symbol: ("2026-11-12", 26.78, 27.86, {}, source)
+            if symbol == "601899.SS" else None,
+            datetime(2026, 11, 12, 20, 0, tzinfo=TZ),
+        )
+        self.assertIn("601899.SH", updated)
+        row = next(x for x in result["quotes"] if x["code"] == "601899.SH")
+        self.assertEqual(row["close"], 26.78)
+        self.assertEqual(row["sourceUrl"], source)
+        self.assertEqual(row["previousClose"], 27.86)
+
+
 if __name__ == "__main__":
     unittest.main()
