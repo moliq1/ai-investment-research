@@ -9,6 +9,7 @@ import json
 import math
 from datetime import datetime, timedelta
 from urllib.parse import urlencode
+from time import sleep
 from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -303,20 +304,27 @@ def main():
             return yahoo_quote
 
         if not fallback_disabled:
-            try:
-                secondary = fetch_eastmoney_quote(symbol, session)
-                chosen = latest_available_quote(yahoo_quote, secondary)
-                fallback_failures = 0
-                if chosen is secondary and secondary is not None:
-                    fallback_used += 1
-                    print("FALLBACK Eastmoney", symbol, secondary[0], secondary[1])
-                return chosen
-            except Exception as exc:
-                fallback_failures += 1
-                print("Eastmoney fallback failed", symbol, type(exc).__name__, str(exc)[:140])
-                if fallback_failures >= 4:
-                    fallback_disabled = True
-                    print("WARNING Eastmoney fallback temporarily disabled after 4 consecutive errors")
+            # Avoid public API rate limits: 47 rapid requests caused remote disconnects.
+            sleep(1.6)
+            for attempt in range(3):
+                try:
+                    secondary = fetch_eastmoney_quote(symbol, session)
+                    chosen = latest_available_quote(yahoo_quote, secondary)
+                    fallback_failures = 0
+                    if chosen is secondary and secondary is not None:
+                        fallback_used += 1
+                        print("FALLBACK Eastmoney", symbol, secondary[0], secondary[1])
+                    return chosen
+                except Exception as exc:
+                    print("Eastmoney attempt failed", symbol, attempt + 1,
+                          type(exc).__name__, str(exc)[:140])
+                    if attempt < 2:
+                        sleep(3 * (attempt + 1))
+                        continue
+                    fallback_failures += 1
+                    if fallback_failures >= 4:
+                        fallback_disabled = True
+                        print("WARNING Eastmoney fallback disabled after four failed tickers")
         return yahoo_quote
 
     updated, refreshed = refresh(stocks, previous, fetch_quote, now=now)
@@ -326,6 +334,8 @@ def main():
         OUTPUT.write_text(serialized, encoding="utf-8")
     latest_count = sum(q["closeDate"] == expected.isoformat() for q in updated["quotes"])
     snapshot_dates = sorted({q["closeDate"] for q in updated["quotes"] if q["closeDate"]})
+    missing = [q["code"] for q in updated["quotes"] if q["closeDate"] != expected.isoformat()]
+    print("STALE TICKERS:", ", ".join(missing) if missing else "none")
     print(f"Refresh complete. {len(refreshed)} newly closed tickers / {len(stocks)} Markdown companies.")
     print(f"QUOTE HEALTH: expected session={expected}; today's coverage={latest_count}/{len(stocks)}; "
           f"Eastmoney newer={fallback_used}; latest snapshot dates={snapshot_dates[-4:]}")
