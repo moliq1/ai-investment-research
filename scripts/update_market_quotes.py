@@ -20,6 +20,61 @@ OUTPUT = ROOT / "data" / "market_quotes.json"
 CN_TZ = ZoneInfo("Asia/Shanghai")
 MAX_SOURCE_AGE_DAYS = 14
 EASTMONEY_URL = "https://push2his.eastmoney.com/api/qt/stock/kline/get"
+TENCENT_URL = "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get"
+
+
+def tencent_symbol(symbol):
+    if symbol.endswith(".SS"):
+        return "sh" + symbol[:-3]
+    if symbol.endswith(".SZ"):
+        return "sz" + symbol[:-3]
+    if symbol.endswith(".HK"):
+        return "hk" + symbol[:-3].zfill(5)
+    raise ValueError("Unsupported Tencent market " + symbol)
+
+
+def parse_tencent_quote(payload, ticker, source_url):
+    data = payload.get("data") if isinstance(payload, dict) else None
+    node = data.get(ticker) if isinstance(data, dict) else None
+    if not isinstance(node, dict):
+        return None
+    # qfqday is the current-price-aligned daily series. On the latest day
+    # its close is the actual close, while prior close includes ex-date effects.
+    rows = node.get("qfqday") or node.get("day")
+    if not isinstance(rows, list) or not rows:
+        return None
+    last = rows[-1]
+    if not isinstance(last, (list, tuple)) or len(last) < 3:
+        return None
+    day = datetime.strptime(str(last[0])[:10], "%Y-%m-%d").date().isoformat()
+    close = float(last[2])
+    if not math.isfinite(close) or close <= 0:
+        return None
+    previous = None
+    if len(rows) >= 2:
+        prior = rows[-2]
+        if isinstance(prior, (list, tuple)) and len(prior) >= 3:
+            previous = float(prior[2])
+            if not math.isfinite(previous) or previous <= 0:
+                previous = None
+    return (day, close, previous, {}, source_url)
+
+
+def fetch_tencent_quote(symbol, session):
+    ticker = tencent_symbol(symbol)
+    params = {"param": ticker + ",day,,,10,qfq"}
+    response = session.get(
+        TENCENT_URL, params=params,
+        headers={"User-Agent": "Mozilla/5.0", "Referer": "https://finance.qq.com/"},
+        timeout=(4, 7),
+    )
+    response.raise_for_status()
+    raw = response.text.strip().rstrip(";")
+    if not raw.startswith("{"):
+        raw = raw.split("=", 1)[-1].strip()
+    url = getattr(response, "url", None) or TENCENT_URL + "?" + urlencode(params)
+    return parse_tencent_quote(json.loads(raw), ticker, url)
+
 
 
 def expected_closed_session(now):
@@ -277,9 +332,10 @@ def main():
     fallback_failures = 0
     fallback_disabled = False
     fallback_used = 0
+    tencent_used = 0
 
     def fetch_quote(symbol):
-        nonlocal fallback_failures, fallback_disabled, fallback_used
+        nonlocal fallback_failures, fallback_disabled, fallback_used, tencent_used
         yahoo_quote = None
         try:
             frame = yf.Ticker(symbol).history(period="15d", interval="1d", auto_adjust=False)
@@ -303,13 +359,27 @@ def main():
         if yahoo_quote and quote_date(yahoo_quote) >= expected:
             return yahoo_quote
 
+        candidate = yahoo_quote
+        try:
+            # Tencent A/H qfqday's latest bar equals the actual daily close.
+            # Unlike Yahoo, it can provide a completed Asian trading session early.
+            secondary = fetch_tencent_quote(symbol, session)
+            if secondary and quote_date(secondary) <= expected:
+                candidate = latest_available_quote(candidate, secondary)
+                if candidate is secondary and quote_date(candidate) >= expected:
+                    tencent_used += 1
+                    print("FALLBACK Tencent", symbol, candidate[0], candidate[1])
+                    return candidate
+        except Exception as exc:
+            print("Tencent fallback failed", symbol, type(exc).__name__, str(exc)[:140])
+
         if not fallback_disabled:
             # Avoid public API rate limits: 47 rapid requests caused remote disconnects.
             sleep(1.6)
             for attempt in range(3):
                 try:
                     secondary = fetch_eastmoney_quote(symbol, session)
-                    chosen = latest_available_quote(yahoo_quote, secondary)
+                    chosen = latest_available_quote(candidate, secondary)
                     fallback_failures = 0
                     if chosen is secondary and secondary is not None:
                         fallback_used += 1
@@ -325,7 +395,7 @@ def main():
                     if fallback_failures >= 4:
                         fallback_disabled = True
                         print("WARNING Eastmoney fallback disabled after four failed tickers")
-        return yahoo_quote
+        return candidate
 
     updated, refreshed = refresh(stocks, previous, fetch_quote, now=now)
     serialized = json.dumps(updated, indent=2, ensure_ascii=False) + "\n"
@@ -338,7 +408,8 @@ def main():
     print("STALE TICKERS:", ", ".join(missing) if missing else "none")
     print(f"Refresh complete. {len(refreshed)} newly closed tickers / {len(stocks)} Markdown companies.")
     print(f"QUOTE HEALTH: expected session={expected}; today's coverage={latest_count}/{len(stocks)}; "
-          f"Eastmoney newer={fallback_used}; latest snapshot dates={snapshot_dates[-4:]}")
+          f"Tencent newer={tencent_used}; Eastmoney newer={fallback_used}; "
+          f"latest snapshot dates={snapshot_dates[-4:]}")
     if latest_count == 0:
         print("::warning title=Market quote freshness::No quotes for expected weekday session "
               f"{expected}. Actions success must not be interpreted as current prices. "
