@@ -319,6 +319,8 @@ vm.runInNewContext(script,{window:quoteWin,document:quoteDoc,fetch:mockFetch,con
  assert.equal(quoteFetches,1);
  assert.ok(quoteNodes.content.innerHTML.includes('HK$180'));
  assert.ok(quoteNodes['quote-status'].textContent.includes(todayUTC));
+ assert.ok(quoteNodes['quote-status'].textContent.includes('当日 1/'+data.items.length));
+ assert.ok(quoteNodes['quote-status'].textContent.includes('旧行情 '+(data.items.length-1)+'只'));
  livePrice=222;
  await quoteWin.AtlasResearch.refreshQuotes(true);
  assert.equal(quoteFetches,2);
