@@ -320,7 +320,7 @@ def main():
         return yahoo_quote
 
     updated, refreshed = refresh(stocks, previous, fetch_quote, now=now)
-    serialized = json.dumps(updated, indent=2, ensure_ascii=False) + "\\n"
+    serialized = json.dumps(updated, indent=2, ensure_ascii=False) + "\n"
     if not OUTPUT.exists() or OUTPUT.read_text("utf-8") != serialized:
         OUTPUT.parent.mkdir(parents=True, exist_ok=True)
         OUTPUT.write_text(serialized, encoding="utf-8")
