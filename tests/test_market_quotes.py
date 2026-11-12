@@ -362,5 +362,40 @@ class MarketQuoteTests(unittest.TestCase):
         self.assertEqual(row["previousClose"], 27.86)
 
 
+    def test_tencent_ticker_mapping_and_daily_close(self):
+        self.assertEqual(mod.tencent_symbol("601899.SS"), "sh601899")
+        self.assertEqual(mod.tencent_symbol("300750.SZ"), "sz300750")
+        self.assertEqual(mod.tencent_symbol("2899.HK"), "hk02899")
+        self.assertEqual(mod.tencent_symbol("0522.HK"), "hk00522")
+        response = {"data": {"hk02899": {"qfqday": [
+            ["2026-11-11", "29.1", "28.94", "29.5", "28.5", "100"],
+            ["2026-11-12", "28.0", "27.94", "28.2", "27.8", "150"],
+        ]}}}
+        close = mod.parse_tencent_quote(response, "hk02899", "https://example.com/tencent")
+        self.assertEqual(close[:3], ("2026-11-12", 27.94, 28.94))
+        self.assertEqual(close[4], "https://example.com/tencent")
+        self.assertIsNone(mod.parse_tencent_quote({"data": {}}, "hk02899", "https://example.com"))
+
+    def test_tencent_http_json_and_jsonp_parsing(self):
+        class Response:
+            url = "https://example.com/tencent?param=sh601899"
+            text = json.dumps({"data": {"sh601899": {"day": [
+                ["2026-11-11", "27.5", "27.86", "27.9", "27.1", "100"],
+                ["2026-11-12", "27.31", "26.78", "27.51", "26.70", "200"],
+            ]}}})
+            def raise_for_status(self): pass
+        class Session:
+            def get(self, url, params, headers, timeout):
+                self.params = params
+                return Response()
+        session = Session()
+        result = mod.fetch_tencent_quote("601899.SS", session)
+        self.assertEqual(session.params["param"], "sh601899,day,,,10,qfq")
+        self.assertEqual(result[:3], ("2026-11-12", 26.78, 27.86))
+        Response.text = "kline_dayqfq=" + Response.text + ";"
+        self.assertEqual(mod.fetch_tencent_quote("601899.SS", session)[:2],
+                         ("2026-11-12", 26.78))
+
+
 if __name__ == "__main__":
     unittest.main()
