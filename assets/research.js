@@ -385,14 +385,16 @@ function updateQuoteStatus(){
  if(!target||!state.db)return;
  const valid=[...state.quotes.values()].filter(q=>q.valid);
  const latest=valid.map(q=>q.closeDate).sort().at(-1)||'暂无';
- const count=valid.length+'/'+state.db.items.length;
+ const upToDate=valid.filter(q=>q.closeDate===latest).length;
+ const count=upToDate+'/'+state.db.items.length;
+ const stale=state.db.items.length-upToDate;
  const checked=state.lastQuoteSuccess
   ?new Date(state.lastQuoteSuccess).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Shanghai'})
   :'—';
  target.textContent=state.quoteError
   ?'行情检查失败 · 保留已有报价 · 最近成功 '+checked+'（北京）'
-  :'行情截至 '+latest+' · '+count+' · 检查 '+checked+'（北京）';
- target.dataset.mobile=state.quoteError?'行情检查失败':latest.slice(5)+' · '+count;
+  :'最新收盘日 '+latest+' · 当日 '+count+' · 旧行情 '+stale+'只 · 读取 '+checked+'（北京）';
+ target.dataset.mobile=state.quoteError?'行情检查失败':latest.slice(5)+' · 当日 '+count;
  target.dataset.error=state.quoteError?'true':'false';
  target.title=target.textContent;
 }
