@@ -7,11 +7,11 @@
       "market": "A股",
       "symbol": "000807.SZ",
       "currency": "¥",
-      "close": 23.31,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=0.000807&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 23.41,
-      "changePercent": -0.43
+      "close": 23.04,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz000807%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 23.31,
+      "changePercent": -1.16
     },
     {
       "code": "600988.SH",
@@ -19,11 +19,11 @@
       "market": "A股",
       "symbol": "600988.SS",
       "currency": "¥",
-      "close": 36.03,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.600988&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 39.3,
-      "changePercent": -8.32
+      "close": 35.01,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600988%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 36.03,
+      "changePercent": -2.83
     },
     {
       "code": "06693.HK",
@@ -31,11 +31,11 @@
       "market": "港股",
       "symbol": "6693.HK",
       "currency": "HK$",
-      "close": 31.62,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.06693&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 33.98,
-      "changePercent": -6.95
+      "close": 30.54,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk06693%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 31.62,
+      "changePercent": -3.42
     },
     {
       "code": "603993.SH",
@@ -43,11 +43,11 @@
       "market": "A股",
       "symbol": "603993.SS",
       "currency": "¥",
-      "close": 13.34,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.603993&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 13.75,
-      "changePercent": -2.98
+      "close": 12.88,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh603993%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 13.34,
+      "changePercent": -3.45
     },
     {
       "code": "03993.HK",
@@ -55,11 +55,11 @@
       "market": "港股",
       "symbol": "3993.HK",
       "currency": "HK$",
-      "close": 12.11,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.03993&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 12.65,
-      "changePercent": -4.27
+      "close": 11.48,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk03993%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 12.11,
+      "changePercent": -5.2
     },
     {
       "code": "01378.HK",
@@ -67,11 +67,11 @@
       "market": "港股",
       "symbol": "1378.HK",
       "currency": "HK$",
-      "close": 19.92,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.01378&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 19.9,
-      "changePercent": 0.1
+      "close": 19.44,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk01378%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 19.92,
+      "changePercent": -2.41
     },
     {
       "code": "000426.SZ",
@@ -79,11 +79,11 @@
       "market": "A股",
       "symbol": "000426.SZ",
       "currency": "¥",
-      "close": 23.78,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=0.000426&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 25.0,
-      "changePercent": -4.88
+      "close": 22.84,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz000426%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 23.68,
+      "changePercent": -3.55
     },
     {
       "code": "601899.SH",
@@ -91,11 +91,11 @@
       "market": "A股",
       "symbol": "601899.SS",
       "currency": "¥",
-      "close": 26.78,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.601899&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 27.86,
-      "changePercent": -3.88
+      "close": 26.38,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601899%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 26.78,
+      "changePercent": -1.49
     },
     {
       "code": "02899.HK",
@@ -103,11 +103,11 @@
       "market": "港股",
       "symbol": "2899.HK",
       "currency": "HK$",
-      "close": 27.94,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.02899&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 28.94,
-      "changePercent": -3.46
+      "close": 26.88,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk02899%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 27.94,
+      "changePercent": -3.79
     },
     {
       "code": "603799.SH",
@@ -115,11 +115,11 @@
       "market": "A股",
       "symbol": "603799.SS",
       "currency": "¥",
-      "close": 31.52,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.603799&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 32.76,
-      "changePercent": -3.79
+      "close": 31.17,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh603799%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 31.52,
+      "changePercent": -1.11
     },
     {
       "code": "02099.HK",
@@ -127,11 +127,11 @@
       "market": "港股",
       "symbol": "2099.HK",
       "currency": "HK$",
-      "close": 172.1,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.02099&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 177.3,
-      "changePercent": -2.93
+      "close": 164.3,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk02099%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 172.1,
+      "changePercent": -4.53
     },
     {
       "code": "688256.SH",
@@ -139,11 +139,11 @@
       "market": "A股",
       "symbol": "688256.SS",
       "currency": "¥",
-      "close": 973.0,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.688256&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 900.0,
-      "changePercent": 8.11
+      "close": 978.88,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh688256%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 973.0,
+      "changePercent": 0.6
     },
     {
       "code": "688347.SH",
@@ -151,11 +151,11 @@
       "market": "A股",
       "symbol": "688347.SS",
       "currency": "¥",
-      "close": 172.59,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.688347&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 169.02,
-      "changePercent": 2.11
+      "close": 167.05,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh688347%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 172.59,
+      "changePercent": -3.21
     },
     {
       "code": "01347.HK",
@@ -163,11 +163,11 @@
       "market": "港股",
       "symbol": "1347.HK",
       "currency": "HK$",
-      "close": 77.0,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.01347&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 75.15,
-      "changePercent": 2.46
+      "close": 72.3,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk01347%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 77.0,
+      "changePercent": -6.1
     },
     {
       "code": "688008.SH",
@@ -175,11 +175,11 @@
       "market": "A股",
       "symbol": "688008.SS",
       "currency": "¥",
-      "close": 162.89,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.688008&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 162.86,
-      "changePercent": 0.02
+      "close": 150.97,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh688008%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 162.89,
+      "changePercent": -7.32
     },
     {
       "code": "06809.HK",
@@ -187,11 +187,11 @@
       "market": "港股",
       "symbol": "6809.HK",
       "currency": "HK$",
-      "close": 192.5,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.06809&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 195.5,
-      "changePercent": -1.53
+      "close": 180.9,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk06809%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 192.5,
+      "changePercent": -6.03
     },
     {
       "code": "01888.HK",
@@ -199,11 +199,11 @@
       "market": "港股",
       "symbol": "1888.HK",
       "currency": "HK$",
-      "close": 28.86,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.01888&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 30.56,
-      "changePercent": -5.56
+      "close": 26.48,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk01888%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 28.86,
+      "changePercent": -8.25
     },
     {
       "code": "300408.SZ",
@@ -211,11 +211,11 @@
       "market": "A股",
       "symbol": "300408.SZ",
       "currency": "¥",
-      "close": 78.21,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=0.300408&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 80.21,
-      "changePercent": -2.49
+      "close": 71.26,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz300408%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 78.21,
+      "changePercent": -8.89
     },
     {
       "code": "06951.HK",
@@ -223,11 +223,11 @@
       "market": "港股",
       "symbol": "6951.HK",
       "currency": "HK$",
-      "close": 71.8,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.06951&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 77.5,
-      "changePercent": -7.35
+      "close": 64.55,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk06951%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 71.8,
+      "changePercent": -10.1
     },
     {
       "code": "688183.SH",
@@ -235,11 +235,11 @@
       "market": "A股",
       "symbol": "688183.SS",
       "currency": "¥",
-      "close": 70.47,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.688183&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 69.98,
-      "changePercent": 0.7
+      "close": 66.79,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh688183%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 70.47,
+      "changePercent": -5.22
     },
     {
       "code": "688012.SH",
@@ -247,11 +247,11 @@
       "market": "A股",
       "symbol": "688012.SS",
       "currency": "¥",
-      "close": 252.55,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.688012&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 250.0,
-      "changePercent": 1.02
+      "close": 245.9,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh688012%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 252.55,
+      "changePercent": -2.63
     },
     {
       "code": "688498.SH",
@@ -259,11 +259,11 @@
       "market": "A股",
       "symbol": "688498.SS",
       "currency": "¥",
-      "close": 762.81,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.688498&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 774.85,
-      "changePercent": -1.55
+      "close": 673.1,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh688498%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 762.81,
+      "changePercent": -11.76
     },
     {
       "code": "600183.SH",
@@ -271,11 +271,11 @@
       "market": "A股",
       "symbol": "600183.SS",
       "currency": "¥",
-      "close": 75.71,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.600183&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 76.88,
-      "changePercent": -1.52
+      "close": 68.15,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600183%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 75.71,
+      "changePercent": -9.99
     },
     {
       "code": "00522.HK",
@@ -283,11 +283,11 @@
       "market": "港股",
       "symbol": "0522.HK",
       "currency": "HK$",
-      "close": 101.2,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.00522&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 101.9,
-      "changePercent": -0.69
+      "close": 98.25,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk00522%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 101.2,
+      "changePercent": -2.92
     },
     {
       "code": "300308.SZ",
@@ -295,11 +295,11 @@
       "market": "A股",
       "symbol": "300308.SZ",
       "currency": "¥",
-      "close": 508.9,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=0.300308&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 542.0,
-      "changePercent": -6.11
+      "close": 466.2,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz300308%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 508.9,
+      "changePercent": -8.39
     },
     {
       "code": "03308.HK",
@@ -307,11 +307,11 @@
       "market": "港股",
       "symbol": "3308.HK",
       "currency": "HK$",
-      "close": 649.5,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.03308&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 675.5,
-      "changePercent": -3.85
+      "close": 588.5,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk03308%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 649.5,
+      "changePercent": -9.39
     },
     {
       "code": "601138.SH",
@@ -319,11 +319,11 @@
       "market": "A股",
       "symbol": "601138.SS",
       "currency": "¥",
-      "close": 43.35,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.601138&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 45.56,
-      "changePercent": -4.85
+      "close": 40.1,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601138%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 43.35,
+      "changePercent": -7.5
     },
     {
       "code": "00992.HK",
@@ -331,11 +331,11 @@
       "market": "港股",
       "symbol": "0992.HK",
       "currency": "HK$",
-      "close": 18.81,
-      "closeDate": "2026-11-12",
-      "sourceUrl": "https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=116.00992&fields1=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6&fields2=f51%2Cf52%2Cf53%2Cf54%2Cf55%2Cf56%2Cf57%2Cf58%2Cf59%2Cf60%2Cf61&klt=101&fqt=0&lmt=10&end=20500101&ut=fa5fd1943c7b386f172d6893dbfba10b",
-      "previousClose": 19.57,
-      "changePercent": -3.88
+      "close": 17.62,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk00992%2Cday%2C%2C%2C10%2Cqfq",
+      "previousClose": 18.81,
+      "changePercent": -6.33
     },
     {
       "code": "002353.SZ",
@@ -343,11 +343,11 @@
       "market": "A股",
       "symbol": "002353.SZ",
       "currency": "¥",
-      "close": 81.81,
-      "closeDate": "2026-11-12",
+      "close": 73.83,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002353%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 81.75,
-      "changePercent": 0.07
+      "previousClose": 81.81,
+      "changePercent": -9.75
     },
     {
       "code": "002851.SZ",
@@ -355,11 +355,11 @@
       "market": "A股",
       "symbol": "002851.SZ",
       "currency": "¥",
-      "close": 78.59,
-      "closeDate": "2026-11-12",
+      "close": 71.8,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002851%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 82.18,
-      "changePercent": -4.37
+      "previousClose": 78.59,
+      "changePercent": -8.64
     },
     {
       "code": "600875.SH",
@@ -367,10 +367,10 @@
       "market": "A股",
       "symbol": "600875.SS",
       "currency": "¥",
-      "close": 21.96,
-      "closeDate": "2026-11-12",
+      "close": 21.49,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600875%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 22.44,
+      "previousClose": 21.96,
       "changePercent": -2.14
     },
     {
@@ -379,11 +379,11 @@
       "market": "港股",
       "symbol": "1072.HK",
       "currency": "HK$",
-      "close": 16.81,
-      "closeDate": "2026-11-12",
+      "close": 16.42,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk01072%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 17.07,
-      "changePercent": -1.52
+      "previousClose": 16.81,
+      "changePercent": -2.32
     },
     {
       "code": "01133.HK",
@@ -391,11 +391,11 @@
       "market": "港股",
       "symbol": "1133.HK",
       "currency": "HK$",
-      "close": 11.29,
-      "closeDate": "2026-11-12",
+      "close": 10.92,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk01133%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 11.49,
-      "changePercent": -1.74
+      "previousClose": 11.29,
+      "changePercent": -3.28
     },
     {
       "code": "300274.SZ",
@@ -403,11 +403,11 @@
       "market": "A股",
       "symbol": "300274.SZ",
       "currency": "¥",
-      "close": 78.26,
-      "closeDate": "2026-11-12",
+      "close": 77.49,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz300274%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 80.09,
-      "changePercent": -2.28
+      "previousClose": 78.26,
+      "changePercent": -0.98
     },
     {
       "code": "300750.SZ",
@@ -415,11 +415,11 @@
       "market": "A股",
       "symbol": "300750.SZ",
       "currency": "¥",
-      "close": 240.0,
-      "closeDate": "2026-11-12",
+      "close": 237.7,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz300750%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 246.66,
-      "changePercent": -2.7
+      "previousClose": 240.0,
+      "changePercent": -0.96
     },
     {
       "code": "03750.HK",
@@ -427,11 +427,11 @@
       "market": "港股",
       "symbol": "3750.HK",
       "currency": "HK$",
-      "close": 374.2,
-      "closeDate": "2026-11-12",
+      "close": 369.8,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk03750%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 387.4,
-      "changePercent": -3.41
+      "previousClose": 374.2,
+      "changePercent": -1.18
     },
     {
       "code": "600276.SH",
@@ -439,11 +439,11 @@
       "market": "A股",
       "symbol": "600276.SS",
       "currency": "¥",
-      "close": 47.93,
-      "closeDate": "2026-11-12",
+      "close": 48.07,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600276%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 48.22,
-      "changePercent": -0.6
+      "previousClose": 47.93,
+      "changePercent": 0.29
     },
     {
       "code": "01276.HK",
@@ -451,11 +451,11 @@
       "market": "港股",
       "symbol": "1276.HK",
       "currency": "HK$",
-      "close": 49.92,
-      "closeDate": "2026-11-12",
+      "close": 49.32,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk01276%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 50.25,
-      "changePercent": -0.66
+      "previousClose": 49.92,
+      "changePercent": -1.2
     },
     {
       "code": "603259.SH",
@@ -463,11 +463,11 @@
       "market": "A股",
       "symbol": "603259.SS",
       "currency": "¥",
-      "close": 150.34,
-      "closeDate": "2026-11-12",
+      "close": 146.3,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh603259%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 148.7,
-      "changePercent": 1.1
+      "previousClose": 150.34,
+      "changePercent": -2.69
     },
     {
       "code": "02359.HK",
@@ -475,11 +475,11 @@
       "market": "港股",
       "symbol": "2359.HK",
       "currency": "HK$",
-      "close": 201.4,
-      "closeDate": "2026-11-12",
+      "close": 191.6,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk02359%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 196.6,
-      "changePercent": 2.44
+      "previousClose": 201.4,
+      "changePercent": -4.87
     },
     {
       "code": "01651.HK",
@@ -487,11 +487,11 @@
       "market": "港股",
       "symbol": "1651.HK",
       "currency": "HK$",
-      "close": 35.28,
-      "closeDate": "2026-11-12",
+      "close": 34.46,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk01651%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 36.7,
-      "changePercent": -3.87
+      "previousClose": 35.28,
+      "changePercent": -2.32
     },
     {
       "code": "02386.HK",
@@ -499,11 +499,11 @@
       "market": "港股",
       "symbol": "2386.HK",
       "currency": "HK$",
-      "close": 5.57,
-      "closeDate": "2026-11-12",
+      "close": 5.76,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk02386%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 5.525,
-      "changePercent": 0.81
+      "previousClose": 5.57,
+      "changePercent": 3.41
     },
     {
       "code": "600188.SH",
@@ -511,11 +511,11 @@
       "market": "A股",
       "symbol": "600188.SS",
       "currency": "¥",
-      "close": 17.04,
-      "closeDate": "2026-11-12",
+      "close": 17.19,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh600188%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 17.44,
-      "changePercent": -2.29
+      "previousClose": 17.04,
+      "changePercent": 0.88
     },
     {
       "code": "01171.HK",
@@ -523,11 +523,11 @@
       "market": "港股",
       "symbol": "1171.HK",
       "currency": "HK$",
-      "close": 11.12,
-      "closeDate": "2026-11-12",
+      "close": 10.99,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk01171%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 11.27,
-      "changePercent": -1.33
+      "previousClose": 11.12,
+      "changePercent": -1.17
     },
     {
       "code": "601225.SH",
@@ -535,11 +535,11 @@
       "market": "A股",
       "symbol": "601225.SS",
       "currency": "¥",
-      "close": 26.3,
-      "closeDate": "2026-11-12",
+      "close": 26.97,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh601225%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 26.25,
-      "changePercent": 0.19
+      "previousClose": 26.3,
+      "changePercent": 2.55
     },
     {
       "code": "002475.SZ",
@@ -547,11 +547,11 @@
       "market": "A股",
       "symbol": "002475.SZ",
       "currency": "¥",
-      "close": 50.82,
-      "closeDate": "2026-11-12",
+      "close": 50.02,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz002475%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 51.67,
-      "changePercent": -1.65
+      "previousClose": 50.82,
+      "changePercent": -1.57
     },
     {
       "code": "02475.HK",
@@ -559,11 +559,11 @@
       "market": "港股",
       "symbol": "2475.HK",
       "currency": "HK$",
-      "close": 50.3,
-      "closeDate": "2026-11-12",
+      "close": 48.14,
+      "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk02475%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 51.75,
-      "changePercent": -2.8
+      "previousClose": 50.3,
+      "changePercent": -4.29
     }
   ]
 }
