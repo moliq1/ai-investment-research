@@ -142,7 +142,7 @@
       "close": 978.88,
       "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh688256%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 973.0,
+      "previousClose": 973,
       "changePercent": 0.6
     },
     {
@@ -166,7 +166,7 @@
       "close": 72.3,
       "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk01347%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 77.0,
+      "previousClose": 77,
       "changePercent": -6.1
     },
     {
@@ -418,7 +418,7 @@
       "close": 237.7,
       "closeDate": "2026-11-13",
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sz300750%2Cday%2C%2C%2C10%2Cqfq",
-      "previousClose": 240.0,
+      "previousClose": 240,
       "changePercent": -0.96
     },
     {
@@ -504,6 +504,18 @@
       "sourceUrl": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hk02386%2Cday%2C%2C%2C10%2Cqfq",
       "previousClose": 5.57,
       "changePercent": 3.41
+    },
+    {
+      "code": "600985.SH",
+      "name": "淮北矿业",
+      "market": "A股",
+      "symbol": "600985.SS",
+      "currency": "¥",
+      "close": 14.08,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://cn.investing.com/equities/leimingkehua-historical-data",
+      "previousClose": 14.14,
+      "changePercent": -0.42
     },
     {
       "code": "600188.SH",
