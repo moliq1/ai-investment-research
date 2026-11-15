@@ -2,6 +2,18 @@
   "schemaVersion": 1,
   "quotes": [
     {
+      "code": "02259.HK",
+      "name": "紫金黄金国际",
+      "market": "港股",
+      "symbol": "2259.HK",
+      "currency": "HK$",
+      "close": 121.2,
+      "closeDate": "2026-11-13",
+      "sourceUrl": "https://stockanalysis.com/quote/hkg/2259/history/",
+      "previousClose": 126.5,
+      "changePercent": -4.19
+    },
+    {
       "code": "000807.SZ",
       "name": "云铝股份",
       "market": "A股",
