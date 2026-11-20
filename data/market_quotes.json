@@ -632,6 +632,26 @@
       "sourceUrl": "https://stockanalysis.com/quote/hkg/0005/history/",
       "previousClose": 136,
       "changePercent": -1.99
+    },
+    {
+      "code": "600036.SH",
+      "name": "招商银行",
+      "market": "A股",
+      "symbol": "600036.SS",
+      "currency": "¥",
+      "close": 43.32,
+      "closeDate": "2026-11-19",
+      "sourceUrl": "https://cn.investing.com/equities/merchants-bank-historical-data"
+    },
+    {
+      "code": "03968.HK",
+      "name": "招商银行",
+      "market": "港股",
+      "symbol": "3968.HK",
+      "currency": "HK$",
+      "close": 53.75,
+      "closeDate": "2026-11-19",
+      "sourceUrl": "https://cn.investing.com/equities/china-merchants-bank-historical-data"
     }
   ]
 }
