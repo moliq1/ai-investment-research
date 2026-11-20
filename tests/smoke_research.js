@@ -109,6 +109,8 @@ assert.ok(data.items.some(x=>x.code==='02899.HK'),'Zijin H stock missing');
 assert.equal(data.sectors.length,new Set(data.items.map(x=>x.sector)).size);
 assert.ok(data.sectors.includes('计算机与AI基础设施'));
 assert.ok(data.items.some(x=>x.code==='00992.HK'),'Lenovo first coverage missing');
+assert.ok(data.items.some(x=>x.code==='00005.HK'),'HSBC coverage missing');
+assert.ok(data.sectors.includes('银行与金融'),'Banking sector missing');
 assert.ok(data.items.some(x=>x.code==='000426.SZ'),'Xingye Silver & Tin first coverage missing');
 assert.equal(data.version,(markdown.match(/文档版本\*\*：(v\d+\.\d+)/)||[])[1]);
 assert.equal(new Set(data.items.map(x=>x.code)).size,data.items.length);
