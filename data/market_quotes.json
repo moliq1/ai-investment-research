@@ -139,7 +139,7 @@
       "market": "港股",
       "symbol": "2099.HK",
       "currency": "HK$",
-      "close": 138.0,
+      "close": 138,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/2099.HK/history/",
       "previousClose": 142.9,
@@ -151,10 +151,10 @@
       "market": "A股",
       "symbol": "688256.SS",
       "currency": "¥",
-      "close": 920.0,
+      "close": 920,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/688256.SS/history/",
-      "previousClose": 934.0,
+      "previousClose": 934,
       "changePercent": -1.5
     },
     {
@@ -202,7 +202,7 @@
       "close": 138.2,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/6809.HK/history/",
-      "previousClose": 152.0,
+      "previousClose": 152,
       "changePercent": -9.08
     },
     {
@@ -271,10 +271,10 @@
       "market": "A股",
       "symbol": "688498.SS",
       "currency": "¥",
-      "close": 584.0,
+      "close": 584,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/",
-      "previousClose": 633.0,
+      "previousClose": 633,
       "changePercent": -7.74
     },
     {
@@ -298,7 +298,7 @@
       "close": 81.85,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/0522.HK/history/",
-      "previousClose": 89.0,
+      "previousClose": 89,
       "changePercent": -8.03
     },
     {
@@ -319,7 +319,7 @@
       "market": "港股",
       "symbol": "3308.HK",
       "currency": "HK$",
-      "close": 490.0,
+      "close": 490,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/3308.HK/history/",
       "previousClose": 535.5,
@@ -358,7 +358,7 @@
       "close": 64.8,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/002353.SZ/history/",
-      "previousClose": 69.0,
+      "previousClose": 69,
       "changePercent": -6.09
     },
     {
@@ -367,7 +367,7 @@
       "market": "A股",
       "symbol": "002851.SZ",
       "currency": "¥",
-      "close": 58.0,
+      "close": 58,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/",
       "previousClose": 59.76,
@@ -439,7 +439,7 @@
       "market": "港股",
       "symbol": "3750.HK",
       "currency": "HK$",
-      "close": 335.0,
+      "close": 335,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/3750.HK/history/",
       "previousClose": 349.8,
@@ -451,7 +451,7 @@
       "market": "A股",
       "symbol": "600276.SS",
       "currency": "¥",
-      "close": 47.0,
+      "close": 47,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/600276.SS/history/",
       "previousClose": 46.88,
@@ -547,7 +547,7 @@
       "market": "A股",
       "symbol": "601088.SS",
       "currency": "¥",
-      "close": 52.0,
+      "close": 52,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/601088.SS/history/",
       "previousClose": 50.82,
@@ -559,7 +559,7 @@
       "market": "港股",
       "symbol": "1088.HK",
       "currency": "HK$",
-      "close": 42.0,
+      "close": 42,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/1088.HK/history/",
       "previousClose": 42.5,
@@ -667,7 +667,7 @@
       "market": "A股",
       "symbol": "600036.SS",
       "currency": "¥",
-      "close": 44.0,
+      "close": 44,
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/600036.SS/history/",
       "previousClose": 43.32,
@@ -683,7 +683,19 @@
       "closeDate": "2026-11-20",
       "sourceUrl": "https://finance.yahoo.com/quote/3968.HK/history/",
       "previousClose": 53.75,
-      "changePercent": 0.0
+      "changePercent": 0
+    },
+    {
+      "code": "600887.SH",
+      "name": "伊利股份",
+      "market": "A股",
+      "symbol": "600887.SS",
+      "currency": "¥",
+      "close": 33.35,
+      "closeDate": "2026-11-20",
+      "sourceUrl": "https://cn.investing.com/equities/yili-company-historical-data",
+      "previousClose": 32.91,
+      "changePercent": 1.34
     }
   ]
 }
