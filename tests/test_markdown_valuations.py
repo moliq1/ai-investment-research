@@ -44,6 +44,8 @@ class MasterValuationArchiveTests(unittest.TestCase):
         self.assertIn("| 中石化炼化工程 | 02386.HK", text)
         self.assertIn("| 陕西煤业 | 601225.SH", text)
         self.assertIn("| 汇丰控股 | 00005.HK", text)
+        self.assertIn("| 招商银行 | 600036.SH", text)
+        self.assertIn("| 招商银行 | 03968.HK", text)
         self.assertIn("| 长江电力 | 600900.SH", text)
         for row in rows:
             self.assertRegex(row[4], r"^\d{4}-\d{2}-\d{2}$")
