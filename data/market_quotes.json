@@ -518,6 +518,30 @@
       "changePercent": -2.73
     },
     {
+      "code": "600938.SH",
+      "name": "中国海油",
+      "market": "A股",
+      "symbol": "600938.SS",
+      "currency": "¥",
+      "close": 30.29,
+      "closeDate": "2026-11-20",
+      "sourceUrl": "https://www.zhunshangshi.com/hq/detail.php?ts_code=600938.SH",
+      "previousClose": 30.25,
+      "changePercent": 0.13
+    },
+    {
+      "code": "00883.HK",
+      "name": "中国海油",
+      "market": "港股",
+      "symbol": "0883.HK",
+      "currency": "HK$",
+      "close": 21.7,
+      "closeDate": "2026-11-20",
+      "sourceUrl": "https://cn.investing.com/equities/cnooc-historical-data",
+      "previousClose": 22.12,
+      "changePercent": -1.9
+    },
+    {
       "code": "601857.SH",
       "name": "中国石油",
       "market": "A股",
