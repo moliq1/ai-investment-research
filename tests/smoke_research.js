@@ -110,6 +110,8 @@ assert.equal(data.sectors.length,new Set(data.items.map(x=>x.sector)).size);
 assert.ok(data.sectors.includes('计算机与AI基础设施'));
 assert.ok(data.items.some(x=>x.code==='00992.HK'),'Lenovo first coverage missing');
 assert.ok(data.items.some(x=>x.code==='00005.HK'),'HSBC coverage missing');
+assert.ok(data.items.some(x=>x.code==='600036.SH'),'CMB A coverage missing');
+assert.ok(data.items.some(x=>x.code==='03968.HK'),'CMB H coverage missing');
 assert.ok(data.sectors.includes('银行与金融'),'Banking sector missing');
 assert.ok(data.sectors.includes('公用事业与电力运营'),'Utility operator sector missing');
 assert.ok(data.items.some(x=>x.code==='600900.SH'),'Yangtze Power first coverage missing');
