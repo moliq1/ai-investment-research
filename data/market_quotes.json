@@ -518,6 +518,26 @@
       "changePercent": -1.22
     },
     {
+      "code": "601088.SH",
+      "name": "中国神华",
+      "market": "A股",
+      "symbol": "601088.SS",
+      "currency": "¥",
+      "close": 50.82,
+      "closeDate": "2026-11-19",
+      "sourceUrl": "https://cn.investing.com/equities/china-shenhua-historical-data"
+    },
+    {
+      "code": "01088.HK",
+      "name": "中国神华",
+      "market": "港股",
+      "symbol": "1088.HK",
+      "currency": "HK$",
+      "close": 42.5,
+      "closeDate": "2026-11-19",
+      "sourceUrl": "https://cn.investing.com/equities/china-shenhua-ss-historical-data"
+    },
+    {
       "code": "600985.SH",
       "name": "淮北矿业",
       "market": "A股",
