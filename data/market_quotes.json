@@ -566,6 +566,18 @@
       "changePercent": -0.47
     },
     {
+      "code": "600900.SH",
+      "name": "长江电力",
+      "market": "A股",
+      "symbol": "600900.SS",
+      "currency": "¥",
+      "close": 30.88,
+      "closeDate": "2026-11-19",
+      "sourceUrl": "https://cn.investing.com/equities/yangtze-power-historical-data",
+      "previousClose": 30.68,
+      "changePercent": 0.65
+    },
+    {
       "code": "002475.SZ",
       "name": "立讯精密",
       "market": "A股",
