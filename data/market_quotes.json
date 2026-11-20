@@ -720,6 +720,26 @@
       "sourceUrl": "https://cn.investing.com/equities/yili-company-historical-data",
       "previousClose": 32.91,
       "changePercent": 1.34
+    },
+    {
+      "code": "000333.SZ",
+      "name": "美的集团",
+      "market": "A股",
+      "symbol": "000333.SZ",
+      "currency": "¥",
+      "close": 94.82,
+      "closeDate": "2026-11-20",
+      "sourceUrl": "https://cn.investing.com/equities/midea-group-a-historical-data"
+    },
+    {
+      "code": "00300.HK",
+      "name": "美的集团",
+      "market": "港股",
+      "symbol": "0300.HK",
+      "currency": "HK$",
+      "close": 103,
+      "closeDate": "2026-11-20",
+      "sourceUrl": "https://cn.investing.com/equities/midea-group-class-h-historical-data"
     }
   ]
 }

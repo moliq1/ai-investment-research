@@ -48,6 +48,8 @@ class MasterValuationArchiveTests(unittest.TestCase):
         self.assertIn("| 招商银行 | 03968.HK", text)
         self.assertIn("| 长江电力 | 600900.SH", text)
         self.assertIn("| 伊利股份 | 600887.SH", text)
+        self.assertIn("| 美的集团 | 000333.SZ", text)
+        self.assertIn("| 美的集团 | 00300.HK", text)
         for row in rows:
             self.assertRegex(row[4], r"^\d{4}-\d{2}-\d{2}$")
             self.assertRegex(row[5], r"^(?:HK\$|¥)[\d,]+(?:\.\d+)?$")
@@ -64,7 +66,7 @@ class MasterValuationArchiveTests(unittest.TestCase):
             if not row.startswith("|"): break
             if all(ch in '| -:' for ch in row): continue
             rows.append([c.strip().replace("**", "") for c in row.strip("|").split("|")])
-        industries = ["有色金属与矿业", "半导体与电子材料", "计算机与AI基础设施", "电力装备与电源", "新能源与储能", "医药与CXO", "机械设备与工业母机", "能源工程服务", "煤炭与能源", "公用事业与电力运营", "消费电子与精密制造", "银行与金融", "食品饮料与乳制品"]
+        industries = ["有色金属与矿业", "半导体与电子材料", "计算机与AI基础设施", "电力装备与电源", "新能源与储能", "医药与CXO", "机械设备与工业母机", "能源工程服务", "煤炭与能源", "公用事业与电力运营", "消费电子与精密制造", "家用电器与多元制造", "银行与金融", "食品饮料与乳制品"]
         self.assertEqual([industries.index(r[2]) for r in rows], sorted(industries.index(r[2]) for r in rows))
         for sector in industries:
             dates = [r[11] for r in rows if r[2] == sector]
