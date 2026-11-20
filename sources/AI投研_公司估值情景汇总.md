@@ -3215,7 +3215,7 @@ TTM归母净利润 = 2025全年约517.77亿元 − 2025年前三季378.64亿元 
 
 #### 原始聊天与研究来源
 
-- 原始研究：《中国石油成长质量与估值预期差一体化分析》（2026-11-20）；**原始 ChatGPT 对话链接：未取得可核实的分享 URL**。原聊天结论作为独立研究草稿，不冒充旧Git模型。
+- 原研究对话：《中国石油成长质量与估值预期差一体化分析》（2026-11-20）；**原始 ChatGPT 对话链接：未取得可核实的分享 URL**。原聊天结论作为独立研究草稿，不冒充旧Git模型。
 - [2026Q3官方季报（2026-10-29）](https://static.cninfo.com.cn/finalpage/2026-10-29/1225637500.PDF)；[同报告可检索正文](https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?id=12673394)；[2025FY经审计年报（2026-03-30）](https://www.petrochina.com.cn/petrochina/rdxx/202603/77efc25cfdc14bad83525f05cf092454/files/e3eab58b4de94a8aa43abf7ec9a40123.pdf)。
 - [2026-11-20 A股历史收盘](https://cn.investing.com/equities/petrochina-ss-historical-data)；[2026-11-20 H股历史收盘](https://cn.investing.com/equities/petrochina-historical-data)；[2026-11-20国家外汇管理局港元人民币中间价](https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do)。
 - [2026-11-20同花顺16机构2026—2028盈利预测](https://basic.10jqka.com.cn/601857/worth.html)；[IEA 2026-11石油市场报告](https://www.iea.org/reports/oil-market-report-november-2026)；[2026Q3独立研究档案](../reports/petrochina/2026Q3.md)。
