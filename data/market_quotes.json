@@ -518,6 +518,30 @@
       "changePercent": -1.22
     },
     {
+      "code": "601857.SH",
+      "name": "中国石油",
+      "market": "A股",
+      "symbol": "601857.SS",
+      "currency": "¥",
+      "close": 13.22,
+      "closeDate": "2026-11-20",
+      "sourceUrl": "https://cn.investing.com/equities/petrochina-ss-historical-data",
+      "previousClose": 12.63,
+      "changePercent": 4.67
+    },
+    {
+      "code": "00857.HK",
+      "name": "中国石油",
+      "market": "港股",
+      "symbol": "0857.HK",
+      "currency": "HK$",
+      "close": 10.05,
+      "closeDate": "2026-11-20",
+      "sourceUrl": "https://cn.investing.com/equities/petrochina-historical-data",
+      "previousClose": 10.12,
+      "changePercent": -0.69
+    },
+    {
       "code": "601088.SH",
       "name": "中国神华",
       "market": "A股",

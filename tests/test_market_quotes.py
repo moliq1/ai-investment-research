@@ -40,6 +40,8 @@ class MarketQuoteTests(unittest.TestCase):
         self.assertEqual(mapping["00522.HK"], "0522.HK")
         self.assertEqual(mapping["00005.HK"], "0005.HK")
         self.assertEqual(mapping["600036.SH"], "600036.SS")
+        self.assertEqual(mapping["601857.SH"], "601857.SS")
+        self.assertEqual(mapping["00857.HK"], "0857.HK")
         self.assertEqual(mapping["03968.HK"], "3968.HK")
         self.assertEqual(mapping["00992.HK"], "0992.HK")
         self.assertEqual(mapping["688012.SH"], "688012.SS")
