@@ -698,6 +698,30 @@
       "changePercent": -1.44
     },
     {
+      "code": "601398.SH",
+      "name": "工商银行",
+      "market": "A股",
+      "symbol": "601398.SS",
+      "currency": "¥",
+      "close": 9.4,
+      "closeDate": "2026-11-20",
+      "sourceUrl": "https://finance.yahoo.com/quote/601398.SS/history/",
+      "previousClose": 9.1,
+      "changePercent": 3.3
+    },
+    {
+      "code": "01398.HK",
+      "name": "工商银行",
+      "market": "港股",
+      "symbol": "1398.HK",
+      "currency": "HK$",
+      "close": 7.885,
+      "closeDate": "2026-11-20",
+      "sourceUrl": "https://finance.yahoo.com/quote/1398.HK/history/",
+      "previousClose": 7.865,
+      "changePercent": 0.25
+    },
+    {
       "code": "00005.HK",
       "name": "汇丰控股",
       "market": "港股",
