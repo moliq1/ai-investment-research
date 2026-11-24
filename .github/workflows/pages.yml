@@ -4,6 +4,7 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
+  actions: read
   contents: write
   pages: write
   id-token: write
@@ -37,7 +38,9 @@ jobs:
             echo 'No newer validated market close available.'
           fi
       - name: Validate research data
-        run: python -m unittest discover -s tests -v
+        run: |
+          python -m unittest discover -s tests -v
+          python -m py_compile scripts/verify_site_quotes.py
       - name: Validate Markdown website
         run: |
           node --check assets/research.js
@@ -48,6 +51,27 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .site
+      - name: Wait for Pages artifact registration
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Artifacts may take several seconds to appear in the Actions API.
+          # deploy-pages fails with 'Found 0 artifact(s)' if called too early.
+          for attempt in $(seq 1 24); do
+            artifact_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts?per_page=100" --jq '.artifacts[] | select(.name == "github-pages" and .expired == false) | .id' 2>/dev/null | head -n 1 || true)"
+            if [ -n "$artifact_id" ]; then
+              echo "Pages artifact registered: $artifact_id"
+              sleep 5
+              exit 0
+            fi
+            echo "Waiting for Pages artifact metadata ($attempt/24)"
+            sleep 5
+          done
+          echo '::error::Pages artifact was uploaded but not indexed by GitHub Actions API.'
+          exit 1
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify live Pages serves published closing quotes
+        run: python scripts/verify_site_quotes.py
