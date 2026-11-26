@@ -2,6 +2,18 @@
   "schemaVersion": 1,
   "quotes": [
     {
+      "code": "03330.HK",
+      "name": "灵宝黄金",
+      "market": "港股",
+      "symbol": "3330.HK",
+      "currency": "HK$",
+      "close": 12.35,
+      "closeDate": "2026-11-25",
+      "sourceUrl": "https://finance.yahoo.com/quote/3330.HK/history/",
+      "previousClose": 12.74,
+      "changePercent": -3.06
+    },
+    {
       "code": "02259.HK",
       "name": "紫金黄金国际",
       "market": "港股",
@@ -154,7 +166,7 @@
       "close": 907.9,
       "closeDate": "2026-11-25",
       "sourceUrl": "https://finance.yahoo.com/quote/688256.SS/history/",
-      "previousClose": 970.0,
+      "previousClose": 970,
       "changePercent": -6.4
     },
     {
@@ -271,7 +283,7 @@
       "market": "A股",
       "symbol": "688498.SS",
       "currency": "¥",
-      "close": 571.0,
+      "close": 571,
       "closeDate": "2026-11-25",
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/",
       "previousClose": 599.3,
@@ -307,10 +319,10 @@
       "market": "A股",
       "symbol": "300308.SZ",
       "currency": "¥",
-      "close": 409.0,
+      "close": 409,
       "closeDate": "2026-11-25",
       "sourceUrl": "https://finance.yahoo.com/quote/300308.SZ/history/",
-      "previousClose": 417.0,
+      "previousClose": 417,
       "changePercent": -1.92
     },
     {
@@ -322,7 +334,7 @@
       "close": 485.4,
       "closeDate": "2026-11-25",
       "sourceUrl": "https://finance.yahoo.com/quote/3308.HK/history/",
-      "previousClose": 530.0,
+      "previousClose": 530,
       "changePercent": -8.42
     },
     {
@@ -766,7 +778,7 @@
       "close": 33.58,
       "closeDate": "2026-11-25",
       "sourceUrl": "https://finance.yahoo.com/quote/600887.SS/history/",
-      "previousClose": 33.0,
+      "previousClose": 33,
       "changePercent": 1.76
     }
   ]
