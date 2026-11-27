@@ -178,8 +178,8 @@
       "close": 212.4,
       "closeDate": "2026-11-27",
       "sourceUrl": "https://finance.yahoo.com/quote/688347.SS/history/",
-      "previousClose": 177.0,
-      "changePercent": 20.0
+      "previousClose": 177,
+      "changePercent": 20
     },
     {
       "code": "01347.HK",
@@ -275,7 +275,7 @@
       "closeDate": "2026-11-27",
       "sourceUrl": "https://finance.yahoo.com/quote/688012.SS/history/",
       "previousClose": 224.25,
-      "changePercent": 20.0
+      "changePercent": 20
     },
     {
       "code": "688498.SH",
@@ -286,8 +286,8 @@
       "close": 704.4,
       "closeDate": "2026-11-27",
       "sourceUrl": "https://finance.yahoo.com/quote/688498.SS/history/",
-      "previousClose": 587.0,
-      "changePercent": 20.0
+      "previousClose": 587,
+      "changePercent": 20
     },
     {
       "code": "600183.SH",
@@ -314,6 +314,30 @@
       "changePercent": 7.5
     },
     {
+      "code": "601869.SH",
+      "name": "长飞光纤光缆",
+      "market": "A股",
+      "symbol": "601869.SS",
+      "currency": "¥",
+      "close": 221.44,
+      "closeDate": "2026-11-27",
+      "sourceUrl": "https://cn.investing.com/equities/yangtze-optical-fibre-cable-joint-historical-data",
+      "previousClose": 201.31,
+      "changePercent": 10
+    },
+    {
+      "code": "06869.HK",
+      "name": "长飞光纤光缆",
+      "market": "港股",
+      "symbol": "6869.HK",
+      "currency": "HK$",
+      "close": 78,
+      "closeDate": "2026-11-27",
+      "sourceUrl": "https://cn.investing.com/equities/yangtze-optical-fibre-and-cable-joi-historical-data",
+      "previousClose": 69.25,
+      "changePercent": 12.64
+    },
+    {
       "code": "300308.SZ",
       "name": "中际旭创",
       "market": "A股",
@@ -334,7 +358,7 @@
       "close": 597.5,
       "closeDate": "2026-11-27",
       "sourceUrl": "https://finance.yahoo.com/quote/3308.HK/history/",
-      "previousClose": 515.0,
+      "previousClose": 515,
       "changePercent": 16.02
     },
     {
@@ -346,7 +370,7 @@
       "close": 44.74,
       "closeDate": "2026-11-27",
       "sourceUrl": "https://finance.yahoo.com/quote/601138.SS/history/",
-      "previousClose": 41.0,
+      "previousClose": 41,
       "changePercent": 9.12
     },
     {
@@ -371,7 +395,7 @@
       "closeDate": "2026-11-27",
       "sourceUrl": "https://finance.yahoo.com/quote/002353.SZ/history/",
       "previousClose": 64.89,
-      "changePercent": 10.0
+      "changePercent": 10
     },
     {
       "code": "002851.SZ",
@@ -383,7 +407,7 @@
       "closeDate": "2026-11-27",
       "sourceUrl": "https://finance.yahoo.com/quote/002851.SZ/history/",
       "previousClose": 60.13,
-      "changePercent": 10.0
+      "changePercent": 10
     },
     {
       "code": "600875.SH",
@@ -454,7 +478,7 @@
       "close": 314.2,
       "closeDate": "2026-11-27",
       "sourceUrl": "https://finance.yahoo.com/quote/3750.HK/history/",
-      "previousClose": 297.0,
+      "previousClose": 297,
       "changePercent": 5.79
     },
     {
@@ -490,7 +514,7 @@
       "close": 153.99,
       "closeDate": "2026-11-27",
       "sourceUrl": "https://finance.yahoo.com/quote/603259.SS/history/",
-      "previousClose": 147.0,
+      "previousClose": 147,
       "changePercent": 4.76
     },
     {
@@ -586,7 +610,7 @@
       "close": 50.86,
       "closeDate": "2026-11-27",
       "sourceUrl": "https://finance.yahoo.com/quote/601088.SS/history/",
-      "previousClose": 53.0,
+      "previousClose": 53,
       "changePercent": -4.04
     },
     {
